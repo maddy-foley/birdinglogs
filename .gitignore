@@ -1,0 +1,8 @@
+# api ignore
+api/data
+api/bird-data.py
+api/__pycache__
+
+# docker files
+docker-compose.yml
+api/Dockerfile.dev
