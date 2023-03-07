@@ -6,7 +6,7 @@ steps = [
             birds_id INTEGER NOT NULL REFERENCES birds(id) ON DELETE CASCADE,
             user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
             comments VARCHAR(1000),
-            spotted_on DATE
+            spotted_on TIMESTAMP
 
         );
         """,

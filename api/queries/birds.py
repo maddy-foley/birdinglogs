@@ -43,6 +43,7 @@ class BirdQueries:
 
 
     def create_bird(self, bird: BirdCreate, family) -> BirdOut:
+        print(family)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -84,6 +85,47 @@ class BirdQueries:
             print(e)
             return Error(message=str(e))
 
+    def update_bird_by_id(self, bird_id: int, bird: BirdCreate, family: str) -> BirdOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    family_result = cur.execute(
+                        """
+                        SELECT id
+                        FROM families
+                        WHERE family=%s;
+                        """,
+                        [family]
+                    )
+                    family_id = family_result.fetchone()[0]
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        UPDATE birds
+                        SET name=%s, picture_url=%s, description=%s, family_id=%s
+                        WHERE id=%s
+                        RETURNING
+                        name
+                        , picture_url
+                        , description
+                        , family_id
+                        id;
+                        """,
+                        [
+                            bird.name,
+                            bird.picture_url,
+                            bird.description,
+                            family_id,
+                            bird_id
+                        ]
+                    )
+                    record = result.fetchone()
+                    print(record)
+                    return self.record_to_bird_out(record, bird_id)
+        except Exception as e:
+            print(e)
+            return Error(message=str(e))
 
     def record_to_bird_out(self, record, bird_id):
         family_id = record[3]

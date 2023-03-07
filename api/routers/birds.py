@@ -34,3 +34,17 @@ def get_bird_by_id(
     repo: BirdQueries = Depends()
 ):
     return repo.get_bird_by_id(bird_id)
+
+
+@ router.put('/api/birds/{bird_id}')
+def update_bird_by_id(
+    bird_id: int,
+    bird: BirdCreate,
+    family: str = Query("family", enum=family_choice),
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    repo: BirdQueries = Depends()
+):
+    if account_data:
+        return repo.update_bird_by_id(bird_id, bird, family)
+    else:
+        return Error(message="You need an account to add birds")
