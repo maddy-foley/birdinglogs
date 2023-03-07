@@ -8,7 +8,11 @@ class BirdIn(BaseModel):
     family: Optional[str]
 
 
-class BirdOut(BirdIn):
+class BirdOut(BaseModel):
+    name: str
+    description: Optional[str]
+    picture_url: Optional[str]
+    family: Optional[str]
     id: int
 
 class Error(BaseModel):

@@ -20,7 +20,6 @@ class AccountAuthenticator(Authenticator):
         return account
 
     def get_hashed_password(self, account: AccountOutWithPassword):
-        print("****************** HASH PASS**********", account)
         return account.hashed_password
 
     def get_account_data_for_cookie(self, account: AccountOut):
