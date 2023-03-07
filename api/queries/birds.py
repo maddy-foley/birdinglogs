@@ -1,5 +1,5 @@
 import requests
-from models.birds import BirdIn, BirdOut, Error
+from models.birds import BirdIn, BirdOut, Error, BirdCreate
 from queries.db import pool
 
 
@@ -42,7 +42,7 @@ class BirdQueries:
             return {"message": "Failed to get bird by id"}
 
 
-    def create_bird(self, bird: BirdIn) -> BirdOut:
+    def create_bird(self, bird: BirdCreate, family) -> BirdOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -52,7 +52,7 @@ class BirdQueries:
                         FROM families
                         WHERE family=%s;
                         """,
-                        [bird.family]
+                        [family]
                     )
                     family_id = family_result.fetchone()[0]
             with pool.connection() as conn:
@@ -78,7 +78,7 @@ class BirdQueries:
                         name=bird.name,
                         picture_url=bird.picture_url,
                         description=bird.description,
-                        family=bird.family
+                        family=family
                     )
         except Exception as e:
             print(e)
