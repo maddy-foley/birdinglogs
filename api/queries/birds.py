@@ -14,9 +14,8 @@ class BirdQueries:
                         FROM birds;
                         """
                     )
-                    print(result.fetchone())
                     return [
-                        self.record_to_bird_out(record)
+                        self.record_to_bird_out(record, bird_id=record[4])
                         for record in result
                     ]
         except Exception as e:
@@ -37,25 +36,7 @@ class BirdQueries:
                         [bird_id]
                     )
                     record = result.fetchone()
-                    family_id = record[3]
-                with pool.connection() as conn2:
-                    with conn2.cursor() as curr2:
-                        family_result = curr2.execute(
-                            """
-                            SELECT family
-                            FROM families
-                            WHERE id=%s;
-                            """,
-                            [family_id]
-                        )
-                        fam = family_result.fetchone()[0]
-                    return BirdOut(
-                        id=bird_id,
-                        name=record[0],
-                        picture_url=record[1],
-                        description=record[2],
-                        family=fam
-                    )
+                    return self.record_to_bird_out(record, bird_id)
 
         except Exception as e:
             return {"message": "Failed to get bird by id"}
@@ -104,11 +85,23 @@ class BirdQueries:
             return Error(message=str(e))
 
 
-    def record_to_bird_out(self, record):
+    def record_to_bird_out(self, record, bird_id):
+        family_id = record[3]
+        with pool.connection() as conn2:
+                with conn2.cursor() as curr2:
+                    family_result = curr2.execute(
+                        """
+                        SELECT family
+                        FROM families
+                        WHERE id=%s;
+                        """,
+                        [family_id]
+                    )
+                    fam = family_result.fetchone()[0]
         return BirdOut(
             name=record[0],
             picture_url=record[1],
             description=record[2],
-            family_id=record[3],
-            id=record[4]
+            family=fam,
+            id=bird_id,
         )
