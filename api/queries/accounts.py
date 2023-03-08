@@ -55,6 +55,7 @@ class AccountQueries:
         except Exception as e:
             return Error(message=str(e))
 
+
     def create_account(self, account: AccountIn, hashed_password: str) -> AccountOutWithPassword:
         try:
             with pool.connection() as conn:
@@ -87,6 +88,7 @@ class AccountQueries:
         except Exception as e:
             print(e)
             return Error(message=str(e))
+
 
     def delete_account(self, account_id: int) -> bool:
         try:

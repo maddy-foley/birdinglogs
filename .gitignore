@@ -4,6 +4,7 @@ api/bird-data.py
 api/__pycache__
 api/queries/__pycache__
 api/data/dictbirdfamily.json
+api/routers/__pycache__
 
 # docker files
 docker-compose.yml

@@ -39,12 +39,23 @@ def get_bird_by_id(
 @ router.put('/api/birds/{bird_id}')
 def update_bird_by_id(
     bird_id: int,
-    bird: BirdCreate,
-    family: str = Query("family", enum=family_choice),
+    bird: BirdIn,
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: BirdQueries = Depends()
 ):
     if account_data:
-        return repo.update_bird_by_id(bird_id, bird, family)
+        return repo.update_bird_by_id(bird_id, bird)
     else:
         return Error(message="You need an account to add birds")
+
+
+@router.delete('/api/birds/{bird_id}')
+def delete_bird_by_id(
+    bird_id,
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    repo: BirdQueries = Depends()
+):
+    if account_data:
+        return repo.delete_bird_by_id(bird_id)
+    else:
+        return Error(message="You need an account to delete birds")

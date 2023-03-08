@@ -85,7 +85,8 @@ class BirdQueries:
             print(e)
             return Error(message=str(e))
 
-    def update_bird_by_id(self, bird_id: int, bird: BirdCreate, family: str) -> BirdOut:
+
+    def update_bird_by_id(self, bird_id: int, bird: BirdIn) -> BirdOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -95,7 +96,7 @@ class BirdQueries:
                         FROM families
                         WHERE family=%s;
                         """,
-                        [family]
+                        [bird.family]
                     )
                     family_id = family_result.fetchone()[0]
             with pool.connection() as conn:
@@ -121,11 +122,34 @@ class BirdQueries:
                         ]
                     )
                     record = result.fetchone()
-                    print(record)
                     return self.record_to_bird_out(record, bird_id)
         except Exception as e:
             print(e)
             return Error(message=str(e))
+
+
+    def delete_bird_by_id(self, bird_id):
+        try:
+            deleted = self.get_bird_by_id(bird_id)
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        DELETE FROM birds
+                        WHERE id=%s
+                        RETURNING name;
+                        """
+                        ,
+                        [bird_id]
+                    )
+                    name = result.fetchone()[0]
+                    if name == deleted.name:
+                        return f"{name} deleted"
+                    return {"message": "Failed to delete bird."}
+        except Exception as e:
+            return Error(message=str(e))
+
+
 
     def record_to_bird_out(self, record, bird_id):
         family_id = record[3]
