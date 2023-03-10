@@ -17,8 +17,8 @@ class AccountQueries:
                     result = cur.execute(
                         """
                         SELECT name, username, password, id
-                        FROM users
-                        WHERE username= %s;
+                        FROM accounts
+                        WHERE username=%s;
                         """,
                         [username]
                     )
@@ -42,7 +42,7 @@ class AccountQueries:
                     result = cur.execute(
                         """
                         SELECT name, username, picture_url, created_on, id
-                        FROM users
+                        FROM accounts
                         WHERE id = %s;
                         """,
                         [account_id]
@@ -62,7 +62,7 @@ class AccountQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        INSERT INTO users
+                        INSERT INTO accounts
                             (name, username, password, picture_url, created_on)
                         VALUES
                             (%s, %s, %s, %s, %s)
@@ -96,8 +96,8 @@ class AccountQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        DELETE FROM users
-                        WHERE id = $s;
+                        DELETE FROM accounts
+                        WHERE id=%s;
                         """,
                         [account_id]
                     )

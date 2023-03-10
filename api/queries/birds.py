@@ -1,4 +1,3 @@
-import requests
 from models.birds import BirdIn, BirdOut, Error, BirdCreate
 from queries.db import pool
 
@@ -124,7 +123,6 @@ class BirdQueries:
                     record = result.fetchone()
                     return self.record_to_bird_out(record, bird_id)
         except Exception as e:
-            print(e)
             return Error(message=str(e))
 
 
