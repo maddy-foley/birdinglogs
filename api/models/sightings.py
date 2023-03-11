@@ -4,15 +4,14 @@ from datetime import datetime
 
 
 class SightingIn(BaseModel):
+    bird_id: int
+    comment: str
+    spotted_on: Optional[datetime | str]
+
+
+class SightingOut(BaseModel):
     account_id: int
     bird_id: int
-    comments: str
-    timestamp: Optional[datetime]
-
-
-class SighingOut(BaseModel):
-    username: str
-    bird: str
-    comments: str
-    timestamp: Optional[datetime]
+    comment: str
+    spotted_on: Optional[datetime | str]
     id: int

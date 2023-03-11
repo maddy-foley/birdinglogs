@@ -41,8 +41,8 @@ class BirdQueries:
             return {"message": "Failed to get bird by id"}
 
 
-    def create_bird(self, bird: BirdCreate, family) -> BirdOut:
-        print(family)
+    def create_bird(self, bird:BirdIn) -> BirdOut:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -52,7 +52,7 @@ class BirdQueries:
                         FROM families
                         WHERE family=%s;
                         """,
-                        [family]
+                        [bird.family]
                     )
                     family_id = family_result.fetchone()[0]
             with pool.connection() as conn:
@@ -78,7 +78,7 @@ class BirdQueries:
                         name=bird.name,
                         picture_url=bird.picture_url,
                         description=bird.description,
-                        family=family
+                        family=bird.family
                     )
         except Exception as e:
             print(e)

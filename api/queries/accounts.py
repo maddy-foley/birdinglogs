@@ -106,15 +106,14 @@ class AccountQueries:
         except Exception as e:
             return Error(message=str(e))
 
-    def record_to_account_out(self, record) -> AccountOutWithPassword:
+    def record_to_account_out(self, record):
         try:
-            return AccountOutWithPassword(
+            return AccountOut(
                 name=record[0],
                 username=record[1],
-                hashed_password=record[2],
-                picture_url=record[3],
-                created_on=record[4],
-                id=record[5]
+                picture_url=record[2],
+                created_on=record[3],
+                id=record[4]
             )
         except Exception as e:
             return Error(message=str(e))
