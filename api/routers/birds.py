@@ -15,7 +15,7 @@ def get_all_birds(
 @router.post('/api/birds')
 def create_bird(
     bird: BirdIn,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
     repo: BirdQueries = Depends()
 ):
     if account_data:
@@ -37,7 +37,7 @@ def get_bird_by_id(
 def update_bird_by_id(
     bird_id: int,
     bird: BirdIn,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
     repo: BirdQueries = Depends()
 ):
     if account_data:
@@ -49,7 +49,7 @@ def update_bird_by_id(
 @router.delete('/api/birds/{bird_id}')
 def delete_bird_by_id(
     bird_id,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
     repo: BirdQueries = Depends()
 ):
     if account_data:

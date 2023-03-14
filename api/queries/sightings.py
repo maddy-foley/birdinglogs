@@ -105,9 +105,57 @@ class SightingsQueries:
         except Exception as e:
             return Error(message=str(e))
 
+    # update bird, comment, sighting time
+    def update_sighting(self, sighting: SightingIn, sighting_id, account_id):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        UPDATE sightings
+                        SET bird_id=%s, comment=%s, spotted_on=%s
+                        WHERE id=%s AND account_id=%s
+                        RETURNING
+                            bird_id
+                            , account_id
+                            , comment
+                            , spotted_on
+                            , id;
+                        """,
+                        [
+                            sighting.bird_id,
+                            sighting.comment,
+                            timestamp(),
+                            sighting_id,
+                            account_id
+                        ]
+                    )
+                    record = result.fetchone()
+                    return self.record_to_sightings_out(record)
+        except Exception as e:
+            print(e)
+            return {"message" : "cannot find sighting"}
 
+    def delete_sighting(self, sighting_id, account_id):
+        try:
+            with pool.connect() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        DELETE FROM sightings
+                        WHERE id=%s AND account_id=%s
+                        RETURNING comment;
+                        """,
+                        [sighting_id, account_id]
+                    )
+                    comment = result.fetchone()[0]
+                    if comment:
+                        return comment
+                    else:
+                        return {"massage": "could not find sighting"}
+        except Exception as e:
+            return{"message":"Failed to find account or sighting"}
     def record_to_sightings_out(self, record):
-        print('******DATE*****',record[3])
         return SightingOut(
             bird_id=record[0],
             account_id=record[1],

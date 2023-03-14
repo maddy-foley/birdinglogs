@@ -27,10 +27,35 @@ def get_all_sightings_by_account(
 @router.post('/api/sighting')
 def create_sighting(
     bird: SightingIn,
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
     repo: SightingsQueries = Depends()
 ):
     if account_data:
         return repo.create_sighting(bird, account_id=account_data['id'])
+    else:
+        return {"message": "could not get account data"}
+
+
+
+@router.put('/api/sighting/{sighting_id}')
+def update_sighting(
+    sighting:SightingIn,
+    sighting_id: int,
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
+    repo: SightingsQueries = Depends()
+):
+    if account_data:
+        return repo.update_sighting(sighting, sighting_id, account_id=account_data['id'])
+    else:
+        return {"message": "could not get account data"}
+
+@router.delete('/api/sighting/{sighting_id}')
+def delete_sighting(
+    sighting_id,
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
+    repo: SightingsQueries = Depends()
+):
+    if account_data:
+        return repo.delete_sighting(sighting_id, account_id=account_data['id'])
     else:
         return {"message": "could not get account data"}
