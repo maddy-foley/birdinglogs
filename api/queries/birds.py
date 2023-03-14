@@ -1,4 +1,4 @@
-from models.birds import BirdIn, BirdOut, Error, BirdCreate
+from models.birds import BirdIn, BirdOut, Error, JoinedBirdOut
 from queries.db import pool
 
 
@@ -9,18 +9,46 @@ class BirdQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, picture_url, description, family_id, account_id, id
-                        FROM birds
-                        ORDER BY id;
+                        SELECT b.name AS name
+                            , b.picture_url AS picture_url
+                            , b.description AS description
+                            , f.family AS family
+                            , a.username AS username
+                            , b.id AS id
+                        FROM birds b
+                        INNER JOIN families f
+                            ON(f.id=b.family_id)
+                        LEFT JOIN accounts a
+                            ON(a.id=b.account_id)
                         """
                     )
+
                     return [
-                        self.record_to_bird_out(record)
+                        self.record_to_joined_bird_out(record)
                         for record in result
                     ]
         except Exception as e:
             print(e)
             return Error(message=str(e))
+
+    # def get_all_birds(self):
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as cur:
+    #                 result = cur.execute(
+    #                     """
+    #                     SELECT name, picture_url, description, family_id, account_id, id
+    #                     FROM birds
+    #                     ORDER BY id;
+    #                     """
+    #                 )
+    #                 return [
+    #                     self.record_to_bird_out(record)
+    #                     for record in result
+    #                 ]
+    #     except Exception as e:
+    #         print(e)
+    #         return Error(message=str(e))
 
 
     def get_bird_by_id(self, bird_id: int) -> BirdOut:
@@ -43,7 +71,6 @@ class BirdQueries:
 
 
     def create_bird(self, bird:BirdIn, account_id: int) -> BirdOut:
-
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -81,7 +108,7 @@ class BirdQueries:
                         picture_url=bird.picture_url,
                         description=bird.description,
                         account_id=account_id,
-                        family=bird.family
+                        family_id=family_id
                     )
         except Exception as e:
             print(e)
@@ -161,12 +188,24 @@ class BirdQueries:
                 account_id=record[4],
                 id=record[5],
             )
-            # else:
-            #     return BirdOut(
-            #         name=record[0],
-            #         picture_url=record[1],
-            #         description=record[2],
-            #         family_id=record[3],
-            #         account_id=None,
-            #         id=record[4],
-            #     )
+
+    def record_to_joined_bird_out(self, record):
+        print(record)
+        if len(record) == 6:
+            return JoinedBirdOut(
+                name=record[0],
+                picture_url=record[1],
+                description=record[2],
+                family=record[3],
+                username=record[4],
+                id=record[5]
+            )
+        else:
+            return JoinedBirdOut(
+                name=record[0],
+                picture_url=record[1],
+                description=record[2],
+                family=record[3],
+                username=None,
+                id=record[4]
+            )

@@ -1,12 +1,10 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class BirdCreate(BaseModel):
+class BirdIn(BaseModel):
     name: str
     description: Optional[str]
     picture_url: Optional[str]
-
-class BirdIn(BirdCreate):
     family: Optional[str]
 
 class BirdOut(BaseModel):
@@ -18,8 +16,14 @@ class BirdOut(BaseModel):
     id: int
 
 
-class JoinedBirdOut(BirdIn):
-    pass
+class JoinedBirdOut(BaseModel):
+    name: str
+    description: Optional[str]
+    picture_url: Optional[str]
+    family: str
+    username: str | None
+    id: int
+
 
 class Error(BaseModel):
     message: str

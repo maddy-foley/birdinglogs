@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Query
 from typing import Union, Optional
-from queries.birds import BirdOut, BirdQueries, BirdCreate, Error, BirdIn
+from queries.birds import BirdOut, BirdQueries, Error, BirdIn
 from authenticator import authenticator
 
 router = APIRouter()
