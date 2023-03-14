@@ -31,24 +31,6 @@ class BirdQueries:
             print(e)
             return Error(message=str(e))
 
-    # def get_all_birds(self):
-    #     try:
-    #         with pool.connection() as conn:
-    #             with conn.cursor() as cur:
-    #                 result = cur.execute(
-    #                     """
-    #                     SELECT name, picture_url, description, family_id, account_id, id
-    #                     FROM birds
-    #                     ORDER BY id;
-    #                     """
-    #                 )
-    #                 return [
-    #                     self.record_to_bird_out(record)
-    #                     for record in result
-    #                 ]
-    #     except Exception as e:
-    #         print(e)
-    #         return Error(message=str(e))
 
     def get_birds_by_account(self, account_id: int):
         try:
@@ -155,7 +137,7 @@ class BirdQueries:
             return Error(message=str(e))
 
 
-    def update_bird_by_id(self, bird_id: int, bird: BirdIn) -> BirdOut:
+    def update_bird_by_id(self, bird_id: int, bird: BirdIn, account_id: int) -> BirdOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -174,29 +156,39 @@ class BirdQueries:
                         """
                         UPDATE birds
                         SET name=%s, picture_url=%s, description=%s, family_id=%s
-                        WHERE id=%s
+                        WHERE id=%s AND account_id=%s
                         RETURNING
                         name
                         , picture_url
                         , description
                         , family_id
-                        id;
+                        , account_id
+                        , id;
                         """,
                         [
                             bird.name,
                             bird.picture_url,
                             bird.description,
                             family_id,
-                            bird_id
+                            bird_id,
+                            account_id
                         ]
                     )
                     record = result.fetchone()
-                    return self.record_to_bird_out(record, bird_id)
+                    print(record)
+                    return BirdOut(
+                        name=record[0],
+                        picture_url=record[1],
+                        description=record[2],
+                        family_id=record[3],
+                        account_id=record[4],
+                        id=record[5],
+                    )
         except Exception as e:
             return Error(message=str(e))
 
 
-    def delete_bird_by_id(self, bird_id):
+    def delete_bird_by_id(self, bird_id: int, account_id: int):
         try:
             deleted = self.get_bird_by_id(bird_id)
             with pool.connection() as conn:
@@ -204,11 +196,11 @@ class BirdQueries:
                     result = cur.execute(
                         """
                         DELETE FROM birds
-                        WHERE id=%s
+                        WHERE id=%s AND account_id=%s
                         RETURNING name;
                         """
                         ,
-                        [bird_id]
+                        [bird_id, account_id]
                     )
                     name = result.fetchone()[0]
                     if name == deleted.name:
@@ -219,15 +211,6 @@ class BirdQueries:
 
 
 
-    def record_to_bird_out(self, record):
-            return BirdOut(
-                name=record[0],
-                picture_url=record[1],
-                description=record[2],
-                family_id=record[3],
-                account_id=record[4],
-                id=record[5],
-            )
 
     def record_to_joined_bird_out(self, record):
         print(record)

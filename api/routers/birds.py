@@ -50,7 +50,7 @@ def update_bird_by_id(
     repo: BirdQueries = Depends()
 ):
     if account_data:
-        return repo.update_bird_by_id(bird_id, bird)
+        return repo.update_bird_by_id(bird_id, bird, account_id=account_data['id'])
     else:
         return Error(message="You need an account to add birds")
 
@@ -62,6 +62,6 @@ def delete_bird_by_id(
     repo: BirdQueries = Depends()
 ):
     if account_data:
-        return repo.delete_bird_by_id(bird_id)
+        return repo.delete_bird_by_id(bird_id, account_id=account_data['id'])
     else:
         return Error(message="You need an account to delete birds")
