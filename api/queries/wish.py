@@ -60,7 +60,24 @@ class WishQueries:
 
     def delete_wish(self, bird_id: int, account_id:int):
         try:
-            with
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        DELETE FROM wishes
+                        WHERE bird_id=%s AND account_id=%s
+                        """,
+                        [
+                            bird_id,
+                            account_id
+                        ]
+                    )
+                    if result is not None:
+                        return True
+                    return False
+        except Exception as e:
+            print(e)
+            return {"message": "Failed to delete like"}
 
     def record_to_wish_out(self, record):
         return WishOut(
