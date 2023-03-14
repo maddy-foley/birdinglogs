@@ -1,5 +1,5 @@
 from queries.db import pool
-from models.accounts_model import (
+from models.accounts import (
     AccountIn,
     AccountOut,
     AccountOutWithPassword,

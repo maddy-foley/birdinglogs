@@ -3,9 +3,6 @@ from models.sightings import SightingOut, SightingIn
 from models.birds import Error
 from typing import List
 from common.common import timestamp
-from routers.birds import get_bird_by_id
-from queries.birds import BirdQueries
-from queries.accounts import AccountQueries
 
 
 class SightingsQueries:
@@ -72,7 +69,7 @@ class SightingsQueries:
         # except Exception as e:
         #     return {"message": "Failed to find sightings"}
 
-    def create_sighting(self, sighting: SightingIn, account_id):
+    def create_sighting(self, sighting: SightingIn, account_id) -> SightingOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -106,7 +103,7 @@ class SightingsQueries:
             return Error(message=str(e))
 
     # update bird, comment, sighting time
-    def update_sighting(self, sighting: SightingIn, sighting_id, account_id):
+    def update_sighting(self, sighting: SightingIn, sighting_id, account_id) -> SightingOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -154,7 +151,7 @@ class SightingsQueries:
                     )
                     comment = result.fetchone()
                     if comment:
-                        return comment
+                        return True
                     else:
                         return {"message": "failed to delete sighting"}
         except Exception as e:

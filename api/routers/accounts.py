@@ -8,7 +8,7 @@ from fastapi import (
 )
 
 from queries.accounts import AccountQueries
-from models.accounts_model import (
+from models.accounts import (
     AccountIn,
     AccountForm,
     AccountOut,
