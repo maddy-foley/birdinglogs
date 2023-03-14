@@ -77,7 +77,7 @@ class WishQueries:
                     return False
         except Exception as e:
             print(e)
-            return {"message": "Failed to delete like"}
+            return {"message": "Failed to delete bird from wishlist"}
 
     def record_to_wish_out(self, record):
         return WishOut(

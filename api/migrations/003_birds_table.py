@@ -6,8 +6,8 @@ steps = [
             name VARCHAR(100) NOT NULL,
             picture_url VARCHAR(500),
             description TEXT,
-            account_id integer REFERENCES accounts (id),
-            family_id integer REFERENCES families (id)
+            account_id integer REFERENCES accounts (id) ON DELETE CASCADE,
+            family_id integer REFERENCES families (id) ON DELETE CASCADE
         );
         """,
         """
