@@ -29,7 +29,7 @@ router = APIRouter()
 @router.get('/api/account/me', response_model=Union[AccountOut,Error])
 def get_account_by_id(
     repo: AccountQueries = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
 ):
     if account_data:
         return repo.get_account_by_id(account_data['id'])
