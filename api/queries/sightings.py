@@ -137,8 +137,9 @@ class SightingsQueries:
             return {"message" : "cannot find sighting"}
 
     def delete_sighting(self, sighting_id, account_id):
+        print(sighting_id, account_id)
         try:
-            with pool.connect() as conn:
+            with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
@@ -146,14 +147,18 @@ class SightingsQueries:
                         WHERE id=%s AND account_id=%s
                         RETURNING comment;
                         """,
-                        [sighting_id, account_id]
+                        [
+                            sighting_id,
+                            account_id
+                        ]
                     )
-                    comment = result.fetchone()[0]
+                    comment = result.fetchone()
                     if comment:
                         return comment
                     else:
-                        return {"massage": "could not find sighting"}
+                        return {"message": "failed to delete sighting"}
         except Exception as e:
+            print(e)
             return{"message":"Failed to find account or sighting"}
     def record_to_sightings_out(self, record):
         return SightingOut(
