@@ -63,6 +63,7 @@ class BirdQueries:
             print(e)
             return Error(message=str(e))
 
+
     def get_bird_by_id(self, bird_id: int) -> BirdOut:
         try:
             with pool.connection() as conn:
@@ -208,8 +209,6 @@ class BirdQueries:
                     return {"message": "Failed to delete bird."}
         except Exception as e:
             return Error(message=str(e))
-
-
 
 
     def record_to_joined_bird_out(self, record):

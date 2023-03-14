@@ -16,11 +16,7 @@ class BirdOut(BaseModel):
     id: int
 
 
-class JoinedBirdOut(BaseModel):
-    name: str
-    description: Optional[str]
-    picture_url: Optional[str]
-    family: str
+class JoinedBirdOut(BirdIn):
     username: str | None
     id: int
 
