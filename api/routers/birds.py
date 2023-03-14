@@ -19,7 +19,7 @@ def create_bird(
     repo: BirdQueries = Depends()
 ):
     if account_data:
-        result = repo.create_bird(bird)
+        result = repo.create_bird(bird, account_id=account_data['id'])
         return result
     else:
         return Error(message="You need an account to add birds")

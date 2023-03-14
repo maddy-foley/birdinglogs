@@ -9,12 +9,13 @@ class BirdQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, picture_url, description, family_id, id
-                        FROM birds;
+                        SELECT name, picture_url, description, family_id, account_id, id
+                        FROM birds
+                        ORDER BY id;
                         """
                     )
                     return [
-                        self.record_to_bird_out(record, bird_id=record[4])
+                        self.record_to_bird_out(record)
                         for record in result
                     ]
         except Exception as e:
@@ -41,7 +42,7 @@ class BirdQueries:
             return {"message": "Failed to get bird by id"}
 
 
-    def create_bird(self, bird:BirdIn) -> BirdOut:
+    def create_bird(self, bird:BirdIn, account_id: int) -> BirdOut:
 
         try:
             with pool.connection() as conn:
@@ -60,16 +61,17 @@ class BirdQueries:
                     result = cur.execute(
                         """
                         INSERT INTO birds
-                            (name, picture_url, description, family_id)
+                            (name, picture_url, description, family_id, account_id)
                         VALUES
-                            (%s, %s, %s, %s)
+                            (%s, %s, %s, %s, %s)
                         RETURNING id;
                         """,
                         [
                             bird.name,
                             bird.picture_url,
                             bird.description,
-                            family_id
+                            family_id,
+                            account_id
                         ]
                     )
                     id = result.fetchone()[0]
@@ -78,6 +80,7 @@ class BirdQueries:
                         name=bird.name,
                         picture_url=bird.picture_url,
                         description=bird.description,
+                        account_id=account_id,
                         family=bird.family
                     )
         except Exception as e:
@@ -149,23 +152,21 @@ class BirdQueries:
 
 
 
-    def record_to_bird_out(self, record, bird_id):
-        family_id = record[3]
-        with pool.connection() as conn2:
-                with conn2.cursor() as curr2:
-                    family_result = curr2.execute(
-                        """
-                        SELECT family
-                        FROM families
-                        WHERE id=%s;
-                        """,
-                        [family_id]
-                    )
-                    fam = family_result.fetchone()[0]
-        return BirdOut(
-            name=record[0],
-            picture_url=record[1],
-            description=record[2],
-            family=fam,
-            id=bird_id,
-        )
+    def record_to_bird_out(self, record):
+            return BirdOut(
+                name=record[0],
+                picture_url=record[1],
+                description=record[2],
+                family_id=record[3],
+                account_id=record[4],
+                id=record[5],
+            )
+            # else:
+            #     return BirdOut(
+            #         name=record[0],
+            #         picture_url=record[1],
+            #         description=record[2],
+            #         family_id=record[3],
+            #         account_id=None,
+            #         id=record[4],
+            #     )

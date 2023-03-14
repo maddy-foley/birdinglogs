@@ -1,6 +1,5 @@
 # api ignore
 api/data
-api/bird-data.py
 api/__pycache__
 api/queries/__pycache__
 api/data/dictbirdfamily.json
