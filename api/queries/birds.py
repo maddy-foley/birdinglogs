@@ -50,6 +50,35 @@ class BirdQueries:
     #         print(e)
     #         return Error(message=str(e))
 
+    def get_birds_by_account(self, account_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT b.name AS name
+                            , b.picture_url AS picture_url
+                            , b.description AS description
+                            , f.family AS family
+                            , a.username AS username
+                            , b.id AS id
+                        FROM birds b
+                        INNER JOIN families f
+                            ON(f.id=b.family_id)
+                        INNER JOIN accounts a
+                            ON(a.id=b.account_id)
+                        WHERE account_id=%s
+                        """,
+                        [account_id]
+                    )
+
+                    return [
+                        self.record_to_joined_bird_out(record)
+                        for record in result
+                    ]
+        except Exception as e:
+            print(e)
+            return Error(message=str(e))
 
     def get_bird_by_id(self, bird_id: int) -> BirdOut:
         try:

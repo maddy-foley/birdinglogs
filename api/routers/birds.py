@@ -11,6 +11,17 @@ def get_all_birds(
 ):
     return repo.get_all_birds()
 
+@router.get('/api/birds/me')
+def get_birds_by_account(
+    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
+    repo: BirdQueries = Depends()
+):
+    if account_data:
+        return repo.get_birds_by_account(account_id=account_data['id'])
+    else:
+        return Error(message="You need to login to view your added birds")
+
+
 ## NEED TO TEST
 @router.post('/api/birds')
 def create_bird(
