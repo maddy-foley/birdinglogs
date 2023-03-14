@@ -76,6 +76,7 @@ class BirdQueries:
                         self.record_to_joined_bird_out(record)
                         for record in result
                     ]
+
         except Exception as e:
             print(e)
             return Error(message=str(e))
@@ -86,14 +87,24 @@ class BirdQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, picture_url, description, family_id
-                        FROM birds
-                        WHERE id=%s;
+                        SELECT b.name AS name
+                            , b.picture_url AS picture_url
+                            , b.description AS description
+                            , f.family AS family
+                            , a.username AS username
+                            , b.id AS id
+                        FROM birds b
+                        INNER JOIN families f
+                            ON(f.id=b.family_id)
+                        LEFT JOIN accounts a
+                            ON(a.id=b.account_id)
+                        WHERE b.id=%s;
                         """,
                         [bird_id]
                     )
                     record = result.fetchone()
-                    return self.record_to_bird_out(record, bird_id)
+                    print(record)
+                    return self.record_to_joined_bird_out(record)
 
         except Exception as e:
             return {"message": "Failed to get bird by id"}

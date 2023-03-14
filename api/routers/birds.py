@@ -21,8 +21,6 @@ def get_birds_by_account(
     else:
         return Error(message="You need to login to view your added birds")
 
-
-## NEED TO TEST
 @router.post('/api/birds')
 def create_bird(
     bird: BirdIn,
@@ -36,7 +34,7 @@ def create_bird(
         return Error(message="You need an account to add birds")
 
 
-@router.get('/api/birds/{bird_id}', response_model=Union[BirdOut, Error])
+@router.get('/api/birds/{bird_id}')
 def get_bird_by_id(
     bird_id: int,
     repo: BirdQueries = Depends()
