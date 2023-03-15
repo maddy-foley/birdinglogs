@@ -20,7 +20,7 @@ class WishQueries:
                             ON(b.id = w.bird_id)
                         INNER JOIN accounts a
                             ON(a.id = w.account_id)
-                        WHERE account_id=%s;
+                        WHERE w.account_id=%s;
                         """,
                         [
                             account_id
