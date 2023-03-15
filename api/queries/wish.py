@@ -22,7 +22,7 @@ class WishQueries:
                             ON(a.id = w.account_id)
                         WHERE w.account_id=%s;
                         """,
-                        [
+                        [ 
                             account_id
                         ]
                     )
