@@ -9,5 +9,3 @@ api/routers/__pycache__
 docker-compose.yml
 api/Dockerfile.dev
 
-# etc
-notestoself.md
