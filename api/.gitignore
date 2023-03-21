@@ -1,7 +1,5 @@
 data
 
-bird-data.py
-
 queries/__pycache__
 routers/__pycache__
 models/__pycache__
