@@ -4,4 +4,11 @@ App: Designed for casual birders to look at, log and learn a little bit about th
 
 Tools: FastAPI, PostgreSQL and React.js
 
-Over 900 North American bird species retrieved from wikipediaapi/wikimedia restful api and stored into database. Data is currently hidden. A few descriptions or pictures do not work and am working on that!
+Over 900 North American bird species retrieved from publically available wikipediaapi and wikimedia restful api. Birds have been stored into a postgresql database and allows for users to add missing birds. Data file is currently hidden.
+
+
+
+
+
+Disclaimer:
+This project is not for profit/scientific accuracy and is only to practice coding. All information and pictures come from each bird's wikipedia. Copyrighted images have been manually removed. 
