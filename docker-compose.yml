@@ -1,0 +1,41 @@
+volumes:
+  bird-data:
+    external: true
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8000:8000
+    volumes:
+      - ./api:/app
+    environment:
+      SIGNING_KEY: 9FRW08FDS0G2JG923G2R4332F4FDCR
+      DATABASE_URL: postgresql://birds_user:birdy@db/birds
+      WAIT_HOST: db:5432
+      PORT: 8000
+  ghi:
+    image: node:latest
+    command: /bin/bash run.sh
+    working_dir: /app
+    volumes:
+      - ./client/app:/app
+    ports:
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3000
+      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+  db:
+    image: postgres:13.3-alpine
+    volumes:
+      - bird-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: birds_user
+      POSTGRES_PASSWORD: birdy
+      POSTGRES_DB: birds
