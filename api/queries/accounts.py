@@ -48,7 +48,6 @@ class AccountQueries:
                         [account_id]
                     )
                     record = result.fetchone()
-                    print("*****GET BY ID**********", record)
                     if record is None:
                         return {"message": "Could not get account"}
                     return self.record_to_account_out(record)

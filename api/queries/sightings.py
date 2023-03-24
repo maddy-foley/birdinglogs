@@ -133,7 +133,6 @@ class SightingsQueries:
             return {"message" : "cannot find sighting"}
 
     def delete_sighting(self, sighting_id, account_id):
-        print(sighting_id, account_id)
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:

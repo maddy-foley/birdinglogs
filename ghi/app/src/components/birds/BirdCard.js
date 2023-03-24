@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
 export function BirdCard({bird}) {
-    const navigation = useNavigate();
-    const toDetails = () => {
-        navigation("/")
+    const navigate = useNavigate();
+
+    const toDetails = () =>{
+        navigate(`/birds/${bird.id}`)
     }
+
     return (
         <div onClick={toDetails} className="flex flex-col border py-7 px-5 m-10 text-right">
             <h1 className="text-2xl text-extrabold">{bird.name}</h1>

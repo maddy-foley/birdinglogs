@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage/>} />
         <Route path="birds">
           <Route path="" element={<BirdPage />} />
+          <Route path=":id" element={<BirdDetail />} />
         </Route>
      </Routes>
     </BrowserRouter>

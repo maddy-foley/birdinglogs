@@ -86,7 +86,6 @@ class BirdQueries:
                         [bird_id]
                     )
                     record = result.fetchone()
-                    print(record)
                     return self.record_to_joined_bird_out(record)
 
         except Exception as e:
@@ -176,7 +175,6 @@ class BirdQueries:
                         ]
                     )
                     record = result.fetchone()
-                    print(record)
                     return BirdOut(
                         name=record[0],
                         picture_url=record[1],
@@ -212,7 +210,6 @@ class BirdQueries:
 
 
     def record_to_joined_bird_out(self, record):
-        print(record)
         if len(record) == 6:
             return JoinedBirdOut(
                 name=record[0],

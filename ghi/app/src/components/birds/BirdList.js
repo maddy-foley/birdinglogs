@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
 import { BirdCard } from "./BirdCard"
+
 
 export function BirdList() {
     const [birds, setBirds] = useState([]);
@@ -31,7 +33,7 @@ export function BirdList() {
 
     return(
         <div className="">
-            <input onChange={handleSearch} type="text" name="searchBar"/>
+            <input onChange={handleSearch} type="text" name="searchBar" placeholder="Search for birds..."/>
             {
                 filteredBirds.map( bird => {
                     return (
