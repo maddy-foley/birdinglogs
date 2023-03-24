@@ -1,5 +1,5 @@
 html{
-    background-color: rgb(17, 4, 3);
+    /* background-color: rgb(17, 4, 3); */
     color: rgb(187, 171, 156);
 }
 
@@ -22,4 +22,25 @@ html{
 
 .border-bottom {
     border-bottom: 1px solid rgb(187, 171, 156);
+}
+
+.nav-link {
+    width: 60px;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background: black;
+    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+.bird-card {
+    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
+    border:1px solid rgb(187, 171, 156);
+    border-radius: 10px;
+}
+
+.bird-card:hover {
+    box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.5);
 }

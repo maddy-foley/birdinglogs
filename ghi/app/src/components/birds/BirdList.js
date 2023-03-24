@@ -19,12 +19,12 @@ export function BirdList() {
     }
 
     const rightPage = () =>{
-        if(indexes.end > filterBirds.length){
+        if(indexes.end < filterBirds.length){
             setIndexes({start: filteredBirds.length-10, end: filteredBirds.length})
         } else {
             setIndexes({start: indexes.start + 10, end: indexes.end + 10})
         }
-
+        console.log(indexes)
     }
 
     const getData = async () => {
@@ -51,9 +51,11 @@ export function BirdList() {
 
     return(
         <div className="">
-            <button onClick={leftPage}>Left</button>
-            <button onClick={rightPage}>Right</button>
-            <input onChange={handleSearch} type="text" name="searchBar" placeholder="Search for birds..."/>
+            <div className="flex justify-center">
+                <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
+                <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
+                <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
+            </div>
             {
                 filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(bird => {
                     return (
@@ -63,6 +65,11 @@ export function BirdList() {
                     )
                 })
             }
+            <div className="flex justify-center">
+                <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
+                <i className="fas fa-crow"></i>
+                <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
+            </div>
         </div>
     )
 }
