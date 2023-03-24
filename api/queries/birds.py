@@ -20,6 +20,7 @@ class BirdQueries:
                             ON(f.id=b.family_id)
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
+                        ORDER BY id;
                         """
                     )
 

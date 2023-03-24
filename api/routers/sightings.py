@@ -66,3 +66,10 @@ def get_sighting_by_bird_id(
     repo: SightingsQueries = Depends()
 ):
     return repo.get_sighting_by_bird_id(bird_id)
+
+@router.get('/api/birds/{bird_id}/sightings/count', response_model=int)
+def get_sighting_count_by_bird_id(
+    bird_id,
+    repo: SightingsQueries = Depends()
+):
+    return repo.get_sighting_count_by_bird_id(bird_id)

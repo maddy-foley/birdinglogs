@@ -187,6 +187,23 @@ class SightingsQueries:
             print(e)
             return {"message": "Failed to find sightings"}
 
+    def get_sighting_count_by_bird_id(self, bird_id: int) -> int:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT COUNT(*) FROM sightings
+                        WHERE bird_id=%s
+                        """,
+                        [bird_id]
+                    )
+                    return result.fetchone()[0]
+
+        except Exception as e:
+            print(e)
+            return {"message": "Failed to find sightings"}
+
     def record_to_sightings_out(self, record):
         return SightingOut(
             bird_id=record[0],
