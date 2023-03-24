@@ -16,7 +16,7 @@ export function BirdList() {
     }
     const filterBirds = async (data) => {
         setFilteredBirds(
-            data.filter( data => data.name.toLowerCase().includes(search) )
+            data.filter( data => data.name.toLowerCase().includes(search) || data.family.toLowerCase().includes(search))
         );
     }
 
@@ -32,7 +32,6 @@ export function BirdList() {
     return(
         <div className="">
             <input onChange={handleSearch} type="text" name="searchBar"/>
-            <button>Search</button>
             {
                 filteredBirds.map( bird => {
                     return (
