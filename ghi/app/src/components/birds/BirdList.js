@@ -22,6 +22,7 @@ export function BirdList() {
         );
     }
 
+
     useEffect(() => {
         getData();
     }, [])
@@ -37,7 +38,9 @@ export function BirdList() {
             {
                 filteredBirds.map( bird => {
                     return (
+                        <div>
                             <BirdCard key={bird.id} bird={bird}/>
+                        </div>
                     )
                 })
             }

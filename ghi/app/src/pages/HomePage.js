@@ -9,7 +9,6 @@ export function HomePage(){
         const response = await fetch("http://localhost:8000/api/birds/766")
         if (response.ok){
             const data = await response.json();
-            console.log(data)
             setCatbird(data)
         }
     }
