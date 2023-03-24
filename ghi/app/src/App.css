@@ -19,3 +19,7 @@ html{
     opacity: 20%;
     position: absolute;
 }
+
+.border-bottom {
+    border-bottom: 1px solid rgb(187, 171, 156);
+}
