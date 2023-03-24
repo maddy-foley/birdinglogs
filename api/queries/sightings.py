@@ -156,6 +156,36 @@ class SightingsQueries:
             print(e)
             return{"message":"Failed to find account or sighting"}
 
+    def get_sighting_by_bird_id(self, bird_id: int):
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT
+                            b.name AS bird
+                            , a.username AS username
+                            , s.comment as comment
+                            , s.spotted_on as spotted_on
+                            , s.id AS id
+                        FROM sightings s
+                        LEFT JOIN accounts a
+                            ON(a.id = s.account_id)
+                        INNER JOIN birds b
+                            ON(b.id = s.bird_id)
+                        WHERE b.id=%s
+                        ORDER BY spotted_on DESC;
+                        """,
+                        [bird_id]
+                    )
+                    return([
+                        self.record_to_joined_sightings_out(record)
+                        for record in result
+                    ])
+
+        except Exception as e:
+            print(e)
+            return {"message": "Failed to find sightings"}
 
     def record_to_sightings_out(self, record):
         return SightingOut(

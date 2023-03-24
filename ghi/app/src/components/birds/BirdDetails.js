@@ -4,6 +4,7 @@ import { useEffect, useState, useParams } from "react"
 export function BirdDetail () {
     const id = window.location.pathname.split("/")[2]
     const [bird, setBird] = useState({});
+    const [sightings, setSightings] = useState([]);
 
 
     const getBird = async() => {
@@ -11,21 +12,39 @@ export function BirdDetail () {
         if (response.ok){
             const data = await response.json();
             setBird(data)
-            console.log(data)
+        }
+    }
+    const getSighting = async () => {
+        const response = await fetch(`http://localhost:8000/api/birds/${id}/sightings`)
+        if (response.ok){
+            const data = await response.json();
+            setSightings(data)
+            console.log(sightings)
         }
     }
 
     useEffect(() => {
         getBird();
+        getSighting();
     }, [])
 
 
     return (
-        <div>
+        <div className="ml-7 mt-3">
             <h1 className="text-3xl md:text-7xl">{bird.name}</h1>
             <div className="italic md:text-3xl">{bird.family}</div>
             <img src={bird.picture_url}/>
-            <p>{bird.description}</p>
+            <p className="">{bird.description}</p>
+            <h2 className="mt-5 text-2xl md:text-5xl">Recent Sightings:</h2>
+            { sightings.length > 0 ? sightings.map(sighting => {
+                return (
+                    <div key={sighting.id}>
+                        <div>{sighting.comment} <span className="text-sm italic">- by {sighting.username}</span></div>
+                        <div className="text-sm mb-4">{sighting.spotted_on}</div>
+                    </div>
+                )})
+            : <div>No Sightings</div>
+            }
         </div>
     )
 }

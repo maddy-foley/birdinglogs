@@ -59,3 +59,10 @@ def delete_sighting(
         return repo.delete_sighting(sighting_id, account_id=account_data['id'])
     else:
         return {"message": "could not get account data"}
+
+@router.get('/api/birds/{bird_id}/sightings')
+def get_sighting_by_bird_id(
+    bird_id,
+    repo: SightingsQueries = Depends()
+):
+    return repo.get_sighting_by_bird_id(bird_id)
