@@ -19,8 +19,12 @@ export function BirdList() {
     }
 
     const rightPage = () =>{
-        // need to stop it from going to high
-        setIndexes({start: indexes.start + 10, end: indexes.end + 10})
+        if(indexes.end > filterBirds.length){
+            setIndexes({start: filteredBirds.length-10, end: filteredBirds.length})
+        } else {
+            setIndexes({start: indexes.start + 10, end: indexes.end + 10})
+        }
+
     }
 
     const getData = async () => {
