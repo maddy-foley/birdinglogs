@@ -1,5 +1,5 @@
 html{
-    /* background-color: rgb(17, 4, 3); */
+    background-color: rgb(17, 4, 3);
     color: rgb(187, 171, 156);
 }
 
@@ -14,10 +14,6 @@ html{
     right: 0;
     bottom: 0;
     background: rgb(255, 255, 255. 5.0);
-}
-.bg-img{
-    opacity: 20%;
-    position: absolute;
 }
 
 .border-bottom {

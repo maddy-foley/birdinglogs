@@ -36,7 +36,8 @@ export function BirdList() {
         }
     }
     const filterBirds = async (data) => {
-        setFilteredBirds(data.filter( data => data.name.toLowerCase().includes(search) || data.family.toLowerCase().includes(search)));
+        setFilteredBirds(data.filter( data => data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase())));
+        setIndexes({ start:-1, end: 10 })
     }
 
 
@@ -45,7 +46,7 @@ export function BirdList() {
     }, [])
 
     const handleSearch = (event) =>{
-        setSearch(event.target.value.toLowerCase())
+        setSearch(event.target.value)
         filterBirds(birds);
     }
 

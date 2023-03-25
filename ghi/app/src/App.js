@@ -6,6 +6,7 @@ import './App.css';
 import { BirdList } from './components/birds/BirdList';
 import { BirdDetail } from './components/birds/BirdDetails';
 import { BirdPage } from './pages/BirdPage'
+import { Login } from './components/accounts/accountLogin';
 
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
         <Route path="birds">
           <Route path="" element={<BirdPage />} />
           <Route path=":id" element={<BirdDetail />} />
+        </Route>
+        <Route path="account">
+          <Route path="login" element={ <Login/>}/>
         </Route>
      </Routes>
     </BrowserRouter>
