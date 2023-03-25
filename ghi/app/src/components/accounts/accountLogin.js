@@ -8,21 +8,30 @@ export function Login() {
         username: '',
         password: ''
     })
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        const url = 'http://localhost:8000/token'
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(formData),
-        }
-        console.log(formData)
-        const response = await fetch(url, fetchConfig)
-
+    const onSubmit = async(e) => {
+        e.preventDefault();
+        const content= `username=${formData.username}&password=${formData.password}`
+        const response = await fetch(
+            "http://localhost:8000/token", {
+                method: "POST",
+                body: content,
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                headers: {
+                    'Authorizatoin': localStorage.getItem
+                }
+            })
         if (response.ok) {
             const user = await response.json()
-            console.log(user)
+            if(user) {
+
+            } else {
+                alert("Not a valid login")
+            }
             setFormData([])
         }
     }
@@ -38,14 +47,10 @@ export function Login() {
         console.log(formData)
     };
 
-    useEffect(() => {
-        onSubmit();
-    }, [])
-
 
     return(
         <div>
-            <form onSubmit={onSubmit}>
+            <form>
                 <div>
                     <input onChange={onChange} name="username"/>
                 </div>
@@ -53,7 +58,7 @@ export function Login() {
                     <input onChange={onChange} type="password" name="password"/>
                 </div>
                 <div>
-                    <button className="border">Login</button>
+                    <button onClick={onSubmit} className="border" name="submit">Login</button>
                 </div>
             </form>
         </div>
