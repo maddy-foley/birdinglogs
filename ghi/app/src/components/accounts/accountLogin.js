@@ -10,6 +10,7 @@ export function Login() {
         username: '',
         password: ''
     })
+    const navigate = useNavigate();
 
     const onSubmit = async(e) => {
         e.preventDefault();
@@ -24,8 +25,9 @@ export function Login() {
                 }
             })
         if (response.ok) {
-            const user = await response.json()
+            await response.json()
             setFormData([])
+            navigate("/")
         } else {
             console.error("error")
         }
