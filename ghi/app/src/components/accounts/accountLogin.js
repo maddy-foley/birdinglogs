@@ -20,15 +20,12 @@ export function Login() {
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                headers: {
-                    'Authorizatoin': localStorage.getItem
                 }
             })
         if (response.ok) {
             const user = await response.json()
             if(user) {
-
+                window.localStorage.setItem('token', user.access_token)
             } else {
                 alert("Not a valid login")
             }
