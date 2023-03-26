@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useCookies } from 'react-cookie';
+
 
 
 
@@ -8,7 +10,6 @@ export function Login() {
         username: '',
         password: ''
     })
-    // const navigate = useNavigate();
 
     const onSubmit = async(e) => {
         e.preventDefault();
@@ -24,12 +25,9 @@ export function Login() {
             })
         if (response.ok) {
             const user = await response.json()
-            if(user) {
-                window.localStorage.setItem('token', user.access_token)
-            } else {
-                alert("Not a valid login")
-            }
             setFormData([])
+        } else {
+            console.error("error")
         }
     }
 

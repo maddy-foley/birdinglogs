@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import { Logout } from "./accounts/accountLogout"
 
 
 export function Navbar(){
@@ -9,6 +10,9 @@ export function Navbar(){
             </div>
             <div className="nav-link">
                 <NavLink to="/birds">Birds</NavLink>
+            </div>
+            <div className="nav-link">
+                <Logout />
             </div>
         </div>
     )

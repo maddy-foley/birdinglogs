@@ -6,7 +6,10 @@ import './App.css';
 import { BirdList } from './components/birds/BirdList';
 import { BirdDetail } from './components/birds/BirdDetails';
 import { BirdPage } from './pages/BirdPage'
+
+
 import { Login } from './components/accounts/accountLogin';
+import { Logout } from './components/accounts/accountLogout';
 
 
 function App() {
@@ -21,6 +24,7 @@ function App() {
         </Route>
         <Route path="account">
           <Route path="login" element={ <Login/>}/>
+          <Route path='logout' element={ <Logout />} />
         </Route>
      </Routes>
     </BrowserRouter>
