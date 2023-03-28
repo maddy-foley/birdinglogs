@@ -19,7 +19,7 @@ export function HomePage(){
     return (
         <div className="bg-transparent">
             <div className="flex justify-center">
-                <BirdCard bird={catbird}/>
+                <BirdCard key='homebird' bird={catbird}/>
             </div>
 
         </div>

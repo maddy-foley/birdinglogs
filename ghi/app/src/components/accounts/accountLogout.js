@@ -1,5 +1,4 @@
 
-
 export function Logout() {
     const handleLogout = async (e) =>{
         e.preventDefault();

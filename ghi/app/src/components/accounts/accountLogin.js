@@ -1,8 +1,5 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useCookies } from 'react-cookie';
-
-
 
 
 export function Login() {
@@ -10,7 +7,7 @@ export function Login() {
         username: '',
         password: ''
     })
-    const navigate = useNavigate();
+
 
     const onSubmit = async(e) => {
         e.preventDefault();
@@ -25,9 +22,7 @@ export function Login() {
                 }
             })
         if (response.ok) {
-            await response.json()
-            setFormData([])
-            navigate("/")
+            const data = await response.json()
         } else {
             console.error("error")
         }
@@ -41,7 +36,6 @@ export function Login() {
                 ...formData, [name]: value
             }
         );
-        console.log(formData)
     };
 
 

@@ -35,15 +35,15 @@ def get_account_by_id(
         return repo.get_account_by_id(account_data['id'])
     return {"message": "You are not logged in"}
 
-# @router.get('/api/account/username', response_model=Union[TokenResponse, Error])
-# def get_account_by_username(
-#     username:str,
-#     repo: AccountQueries = Depends()
-# ):
-#     try:
-#         return repo.get_account_by_username(username)
-#     except Exception as e:
-#         return Error(message=str(e))
+@router.get('/api/account/username', response_model=Union[TokenResponse, Error])
+def get_account_by_username(
+    username:str,
+    repo: AccountQueries = Depends()
+):
+    try:
+        return repo.get_account_by_username(username)
+    except Exception as e:
+        return Error(message=str(e))
 
 
 @router.get('/token', response_model=AccountToken | None)

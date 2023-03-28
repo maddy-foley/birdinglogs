@@ -10,12 +10,17 @@ import { BirdPage } from './pages/BirdPage'
 
 import { Login } from './components/accounts/accountLogin';
 import { Logout } from './components/accounts/accountLogout';
+import { Profile } from './components/accounts/accountProfile';
+import GetToken from './components/Token';
+import { useEffect, useState } from 'react';
+
 
 
 function App() {
   return (
     <BrowserRouter>
      <Navbar />
+     <GetToken />
      <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="birds">
@@ -25,6 +30,7 @@ function App() {
         <Route path="account">
           <Route path="login" element={ <Login/>}/>
           <Route path='logout' element={ <Logout />} />
+          <Route path="profile" element={ < Profile />} />
         </Route>
      </Routes>
     </BrowserRouter>
