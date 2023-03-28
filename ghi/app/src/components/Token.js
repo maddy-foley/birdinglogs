@@ -22,7 +22,6 @@ function GetToken () {
     useEffect(()=>{
         getToken();
     }, []);
-
     return
 }
 

@@ -20,7 +20,6 @@ function App() {
   return (
     <BrowserRouter>
      <Navbar />
-     <GetToken />
      <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="birds">
