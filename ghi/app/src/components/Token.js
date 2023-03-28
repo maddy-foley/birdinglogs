@@ -1,28 +1,18 @@
-import { useEffect, useState } from "react";
 
-function GetToken () {
-    const [token, setToken] = useState({})
-
-    const getToken = async() =>{
-        try{
-            const response = await fetch('http://localhost:8000/token', {
-                credentials: 'include'
-            })
-            if(response.ok) {
-                const data = await response.json()
-                console.log(data)
-                setToken(data.access_token)
-            }
-        } catch(err){
-            console.error(err)
+const getToken = async() =>{
+    let token = ''
+    try{
+        const response = await fetch('http://localhost:8000/token', {
+            credentials: 'include'
+        })
+        if(response.ok) {
+            const data = await response.json()
+            token += data.access_token
         }
-        return token
+    } catch(err){
+        console.error(err)
     }
-
-    useEffect(()=>{
-        getToken();
-    }, []);
-    return
+    return token
 }
 
-export default GetToken
+export default getToken
