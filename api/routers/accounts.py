@@ -59,7 +59,7 @@ async def get_token(
         }
 
 
-@router.post('/api/account')
+@router.post('/api/account/create')
 async def create_account(
     account: AccountIn,
     request: Request,

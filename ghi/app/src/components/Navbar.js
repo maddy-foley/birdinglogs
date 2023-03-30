@@ -29,13 +29,17 @@ export function Navbar(){
             <div className="nav-link">
                 <NavLink to="/birds">Birds</NavLink>
             </div>
-            <div className="nav-link">
-                <NavLink to="/account/profile">My Profile</NavLink>
-            </div>
+
             {
                 isLogged ?
-                <Logout /> :
-                <NavLink to="/account/login">Login</NavLink>
+                <>
+                    <div className="nav-link">
+                        <NavLink to="/account/profile">My Profile</NavLink>
+                    </div>
+                    <Logout />
+                </>
+                :
+                <NavLink to="/account/login">Login / Sign Up</NavLink>
             }
         </div>
     )

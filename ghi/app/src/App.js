@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { Navbar } from './components/Navbar';
 import './App.css';
-import { BirdList } from './components/birds/BirdList';
 import { BirdDetail } from './components/birds/BirdDetails';
 import { BirdPage } from './pages/BirdPage'
 
@@ -12,7 +11,7 @@ import { Login } from './components/accounts/AccountLogin';
 import { Logout } from './components/accounts/AccountLogout';
 import { Profile } from './components/accounts/AccountProfile';
 import GetToken from './components/Token';
-import { useEffect, useState } from 'react';
+import { CreateAccount } from './components/accounts/AccountCreate';
 
 
 
@@ -29,6 +28,7 @@ function App() {
         <Route path="account">
           <Route path="login" element={ <Login/>}/>
           <Route path='logout' element={ <Logout />} />
+          <Route path="create-account" element={<CreateAccount />} />
           <Route path="profile" element={ < Profile />} />
         </Route>
      </Routes>

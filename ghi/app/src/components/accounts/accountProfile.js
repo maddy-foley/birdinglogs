@@ -31,7 +31,7 @@ export function Profile() {
         <div>
             <h2>Welcome Back {profile.name}</h2>
             <div>@{profile.username}</div>
-            <img className="bird-img"src={profile.picture_url} alt={profile.name}/>
+            <img className="bird-img"src={profile.picture_url} alt={profile.username + "image url broken"}/>
         </div>
     )
 }

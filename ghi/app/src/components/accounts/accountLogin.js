@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 export function Login() {
@@ -53,6 +53,9 @@ export function Login() {
                 </div>
                 <div>
                     <button onClick={onSubmit} className="border" name="submit">Login</button>
+                </div>
+                <div>
+                    <NavLink to="/account/create-account">Create an Account</NavLink>
                 </div>
             </form>
         </div>
