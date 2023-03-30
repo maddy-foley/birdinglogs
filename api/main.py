@@ -1,7 +1,7 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import birds, accounts, sightings, wish
+from routers import birds, accounts, sightings, wish, family
 from authenticator import authenticator
 
 
@@ -23,3 +23,4 @@ app.include_router(accounts.router, tags=['Accounts'])
 app.include_router(authenticator.router, tags=['Login / Logout'])
 app.include_router(sightings.router, tags=['Sightings'])
 app.include_router(wish.router, tags=['Wish List'])
+app.include_router(family.router, tags=['Family'])

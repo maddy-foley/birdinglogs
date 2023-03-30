@@ -14,7 +14,6 @@ export function CreateAccount () {
 
     const handleSubmit= async (e) => {
         e.preventDefault();
-        console.log(formData)
         const data = JSON.stringify(formData)
         const response = await fetch(
             "http://localhost:8000/api/account/create", {
@@ -74,6 +73,7 @@ export function CreateAccount () {
                 </div>
                 <button className="border" type="submit">Sign Up</button>
             </form>
+            <br></br>
             <div>
                 <h1>Profile Picture Preview: </h1>
                 <div>

@@ -32,7 +32,7 @@ class BirdQueries:
             print(e)
             return Error(message=str(e))
 
-
+    
     def get_birds_by_account(self, account_id: int):
         try:
             with pool.connection() as conn:

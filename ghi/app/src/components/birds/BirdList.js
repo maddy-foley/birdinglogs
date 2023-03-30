@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BirdCard } from "./BirdCard"
 
 
@@ -56,6 +56,9 @@ export function BirdList() {
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
                 <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
                 <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div>
+                <NavLink to="/birds/create">Add a Bird</NavLink>
             </div>
             {
                 filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(bird => {

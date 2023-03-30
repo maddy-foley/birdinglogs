@@ -12,6 +12,7 @@ import { Logout } from './components/accounts/AccountLogout';
 import { Profile } from './components/accounts/AccountProfile';
 import GetToken from './components/Token';
 import { CreateAccount } from './components/accounts/AccountCreate';
+import { CreateBird } from './components/birds/BirdCreate';
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="birds">
           <Route path="" element={<BirdPage />} />
           <Route path=":id" element={<BirdDetail />} />
+          <Route path="create" element={<CreateBird />} />
         </Route>
         <Route path="account">
           <Route path="login" element={ <Login/>}/>
