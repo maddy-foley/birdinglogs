@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 
 export function Logout() {
+    const navigate = useNavigate();
     const handleLogout = async (e) =>{
         e.preventDefault();
         const response = await fetch(
@@ -7,6 +9,8 @@ export function Logout() {
                 method: "DELETE",
                 credentials: 'include',
             })
+        window.location.reload()
+        navigate("/")
     }
 
     return (

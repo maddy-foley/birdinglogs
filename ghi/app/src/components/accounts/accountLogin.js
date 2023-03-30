@@ -7,7 +7,7 @@ export function Login() {
         username: '',
         password: ''
     })
-
+    const navigate = useNavigate();
 
     const onSubmit = async(e) => {
         e.preventDefault();
@@ -23,6 +23,9 @@ export function Login() {
             })
         if (response.ok) {
             const data = await response.json()
+            navigate("/account/profile")
+            window.location.reload();
+
         } else {
             console.error("error")
         }

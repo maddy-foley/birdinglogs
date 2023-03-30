@@ -8,9 +8,9 @@ import { BirdDetail } from './components/birds/BirdDetails';
 import { BirdPage } from './pages/BirdPage'
 
 
-import { Login } from './components/accounts/accountLogin';
-import { Logout } from './components/accounts/accountLogout';
-import { Profile } from './components/accounts/accountProfile';
+import { Login } from './components/accounts/AccountLogin';
+import { Logout } from './components/accounts/AccountLogout';
+import { Profile } from './components/accounts/AccountProfile';
 import GetToken from './components/Token';
 import { useEffect, useState } from 'react';
 

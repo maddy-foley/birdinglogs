@@ -7,7 +7,9 @@ const getToken = async() =>{
         })
         if(response.ok) {
             const data = await response.json()
-            token += data.access_token
+            if(data['access_token']){
+                token = data.access_token
+            } 
         }
     } catch(err){
         console.error(err)
