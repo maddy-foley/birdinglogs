@@ -7,7 +7,8 @@ Tools: FastAPI, PostgreSQL and React.js
 Over 900 North American bird species retrieved from publically available wikipediaapi and wikimedia restful api. Birds have been stored into a postgresql database and allows for users to add missing birds. Data file is currently hidden.
 
 
-
+## Currently Working on:
+Basic front-end functionality. Backend and authentication done.
 
 
 Disclaimer:
