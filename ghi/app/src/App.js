@@ -13,6 +13,8 @@ import { Profile } from './components/accounts/AccountProfile';
 import GetToken from './components/Token';
 import { CreateAccount } from './components/accounts/AccountCreate';
 import { CreateBird } from './components/birds/BirdCreate';
+import { MyBirds } from './components/accounts/AccountBirds';
+import { MySightings } from './components/sightings/AccountSightings';
 
 
 
@@ -26,12 +28,16 @@ function App() {
           <Route path="" element={<BirdPage />} />
           <Route path=":id" element={<BirdDetail />} />
           <Route path="create" element={<CreateBird />} />
+          <Route path="me" element={<MyBirds/>}/>
         </Route>
         <Route path="account">
           <Route path="login" element={ <Login/>}/>
           <Route path='logout' element={ <Logout />} />
           <Route path="create-account" element={<CreateAccount />} />
           <Route path="profile" element={ < Profile />} />
+        </Route>
+        <Route path="sightings">
+          <Route path="me" element={<MySightings />}/>
         </Route>
      </Routes>
     </BrowserRouter>

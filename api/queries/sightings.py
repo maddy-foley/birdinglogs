@@ -12,8 +12,11 @@ class SightingsQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT
+                          SELECT
                             b.name AS bird
+                            , b.picture_url AS picture_url
+                            , b.description AS description
+                            , f.family AS family
                             , a.username AS username
                             , s.comment as comment
                             , s.spotted_on as spotted_on
@@ -23,6 +26,8 @@ class SightingsQueries:
                             ON(a.id = s.account_id)
                         INNER JOIN birds b
                             ON(b.id = s.bird_id)
+                        INNER JOIN families f
+                            ON(b.family_id = f.id)
                         ORDER BY spotted_on DESC;
                         """
                     )
@@ -44,6 +49,9 @@ class SightingsQueries:
                         """
                         SELECT
                             b.name AS bird
+                            , b.picture_url AS picture_url
+                            , b.description AS description
+                            , f.family AS family
                             , a.username AS username
                             , s.comment as comment
                             , s.spotted_on as spotted_on
@@ -53,6 +61,8 @@ class SightingsQueries:
                             ON(a.id = s.account_id)
                         INNER JOIN birds b
                             ON(b.id = s.bird_id)
+                        INNER JOIN families f
+                            ON(b.family_id = f.id)
                         WHERE s.account_id=%s
                         ORDER BY spotted_on DESC;
                         """,
@@ -162,8 +172,11 @@ class SightingsQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT
+                          SELECT
                             b.name AS bird
+                            , b.picture_url AS picture_url
+                            , b.description AS description
+                            , f.family AS family
                             , a.username AS username
                             , s.comment as comment
                             , s.spotted_on as spotted_on
@@ -173,6 +186,8 @@ class SightingsQueries:
                             ON(a.id = s.account_id)
                         INNER JOIN birds b
                             ON(b.id = s.bird_id)
+                        INNER JOIN families f
+                            ON(b.family_id = f.id)
                         WHERE b.id=%s
                         ORDER BY spotted_on DESC;
                         """,
@@ -215,10 +230,14 @@ class SightingsQueries:
 
 
     def record_to_joined_sightings_out(self, record):
+        print(record)
         return JoinedSightingOut(
             bird=record[0],
-            username=record[1],
-            comment=record[2],
-            spotted_on=str(record[3]),
-            id=record[4]
+            picture_url=record[1],
+            description=record[2],
+            family=record[3],
+            username=record[4],
+            comment=record[5],
+            spotted_on=str(record[6]),
+            id=record[7]
         )

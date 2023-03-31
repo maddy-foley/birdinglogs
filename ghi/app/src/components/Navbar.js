@@ -34,6 +34,12 @@ export function Navbar(){
                 isLogged ?
                 <>
                     <div className="nav-link">
+                        <NavLink to="/sightings/me">My Sightings</NavLink>
+                    </div>
+                    <div className="nav-link">
+                        <NavLink to="/birds/me">My Birds</NavLink>
+                    </div>
+                    <div className="nav-link">
                         <NavLink to="/account/profile">My Profile</NavLink>
                     </div>
                     <Logout />

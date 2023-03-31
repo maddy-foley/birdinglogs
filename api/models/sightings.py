@@ -20,6 +20,9 @@ class SightingOut(BaseModel):
 class JoinedSightingOut(BaseModel):
     bird: str
     username: str
+    picture_url: str
+    family: str
+    description: str
     comment: str
     spotted_on: Optional[datetime | str]
     id: int
