@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
+
 
 export function CreateSighting(){
     const id = window.location.pathname.split("/")[2]
     const [bird, setBird] = useState({})
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         bird_id: id,
         comment: '',
@@ -22,7 +25,16 @@ export function CreateSighting(){
                     'Content-Type': 'application/json'
                 }
             });
+            if(response.ok){
+                setFormData({
+                    bird_id: id,
+                    comment: '',
+                    spotted_on: new Date()
+                })
+                navigate(`/birds/${id}`)
+                window.location.reload()
     }
+}
 
     const handleChange = (e) => {
         e.preventDefault();
