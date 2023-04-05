@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { MySightings } from "../sightings/AccountSightings";
 import getToken from "../Token";
 
 
@@ -32,6 +33,7 @@ export function Profile() {
             <h2>Welcome Back {profile.name}</h2>
             <div>@{profile.username}</div>
             <img className="bird-img"src={profile.picture_url} alt={profile.username + "image url broken"}/>
+            <MySightings />
         </div>
     )
 }

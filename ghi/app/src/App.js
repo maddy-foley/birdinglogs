@@ -15,6 +15,7 @@ import { CreateAccount } from './components/accounts/AccountCreate';
 import { CreateBird } from './components/birds/BirdCreate';
 import { MyBirds } from './components/accounts/AccountBirds';
 import { MySightings } from './components/sightings/AccountSightings';
+import { CreateSighting } from './components/sightings/CreateSighting';
 
 
 
@@ -29,11 +30,12 @@ function App() {
           <Route path=":id" element={<BirdDetail />} />
           <Route path="create" element={<CreateBird />} />
           <Route path="me" element={<MyBirds/>}/>
+          <Route path=":id/create-sighting" element={<CreateSighting />}/>
         </Route>
         <Route path="account">
           <Route path="login" element={ <Login/>}/>
           <Route path='logout' element={ <Logout />} />
-          <Route path="create-account" element={<CreateAccount />} />
+          <Route path="create" element={<CreateAccount />} />
           <Route path="profile" element={ < Profile />} />
         </Route>
         <Route path="sightings">

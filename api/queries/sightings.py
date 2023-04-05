@@ -2,7 +2,6 @@ from queries.db import pool
 from models.sightings import SightingOut, SightingIn, JoinedSightingOut
 from models.birds import Error
 from typing import List
-from common.common import timestamp
 
 
 class SightingsQueries:
@@ -94,7 +93,7 @@ class SightingsQueries:
                             sighting.bird_id,
                             account_id,
                             sighting.comment,
-                            timestamp(),
+                            sighting.spotted_on,
                         ]
                     )
                     result = result.fetchone()
@@ -104,7 +103,7 @@ class SightingsQueries:
                         bird_id=sighting.bird_id,
                         account_id=account_id,
                         comment=sighting.comment,
-                        spotted_on=timestamp(),
+                        spotted_on=sighting.spotted_on,
                     )
 
 
@@ -131,7 +130,7 @@ class SightingsQueries:
                         [
                             sighting.bird_id,
                             sighting.comment,
-                            timestamp(),
+                            sighting.spotted_on,
                             sighting_id,
                             account_id
                         ]
@@ -230,7 +229,6 @@ class SightingsQueries:
 
 
     def record_to_joined_sightings_out(self, record):
-        print(record)
         return JoinedSightingOut(
             bird=record[0],
             picture_url=record[1],

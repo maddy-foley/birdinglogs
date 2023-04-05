@@ -1,4 +1,5 @@
 import { useEffect, useState, useParams } from "react"
+import { NavLink } from "react-router-dom";
 
 
 export function BirdDetail () {
@@ -34,6 +35,9 @@ export function BirdDetail () {
             <div className="italic md:text-3xl">{bird.family}</div>
             <img src={bird.picture_url}/>
             <p className="">{bird.description}</p>
+            <div>
+                <NavLink to={"/birds/"+id+"/create-sighting"}>Create Sighting</NavLink>
+            </div>
             <h2 className="mt-5 text-2xl md:text-5xl">Recent Sightings:</h2>
             { sightings.length > 0 ? sightings.map(sighting => {
                 return (

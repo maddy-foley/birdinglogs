@@ -55,7 +55,7 @@ export function Login() {
                     <button onClick={onSubmit} className="border" name="submit">Login</button>
                 </div>
                 <div>
-                    <NavLink to="/account/create-account">Create an Account</NavLink>
+                    <NavLink to="/account/create">Create an Account</NavLink>
                 </div>
             </form>
         </div>
