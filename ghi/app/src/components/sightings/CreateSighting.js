@@ -15,7 +15,7 @@ export function CreateSighting(){
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const response = fetch(
+        const response = await fetch(
             'http://localhost:8000/api/sighting',
             {
                 method: "POST",
@@ -25,15 +25,9 @@ export function CreateSighting(){
                     'Content-Type': 'application/json'
                 }
             });
-            if(response.ok){
-                setFormData({
-                    bird_id: id,
-                    comment: '',
-                    spotted_on: new Date()
-                })
-                navigate(`/birds/${id}`)
-                window.location.reload()
-    }
+        if(response.ok) {
+            navigate(`/birds/${id}`)
+        }
 }
 
     const handleChange = (e) => {
@@ -41,7 +35,6 @@ export function CreateSighting(){
         const name = e.target.name
         const value = e.target.value
         setFormData({...formData, [name]: value})
-        console.log(formData)
     }
 
     useEffect(() =>{
@@ -64,13 +57,13 @@ export function CreateSighting(){
             </div>
             <div>
                 <label htmlFor="comment">comment: </label>
-                <textarea onChange={handleChange} name="comment"></textarea>
+                <textarea onChange={handleChange} name="comment" id="comment"></textarea>
             </div>
             <div>
                 <label htmlFor="spotted_on">spotted_on: </label>
-                <input type="datetime-local" onChange={handleChange} name="spotted_on" defaultValue={new Date().toISOString().slice(0,16)}/>
+                <input type="datetime-local" onChange={handleChange} name="spotted_on" id="spotted_on" defaultValue={new Date().toISOString().slice(0,16)}/>
             </div>
-            <button className="border" type="submit">Submit</button>
+            <button className="border">Submit</button>
         </form>
         <br></br>
     </div>

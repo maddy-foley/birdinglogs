@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { MySightings } from "../sightings/AccountSightings";
+import { MySightings } from "../sightings/MySightings";
 import getToken from "../Token";
 
 

@@ -1,12 +1,25 @@
+import { useState } from "react"
 import { DeleteSighting } from "./DeleteSighting"
 
 export function SightingsCard ({sighting}) {
+    const [isOpen, setIsOpen] = useState(false)
+    const callbackOpen = () =>{
+        setIsOpen(false);
+    }
+
     return (
         <>
         <div className="flex flex-col bird-card py-7 px-5 m-10 text-right">
             <h1 className="text-2xl text-extrabold">{sighting.bird}</h1>
             <div className="text-sm italic">Family: {sighting.family}</div>
-            <button onClick={<DeleteSighting id={sighting.id}/>}>Delete</button>
+            <button onClick={e=> setIsOpen(!isOpen)}>Delete</button>
+            {
+                isOpen ?
+                <div>
+                    <DeleteSighting id={sighting.id}  callback={callbackOpen}/>
+                </div> :
+                null
+            }
             <p className="border-bottom ml-2 mt-2 mb-4"></p>
             <div className="flex justify-center">
                 <img className="bird-img" src={sighting.picture_url} alt={sighting.bird}/>
