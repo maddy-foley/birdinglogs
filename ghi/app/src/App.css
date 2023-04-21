@@ -40,3 +40,16 @@ html{
 .bird-card:hover {
     box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.5);
 }
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}

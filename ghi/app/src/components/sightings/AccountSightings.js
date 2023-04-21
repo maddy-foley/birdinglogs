@@ -51,7 +51,7 @@ export function MySightings() {
                             <SightingsCard sighting={sighting}/>
                         </div>
                     )
-                })
+                }).reverse()
 
             }
         </div>
