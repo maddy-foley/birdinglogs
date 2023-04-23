@@ -12,7 +12,9 @@ class WishQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT b.name AS name
+                        SELECT b.picture_url AS picture_url
+                            , f.family AS family
+                            , b.name  as name
                             , a.username AS username
                             , w.id AS id
                         FROM wishes AS w
@@ -20,9 +22,11 @@ class WishQueries:
                             ON(b.id = w.bird_id)
                         INNER JOIN accounts a
                             ON(a.id = w.account_id)
+                        INNER JOIN families f
+                            ON(b.family_id = f.id)
                         WHERE w.account_id=%s;
                         """,
-                        [ 
+                        [
                             account_id
                         ]
                     )
@@ -86,8 +90,11 @@ class WishQueries:
             id=record[2]
         )
     def record_to_joined_wish(self, record):
+        print(record)
         return JoinedWishOut(
-            bird=record[0],
-            username=record[1],
-            id=record[2]
+            picture_url=record[0],
+            family=record[1],
+            bird=record[2],
+            username=record[3],
+            id=record[4]
         )

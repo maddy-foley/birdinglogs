@@ -6,17 +6,17 @@ import './App.css';
 import { BirdDetail } from './components/birds/BirdDetails';
 import { BirdPage } from './pages/BirdPage'
 
-
 import { Login } from './components/accounts/AccountLogin';
 import { Logout } from './components/accounts/AccountLogout';
 import { Profile } from './components/accounts/AccountProfile';
-import GetToken from './components/Token';
+
 import { CreateAccount } from './components/accounts/AccountCreate';
 import { CreateBird } from './components/birds/BirdCreate';
 import { MyBirds } from './components/accounts/AccountBirds';
-import { MySightings } from './components/sightings/AccountSightings';
+import { MySightings } from './components/sightings/MySightings';
 import { CreateSighting } from './components/sightings/CreateSighting';
 
+import { MyWishes } from './components/wishes/MyWishes';
 
 
 function App() {
@@ -40,6 +40,9 @@ function App() {
         </Route>
         <Route path="sightings">
           <Route path="me" element={<MySightings />}/>
+        </Route>
+        <Route path="wishes">
+          <Route path="me" element={<MyWishes/>}/>
         </Route>
      </Routes>
     </BrowserRouter>

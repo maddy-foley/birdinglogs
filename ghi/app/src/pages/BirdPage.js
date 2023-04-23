@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BirdList } from '../components/birds/BirdList'
 
 
 export function BirdPage () {
-
 
 
     return (
