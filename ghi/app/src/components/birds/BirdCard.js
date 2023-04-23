@@ -2,20 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export function BirdCard({bird}) {
-    // const [sightingCount, setSightingCount] = useState(0);
+
     const navigate = useNavigate();
-
-    // const getSightingCount = async () =>{
-    //     const response = await fetch(`http://localhost:8000/api/birds/${bird.id}/sightings/count`)
-    //     if(response.ok){
-    //         const data = await response.json();
-    //        setSightingCount(data)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     getSightingCount();
-    // }, [])
 
     const toDetails = () =>{
         navigate(`/birds/${bird.id}`)
@@ -29,7 +17,7 @@ export function BirdCard({bird}) {
             <div className="flex justify-center">
                 <img className="bird-img" src={bird.picture_url} alt={bird.name}/>
             </div>
-            {/* <div>Sightings: {sightingCount}</div> */}
+            <div>Sightings: {bird.sightings}</div>
         </div>
     )
 }

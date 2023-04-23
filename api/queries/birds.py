@@ -14,12 +14,19 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
+                            , COUNT(w.bird_id) AS wishes
+                            , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
                         INNER JOIN families f
                             ON(f.id=b.family_id)
+                        LEFT JOIN wishes w
+                            ON(w.bird_id=b.id)
+                        LEFT JOIN sightings s
+                            ON(s.bird_id=b.id)
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
+                        GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username
                         ORDER BY id;
                         """
                     )
@@ -44,13 +51,20 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
+                            , COUNT(w.bird_id) AS wishes
+                            , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
                         INNER JOIN families f
                             ON(f.id=b.family_id)
-                        INNER JOIN accounts a
+                        LEFT JOIN wishes w
+                            ON(w.bird_id=b.id)
+                        LEFT JOIN sightings s
+                            ON(s.bird_id=b.id)
+                        LEFT JOIN accounts a
                             ON(a.id=b.account_id)
-                        WHERE account_id=%s
+                        WHERE b.account_id=%s
+                        GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
                         [account_id]
                     )
@@ -76,13 +90,20 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
+                            , COUNT(w.bird_id) AS wishes
+                            , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
                         INNER JOIN families f
                             ON(f.id=b.family_id)
+                        LEFT JOIN wishes w
+                            ON(w.bird_id=b.id)
+                        LEFT JOIN sightings s
+                            ON(s.bird_id=b.id)
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
-                        WHERE b.id=%s;
+                        WHERE b.id=%s
+                        GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
                         [bird_id]
                     )
@@ -211,22 +232,13 @@ class BirdQueries:
 
 
     def record_to_joined_bird_out(self, record):
-        print(record)
-        if len(record) == 6:
             return JoinedBirdOut(
                 name=record[0],
                 picture_url=record[1],
                 description=record[2],
                 family=record[3],
                 username=record[4],
-                id=record[5]
-            )
-        else:
-            return JoinedBirdOut(
-                name=record[0],
-                picture_url=record[1],
-                description=record[2],
-                family=record[3],
-                username=None,
-                id=record[4]
+                wishes=record[5],
+                sightings=record[6],
+                id=record[7]
             )
