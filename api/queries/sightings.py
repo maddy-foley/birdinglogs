@@ -54,6 +54,7 @@ class SightingsQueries:
                             , a.username AS username
                             , s.comment as comment
                             , s.spotted_on as spotted_on
+                            , s.bird_id AS bird_id
                             , s.id AS id
                         FROM sightings s
                         LEFT JOIN accounts a
@@ -237,5 +238,6 @@ class SightingsQueries:
             username=record[4],
             comment=record[5],
             spotted_on=str(record[6]),
-            id=record[7]
+            bird_id=record[7],
+            id=record[8]
         )

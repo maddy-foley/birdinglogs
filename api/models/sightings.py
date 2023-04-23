@@ -25,4 +25,5 @@ class JoinedSightingOut(BaseModel):
     description: str
     comment: str
     spotted_on: Optional[datetime | str]
+    bird_id: int
     id: int

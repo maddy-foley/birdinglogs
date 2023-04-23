@@ -6,6 +6,9 @@ html{
 img {
     max-height: 300px;
 }
+button:hover {
+    background-color: rgb(236, 211, 185);
+}
 /* MISC */
 .bg-container{
     top: 0;
@@ -41,15 +44,10 @@ img {
     border:1px solid rgb(187, 171, 156);
     border-radius: 10px;
     width:500px;
-    height:500px;;
+    height:500px;
 }
 .border-bottom {
     border-bottom: 1px solid rgb(187, 171, 156);
-}
-.bird-img{
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .bird-card:hover {
@@ -58,6 +56,12 @@ img {
     background-color: rgb(236, 211, 185);
 }
 
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
 /* MODAL */
 .modal {
     position: fixed;
@@ -84,4 +88,9 @@ img {
 
 .center-img{
     align-items: center;
+}
+
+/* SIGHTINGS */
+.sighting-container{
+    max-width: 400px;
 }

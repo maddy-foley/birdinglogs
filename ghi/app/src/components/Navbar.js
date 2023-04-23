@@ -44,7 +44,10 @@ export function Navbar(){
                     <Logout />
                 </>
                 :
-                <NavLink to="/account/login">Login / Sign Up</NavLink>
+                <div className="nav-link">
+                    <NavLink to="/account/login">Login / Sign Up</NavLink>
+                </div>
+
             }
         </div>
     )

@@ -30,7 +30,6 @@ export function BirdCard({bird}) {
                             'Content-Type': 'application/json'
                         }
                     });
-                    console.log(bird)
             } else {
                 const response = await fetch(`http://localhost:8000/api/birds/${bird.id}/wishes`,
                     {
@@ -40,7 +39,6 @@ export function BirdCard({bird}) {
                             'Content-Type': 'application/json'
                         }
                     });
-                    console.log(bird)
             }
 
         } else {
@@ -49,8 +47,9 @@ export function BirdCard({bird}) {
     }
 
     return (
-        <div className="bird-card">
-            <div>
+        <div className="bird-card m-3">
+            <div className="p-3">
+                <div className="flex justify-end">
                {
                 wish ?
                     <button className="z-10" onClick={handleLike}><div><i className="fa-solid fa-heart fa-2x heart"></i></div></button>:
@@ -65,17 +64,18 @@ export function BirdCard({bird}) {
                     null
             }
             </div>
-            <div onClick={toDetails}>
-                <h1 className="text-2xl text-extrabold">{bird.name}</h1>
-                    <div className="text-sm italic">Family: {bird.family}</div>
+            <div onClick={toDetails} className="">
+                <h1 className="text-2xl text-extrabold flex justify-center">{bird.name}</h1>
+                    <div className="text-sm italic flex justify-center">Family: {bird.family}</div>
                     <p className="border-bottom ml-2 mt-2 mb-4"></p>
-                    <div>
-                        <div className="bird-img m-5">
+                    <div className="card-content">
+                        <div className="m-5">
                             <img src={bird.picture_url} alt={bird.name}/>
                         </div>
-                        <div className="flex justify-end ">Sightings: {bird.sightings}</div>
+                        <div className="">Sightings: {bird.sightings}</div>
                     </div>
             </div>
+        </div>
         </div>
     )
 }

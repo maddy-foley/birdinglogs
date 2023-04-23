@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { SightingsCard } from "./SightingsCard"
 
-
 export function MySightings() {
     const [sightings, setSightings] = useState([])
     const [indexes, setIndexes] = useState({start: -1, end: 10 })
@@ -36,6 +35,7 @@ export function MySightings() {
             const data = await response.json();
             setSightings(data)
             setFilteredBirds(data)
+            console.log(data)
         }
     }
 
