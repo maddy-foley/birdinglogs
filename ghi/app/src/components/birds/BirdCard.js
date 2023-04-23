@@ -69,7 +69,10 @@ export function BirdCard({bird}) {
             <div className="flex justify-center">
                 <img onClick={toDetails}  className="bird-img" src={bird.picture_url} alt={bird.name}/>
             </div>
-            <div>Sightings: {bird.sightings}</div>
+            {
+                bird['wish'] ? <div></div>:<div>Sightings: {bird.sightings}</div>
+            }
+
         </div>
     )
 }

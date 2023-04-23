@@ -10,21 +10,19 @@ export function BirdList() {
     const [indexes, setIndexes] = useState({start: -1, end: 10 })
 
     const leftPage = () =>{
-        if(indexes.start<0){
-            setIndexes({start: -1, end: 10})
+        if(indexes.start<= 0){
+            setIndexes({start: 0, end: 10})
         } else {
             setIndexes({start: indexes.start - 10, end: indexes.end - 10})
         }
-
     }
 
     const rightPage = () =>{
-        if(indexes.end < filterBirds.length){
-            setIndexes({start: filteredBirds.length-10, end: filteredBirds.length})
-        } else {
-            setIndexes({start: indexes.start + 10, end: indexes.end + 10})
+        const endIdx = filteredBirds.length % 10
+        setIndexes({start: indexes.start + 10, end: indexes.end + 10})
+        if(indexes.end > filteredBirds.length){
+            setIndexes({start: filteredBirds.length-endIdx, end: filteredBirds.length+endIdx})
         }
-        console.log(indexes)
     }
 
     const getData = async () => {
@@ -33,7 +31,6 @@ export function BirdList() {
             const data = await response.json();
             setBirds(data);
             setFilteredBirds(data);
-            console.log(data)
         }
     }
     const filterBirds = async (data) => {
