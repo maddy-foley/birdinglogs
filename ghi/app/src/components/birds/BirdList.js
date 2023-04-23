@@ -33,6 +33,7 @@ export function BirdList() {
             const data = await response.json();
             setBirds(data);
             setFilteredBirds(data);
+            console.log(data)
         }
     }
     const filterBirds = async (data) => {
@@ -63,8 +64,8 @@ export function BirdList() {
             {
                 filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(bird => {
                     return (
-                        <div>
-                            <BirdCard key={bird.id} bird={bird}/>
+                        <div key={bird.id}>
+                            <BirdCard bird={bird}/>
                         </div>
                     )
                 })

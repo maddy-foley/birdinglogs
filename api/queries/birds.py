@@ -14,18 +14,22 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
-                            , COUNT(w.bird_id) AS wishes
+                            , CASE
+                                WHEN COUNT(w.account_id) > 0
+                                    THEN 1
+                                    ELSE 0
+                            END as wish
                             , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
                         INNER JOIN families f
                             ON(f.id=b.family_id)
-                        LEFT JOIN wishes w
-                            ON(w.bird_id=b.id)
                         LEFT JOIN sightings s
                             ON(s.bird_id=b.id)
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
+                        LEFT JOIN wishes w
+                            ON(w.bird_id=b.id)
                         GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username
                         ORDER BY id;
                         """
@@ -51,18 +55,22 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
-                            , COUNT(w.bird_id) AS wishes
+                            , CASE
+                                WHEN COUNT(w.account_id) > 0
+                                    THEN 1
+                                    ELSE 0
+                            END as wish
                             , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
                         INNER JOIN families f
                             ON(f.id=b.family_id)
-                        LEFT JOIN wishes w
-                            ON(w.bird_id=b.id)
                         LEFT JOIN sightings s
                             ON(s.bird_id=b.id)
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
+                        LEFT JOIN wishes w
+                            ON(w.bird_id=b.id)
                         WHERE b.account_id=%s
                         GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
@@ -90,18 +98,22 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
-                            , COUNT(w.bird_id) AS wishes
+                            , CASE
+                                WHEN COUNT(w.account_id) > 0
+                                    THEN 1
+                                    ELSE 0
+                            END as wish
                             , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
                         INNER JOIN families f
                             ON(f.id=b.family_id)
-                        LEFT JOIN wishes w
-                            ON(w.bird_id=b.id)
                         LEFT JOIN sightings s
                             ON(s.bird_id=b.id)
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
+                        LEFT JOIN wishes w
+                            ON(w.bird_id=b.id)
                         WHERE b.id=%s
                         GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
@@ -232,13 +244,14 @@ class BirdQueries:
 
 
     def record_to_joined_bird_out(self, record):
+            print(record)
             return JoinedBirdOut(
                 name=record[0],
                 picture_url=record[1],
                 description=record[2],
                 family=record[3],
                 username=record[4],
-                wishes=record[5],
+                wish=record[5],
                 sightings=record[6],
                 id=record[7]
             )

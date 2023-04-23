@@ -35,8 +35,10 @@ export function MyWishes() {
         })
         if(response.ok) {
             const data = await response.json();
-            setBirds(data.reverse())
-            setFilteredBirds(data.reverse())
+
+            console.log(data)
+            setBirds(data)
+            setFilteredBirds(data)
         }
     }
 

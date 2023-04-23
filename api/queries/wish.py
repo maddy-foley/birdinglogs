@@ -14,9 +14,14 @@ class WishQueries:
                         """
                         SELECT b.picture_url AS picture_url
                             , f.family AS family
-                            , b.name  as name
+                            , b.name  AS name
+                            , b.id AS bird_id
                             , a.username AS username
-                            , w.id AS id
+                            , CASE
+                                WHEN COUNT(w.account_id) > 0
+                                    THEN 1
+                                    ELSE 0
+                            END as wish
                         FROM wishes AS w
                         INNER JOIN birds b
                             ON(b.id = w.bird_id)
@@ -24,7 +29,9 @@ class WishQueries:
                             ON(a.id = w.account_id)
                         INNER JOIN families f
                             ON(b.family_id = f.id)
-                        WHERE w.account_id=%s;
+                        WHERE w.account_id=%s
+                        GROUP BY b.picture_url, b.id, b.name, a.username, f.family, w.id;
+
                         """,
                         [
                             account_id
@@ -95,6 +102,7 @@ class WishQueries:
             picture_url=record[0],
             family=record[1],
             name=record[2],
-            username=record[3],
-            id=record[4]
+            id=record[3],
+            username=record[4],
+            wish=record[5]
         )

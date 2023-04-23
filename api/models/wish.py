@@ -8,6 +8,7 @@ class WishOut(BaseModel):
 class JoinedWishOut(BaseModel):
     name: str
     username: str
+    id: int
     family: str
     picture_url: str
-    id: int
+    wish: bool

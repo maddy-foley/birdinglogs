@@ -6,7 +6,6 @@ import getToken from "./Token"
 
 export function Navbar(){
     const [isLogged, setIsLogged] = useState(false)
-    const navigate = useNavigate();
 
     const myToken  = async () =>{
         const data = await getToken();

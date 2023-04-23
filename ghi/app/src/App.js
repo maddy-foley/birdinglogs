@@ -20,6 +20,7 @@ import { MyWishes } from './components/wishes/MyWishes';
 
 
 function App() {
+
   return (
     <BrowserRouter>
      <Navbar />
