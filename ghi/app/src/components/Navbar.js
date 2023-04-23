@@ -26,7 +26,7 @@ export function Navbar(){
                 <NavLink to="/">Home</NavLink>
             </div>
             <div className="nav-link">
-                <NavLink to="/birds">Birds</NavLink>
+                <NavLink to="/birds">All Birds</NavLink>
             </div>
 
             {
