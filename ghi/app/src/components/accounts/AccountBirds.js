@@ -58,7 +58,7 @@ export function MyBirds() {
     }
 
     return(
-        <>
+        <div className="grid justify-center">
             <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
                 <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
@@ -79,6 +79,6 @@ export function MyBirds() {
                 <i className="fas fa-crow"></i>
                 <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
-        </>
+        </div>
     )
 }

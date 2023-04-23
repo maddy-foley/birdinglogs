@@ -17,7 +17,7 @@ import { MySightings } from './components/sightings/MySightings';
 import { CreateSighting } from './components/sightings/CreateSighting';
 
 import { MyWishes } from './components/wishes/MyWishes';
-
+import { Footer } from './components/Footer';
 
 function App() {
 
@@ -46,6 +46,7 @@ function App() {
           <Route path="me" element={<MyWishes/>}/>
         </Route>
      </Routes>
+     <Footer />
     </BrowserRouter>
   );
 }

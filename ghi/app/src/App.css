@@ -94,3 +94,16 @@ button:hover {
 .sighting-container{
     max-width: 400px;
 }
+
+/* FOOTER */
+.footer {
+    background-color: rgb(122, 79, 62);
+    color: rgb(55, 23, 10);
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+}
+.footer-icon {
+    color: rgb(86, 47, 5);
+}

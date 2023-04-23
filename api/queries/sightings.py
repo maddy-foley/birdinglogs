@@ -19,6 +19,7 @@ class SightingsQueries:
                             , a.username AS username
                             , s.comment as comment
                             , s.spotted_on as spotted_on
+                            , s.bird_id as bird_id
                             , s.id AS id
                         FROM sightings s
                         LEFT JOIN accounts a
@@ -180,6 +181,7 @@ class SightingsQueries:
                             , a.username AS username
                             , s.comment as comment
                             , s.spotted_on as spotted_on
+                            , s.bird_id AS bird_id
                             , s.id AS id
                         FROM sightings s
                         LEFT JOIN accounts a
@@ -230,6 +232,7 @@ class SightingsQueries:
 
 
     def record_to_joined_sightings_out(self, record):
+        print(record)
         return JoinedSightingOut(
             bird=record[0],
             picture_url=record[1],

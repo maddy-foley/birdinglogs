@@ -43,7 +43,7 @@ export function CreateBird() {
         const value = e.target.value
         setFormData({...formData, [name]: value})
     }
-    
+
     const getFamily = async() => {
         const response = await fetch('http://localhost:8000/api/family')
         if(response.ok){
@@ -57,7 +57,7 @@ export function CreateBird() {
     }, [])
 
     return(
-        <div>
+        <div className="grid grid-cols-2">
         <h1>Create a Bird</h1>
         <form onSubmit={handleSubmit}>
             <div>

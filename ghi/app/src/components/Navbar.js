@@ -21,7 +21,7 @@ export function Navbar(){
     }, [])
 
     return(
-        <div className="flex nav-header nav-bar">
+        <div className="flex nav-header nav-bar mb-5">
             <div className="nav-link">
                 <NavLink to="/">Home</NavLink>
             </div>
