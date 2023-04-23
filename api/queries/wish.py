@@ -94,7 +94,7 @@ class WishQueries:
         return JoinedWishOut(
             picture_url=record[0],
             family=record[1],
-            bird=record[2],
+            name=record[2],
             username=record[3],
             id=record[4]
         )

@@ -26,7 +26,7 @@ export function MyWishes() {
     }
 
     const getWishes = async () =>{
-        const response = await fetch('http://localhost:8000/api/account/wishes/me/', {
+        const response = await fetch('http://localhost:8000/api/account/me/wishes', {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -36,6 +36,7 @@ export function MyWishes() {
         if(response.ok) {
             const data = await response.json();
             setBirds(data.reverse())
+            setFilteredBirds(data.reverse())
         }
     }
 
@@ -63,8 +64,8 @@ export function MyWishes() {
         {
             filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(bird => {
                 return (
-                    <div>
-                        <BirdCard key={bird.id} id={bird.id}/>
+                    <div key={bird.id}>
+                        <BirdCard bird={bird}/>
                     </div>
                 )
             })

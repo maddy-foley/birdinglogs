@@ -6,7 +6,7 @@ class WishOut(BaseModel):
     id: int
 
 class JoinedWishOut(BaseModel):
-    bird: str
+    name: str
     username: str
     family: str
     picture_url: str

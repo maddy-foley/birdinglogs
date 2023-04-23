@@ -39,6 +39,9 @@ export function Navbar(){
                     <div className="nav-link">
                         <NavLink to="/account/profile">My Profile</NavLink>
                     </div>
+                    <div className="nav-link">
+                        <NavLink to="/wishes/me">My WishList</NavLink>
+                    </div>
                     <Logout />
                 </>
                 :

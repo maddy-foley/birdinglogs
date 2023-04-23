@@ -32,7 +32,7 @@ class BirdQueries:
             print(e)
             return Error(message=str(e))
 
-    
+
     def get_birds_by_account(self, account_id: int):
         try:
             with pool.connection() as conn:
@@ -211,6 +211,7 @@ class BirdQueries:
 
 
     def record_to_joined_bird_out(self, record):
+        print(record)
         if len(record) == 6:
             return JoinedBirdOut(
                 name=record[0],
