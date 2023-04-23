@@ -1,13 +1,12 @@
+/* ALL */
 html{
-    background-color: rgb(17, 4, 3);
-    color: rgb(187, 171, 156);
+    background-color: rgb(246, 241, 233);
+    color: rgb(79, 32, 13)
 }
-
-.bird-img {
-    max-width: 400px;
-    max-height: 400px;
+img {
+    max-height: 300px;
 }
-
+/* MISC */
 .bg-container{
     top: 0;
     left: 0;
@@ -16,9 +15,7 @@ html{
     background: rgb(255, 255, 255. 5.0);
 }
 
-.border-bottom {
-    border-bottom: 1px solid rgb(187, 171, 156);
-}
+/* NAVBAR/LINKS */
 
 .nav-link {
     width: 60px;
@@ -27,20 +24,41 @@ html{
 }
 
 .nav-link:hover {
-    background: black;
     box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
 }
+.nav-bar{
+    position: sticky;
+    background-color: rgb(255, 217, 61);
+    top:0px;
+    left:0px;
+    height: 100%;
+    width:100%;
+}
 
+/* CARDS */
 .bird-card {
     box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
     border:1px solid rgb(187, 171, 156);
     border-radius: 10px;
+    width:500px;
+    height:500px;;
+}
+.border-bottom {
+    border-bottom: 1px solid rgb(187, 171, 156);
+}
+.bird-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bird-card:hover {
     box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.5);
+    transition: 1s;
+    background-color: rgb(236, 211, 185);
 }
 
+/* MODAL */
 .modal {
     position: fixed;
     left: 0;
@@ -52,4 +70,18 @@ html{
     align-items: center;
     justify-content: center;
     z-index: 10;
+}
+
+/* HEARTS */
+.heart {
+    color:rgb(229, 87, 87);
+}
+.heart:hover {
+    color: rgb(141, 0, 0);
+    transform: scale(1.5);
+    transition: all 0.4s ease-in-out;
+}
+
+.center-img{
+    align-items: center;
 }

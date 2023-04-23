@@ -49,12 +49,12 @@ export function BirdCard({bird}) {
     }
 
     return (
-        <div className="flex flex-col bird-card py-7 px-5 m-10 text-right">
-            <h1 className="text-2xl text-extrabold">{bird.name}</h1>
-            {
+        <div className="bird-card">
+            <div>
+               {
                 wish ?
-                    <button className="z-10 bg-slate-50" onClick={handleLike}><div><i className="fa-solid fa-heart"></i></div></button>:
-                    <button className="z-10 bg-slate-50" onClick={handleLike}><div><i className="fa-regular fa-heart"></i></div></button>
+                    <button className="z-10" onClick={handleLike}><div><i className="fa-solid fa-heart fa-2x heart"></i></div></button>:
+                    <button className="z-10" onClick={handleLike}><div><i className="fa-regular fa-heart fa-2x heart"></i></div></button>
             }
             {
                 ask ?
@@ -64,15 +64,18 @@ export function BirdCard({bird}) {
                     </div> :
                     null
             }
-            <div className="text-sm italic">Family: {bird.family}</div>
-            <p className="border-bottom ml-2 mt-2 mb-4"></p>
-            <div className="flex justify-center">
-                <img onClick={toDetails}  className="bird-img" src={bird.picture_url} alt={bird.name}/>
             </div>
-            {
-                bird['wish'] ? <div></div>:<div>Sightings: {bird.sightings}</div>
-            }
-
+            <div onClick={toDetails}>
+                <h1 className="text-2xl text-extrabold">{bird.name}</h1>
+                    <div className="text-sm italic">Family: {bird.family}</div>
+                    <p className="border-bottom ml-2 mt-2 mb-4"></p>
+                    <div>
+                        <div className="bird-img m-5">
+                            <img src={bird.picture_url} alt={bird.name}/>
+                        </div>
+                        <div className="flex justify-end ">Sightings: {bird.sightings}</div>
+                    </div>
+            </div>
         </div>
     )
 }
