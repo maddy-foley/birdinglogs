@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { SightingsCard } from "./SightingsCard"
+import { NavLink } from "react-router-dom"
 
 export function MySightings() {
     const [sightings, setSightings] = useState([])
@@ -55,13 +56,16 @@ export function MySightings() {
     }, [])
 
     return(
-        <div>
-            <h1>My sightings:</h1>
-            <div className="flex justify-center">
+        <div className="mt-10">
+            {
+                sightings.length>0 ?
+                <div>
+                     <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
                 <input onChange={handleSearch} type="text" name="search" id="search" className="p-1" placeholder="Search for birds..."/>
                 <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
+
             <div className="grid justify-center">
                 {
                     filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(sighting => {
@@ -78,6 +82,11 @@ export function MySightings() {
                     <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
+                </div>
+                :
+                <div>Go to <NavLink to="/birds">All Birds</NavLink> and Add Sightings!</div>
+            }
+
         </div>
     )
 }

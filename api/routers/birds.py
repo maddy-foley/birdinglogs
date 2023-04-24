@@ -7,9 +7,14 @@ router = APIRouter()
 
 @router.get('/api/birds')
 def get_all_birds(
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: BirdQueries = Depends()
 ):
-    return repo.get_all_birds()
+    if account_data:
+        return repo.get_all_birds(account_data["id"])
+    else:
+        return repo.get_all_birds(account_id=None)
+
 
 @router.get('/api/birds/me')
 def get_birds_by_account(

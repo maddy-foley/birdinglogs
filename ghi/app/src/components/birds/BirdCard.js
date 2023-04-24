@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import getToken from "../Token";
 
 export function BirdCard({bird}) {
-    const [wish, setWish] = useState(bird.wish);
+
+    const [wish, setWish] = useState(bird.wish != null);
     const [ask, setAsk] = useState(false);
 
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ export function BirdCard({bird}) {
             console.log("Delayed for 1 second.");
           }, "1000")
         if(data){
+            console.log(wish)
             setWish(!wish);
 
             if (wish){
@@ -52,8 +54,8 @@ export function BirdCard({bird}) {
                 <div className="flex justify-end">
                {
                 wish ?
-                    <button className="z-10" onClick={handleLike}><div><i className="fa-solid fa-heart fa-2x heart"></i></div></button>:
-                    <button className="z-10" onClick={handleLike}><div><i className="fa-regular fa-heart fa-2x heart"></i></div></button>
+                    <button className="z-9" onClick={handleLike}><div><i className="fa-solid fa-heart fa-2x heart"></i></div></button>:
+                    <button className="z-9" onClick={handleLike}><div><i className="fa-regular fa-heart fa-2x heart"></i></div></button>
             }
             {
                 ask ?

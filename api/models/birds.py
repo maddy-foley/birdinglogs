@@ -18,7 +18,7 @@ class BirdOut(BaseModel):
 
 class JoinedBirdOut(BirdIn):
     username: str | None
-    wish: bool
+    wish: int | None
     sightings: int
     id: int
 

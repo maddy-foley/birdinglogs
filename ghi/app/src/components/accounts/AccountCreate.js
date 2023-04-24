@@ -25,6 +25,7 @@ export function CreateAccount () {
                 }
             })
         if(response.ok){
+
             setFormData({
                 name: '',
                 username: '',
@@ -39,10 +40,6 @@ export function CreateAccount () {
         }
 
     }
-
-    // useEffect(() => {
-    //     getData();
-    // }, []);
 
     const handleChange = async(e) => {
         const name = e.target.name;

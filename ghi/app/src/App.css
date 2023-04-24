@@ -25,14 +25,18 @@ button:hover {
 /* NAVBAR/LINKS */
 
 .nav-link {
-    width: 60px;
+    display: flex;
     text-align: center;
     border-radius: 10px;
+    justify-content: center;
+    padding: 7px;
+    background-color: rgb(255, 226, 108);
 }
 
 .nav-link:hover {
     box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
 }
+
 .nav-bar{
     position: sticky;
     background-color: rgb(255, 217, 61);
@@ -40,6 +44,18 @@ button:hover {
     left:0px;
     height: 100%;
     width:100%;
+}
+
+.account-nav {
+  padding: 10px;
+  border: 1px solid black;
+
+}
+
+/* PROFILE */
+.sightings-header{
+    margin-left: 100px;
+    margin-bottom: 20px;
 }
 
 /* CARDS */
@@ -101,7 +117,7 @@ button:hover {
 
 /* FOOTER */
 .footer {
-    background-color: rgb(122, 79, 62);
+    background-color: rgb(208, 115, 76);
     color: rgb(55, 23, 10);
     left: 0;
     bottom: 0;

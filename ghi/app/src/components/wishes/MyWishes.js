@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { BirdCard } from "../birds/BirdCard";
+import { BirdCard } from "../birds/BirdCard"
+import { NavLink } from "react-router-dom";
 
 export function MyWishes() {
     const [birds, setBirds] = useState([]);
@@ -64,7 +65,7 @@ export function MyWishes() {
                 <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
                 <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2">
+            <div className="grid sm:grid-cols-1 lg:grid-cols-2 ml-10">
             {
                 filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(bird => {
                     return (
@@ -81,7 +82,7 @@ export function MyWishes() {
             </div>
         </div>
         :
-        <div>Go to All Birds and add birds to your List!</div>}
+        <div>Go to <NavLink to="/birds">All Birds</NavLink>  and add birds to your List!</div>}
 
     </div>
 )

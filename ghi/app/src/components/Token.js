@@ -7,9 +7,11 @@ const getToken = async() =>{
         })
         if(response.ok) {
             const data = await response.json()
-            if(data['access_token']){
+            try {
                 token = data.access_token
-            } 
+            }  catch (TypeError){
+                token = ''
+            }
         }
     } catch(err){
         console.error(err)

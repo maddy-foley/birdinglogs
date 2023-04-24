@@ -9,8 +9,9 @@ export function Logout() {
                 method: "DELETE",
                 credentials: 'include',
             })
-        window.location.reload()
         navigate("/")
+        window.location.reload()
+
     }
 
     return (
