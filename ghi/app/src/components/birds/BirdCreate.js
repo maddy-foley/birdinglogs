@@ -57,7 +57,7 @@ export function CreateBird() {
     }, [])
 
     return(
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 body-page">
         <h1>Create a Bird</h1>
         <form onSubmit={handleSubmit}>
             <div>

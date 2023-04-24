@@ -49,7 +49,7 @@ export function BirdList() {
     }
 
     return(
-        <div className="">
+        <div className="body-page">
             <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
                 <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>

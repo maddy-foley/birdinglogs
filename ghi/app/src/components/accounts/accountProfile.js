@@ -29,7 +29,7 @@ export function Profile() {
         getData();
     }, [])
     return (
-        <div>
+        <div className="body-page">
             <h2>Welcome Back {profile.name}</h2>
             <div>@{profile.username}</div>
             <img className="bird-img"src={profile.picture_url} alt={profile.username + "image url broken"}/>

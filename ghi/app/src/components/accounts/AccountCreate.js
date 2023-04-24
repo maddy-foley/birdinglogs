@@ -52,7 +52,7 @@ export function CreateAccount () {
     }
 
     return (
-        <div>
+        <div className="body-page">
             <h1>Create a User</h1>
             <form onSubmit={handleSubmit}>
                 <div>

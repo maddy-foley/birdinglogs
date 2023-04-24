@@ -49,7 +49,7 @@ export function CreateSighting(){
     }, [])
 
     return(
-        <div>
+        <div className="body-page">
         <h1>Create a Sighting for {bird.name}</h1>
         <img src={bird.picture_url}/>
         <form onSubmit={handleSubmit}>

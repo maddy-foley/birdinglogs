@@ -43,7 +43,7 @@ export function Login() {
 
 
     return(
-        <div>
+        <div className="body-page">
             <form>
                 <div>
                     <input onChange={onChange} name="username"/>

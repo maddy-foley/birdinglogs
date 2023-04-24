@@ -31,7 +31,7 @@ export function BirdDetail () {
 
 
     return (
-        <div className="ml-7 mt-3">
+        <div className="ml-7 mt-3 body-page">
             <h1 className="text-3xl md:text-7xl">{bird.name}</h1>
             <div className="italic md:text-3xl">{bird.family}</div>
             <img src={bird.picture_url}/>
