@@ -27,6 +27,11 @@ export function Navbar(){
 
     return(
         <div className="nav-bar p-5 mb-5 z-10">
+                <div className="flex justify-end mb-1">
+                    <button className=" nav-link"onClick={isOpen}>
+                        <i className="toggle-button fas fa-bars fa-2x"></i>
+                    </button>
+                </div>
             {
                 open ?
                 <div className="grid grid-cols-3">
@@ -68,11 +73,6 @@ export function Navbar(){
                 </div> :
                     <div></div>
                 }
-                <div className="flex justify-end mb-1">
-                    <button className=" nav-link"onClick={isOpen}>
-                        <i className="toggle-button fas fa-bars fa-2x"></i>
-                    </button>
-                </div>
         </div>
     )
 }

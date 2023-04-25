@@ -14,7 +14,7 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
-                            , w.account_id as wish
+                            , COUNT(w.account_id) as wish
                             , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
@@ -241,13 +241,25 @@ class BirdQueries:
 
 
     def record_to_joined_bird_out(self, record):
-            return JoinedBirdOut(
-            name=record[0],
-            picture_url=record[1],
-            description=record[2],
-            family=record[3],
-            username=record[4],
-            wish=record[5],
-            sightings=record[6],
-            id=record[7]
+            if record[5] == 0:
+                return JoinedBirdOut(
+                name=record[0],
+                picture_url=record[1],
+                description=record[2],
+                family=record[3],
+                username=record[4],
+                wish=False,
+                sightings=record[6],
+                id=record[7]
+            )
+            else:
+                return JoinedBirdOut(
+                name=record[0],
+                picture_url=record[1],
+                description=record[2],
+                family=record[3],
+                username=record[4],
+                wish=True,
+                sightings=record[6],
+                id=record[7]
         )

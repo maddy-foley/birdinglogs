@@ -26,11 +26,18 @@ export function BirdList() {
     }
 
     const getData = async () => {
-        const response = await fetch('http://localhost:8000/api/birds')
+        const url = 'http://localhost:8000/api/birds'
+        const fetchConfig = {
+            method: 'GET',
+            credentials: 'include',
+        }
+        const response = await fetch (url, fetchConfig);
+        
         if (response.ok){
             const data = await response.json();
             setBirds(data);
             setFilteredBirds(data);
+            console.log(data)
         }
     }
     const filterBirds = async (data) => {
