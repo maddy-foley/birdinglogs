@@ -52,14 +52,14 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
-                            , COUNT(w.account_id) as wish
+                            , COUNT(w.account_id) AS wish
                             , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
                         INNER JOIN families f
                             ON(f.id=b.family_id)
                         LEFT JOIN sightings s
-                            ON(s.bird_id=b.id)
+                            ON(s.bird_id=b.id) AND (s.account_id=%s)
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
                         LEFT JOIN wishes w
@@ -67,7 +67,7 @@ class BirdQueries:
                         WHERE b.account_id=%s
                         GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
-                        [account_id, account_id]
+                        [account_id, account_id, account_id]
                     )
 
                     return [

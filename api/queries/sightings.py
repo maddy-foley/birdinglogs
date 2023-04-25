@@ -65,7 +65,7 @@ class SightingsQueries:
                         INNER JOIN families f
                             ON(b.family_id = f.id)
                         WHERE s.account_id=%s
-                        ORDER BY spotted_on DESC;
+                        ORDER BY spotted_on;
                         """,
                         [account_id]
                     )
@@ -191,7 +191,7 @@ class SightingsQueries:
                         INNER JOIN families f
                             ON(b.family_id = f.id)
                         WHERE b.id=%s
-                        ORDER BY spotted_on DESC;
+                        ORDER BY spotted_on;
                         """,
                         [bird_id]
                     )

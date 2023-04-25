@@ -40,7 +40,6 @@ export function MySightings() {
     }
 
     const filterBirds = async (data) => {
-        console.log(data)
         setFilteredBirds(data.filter( data => data.bird.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase()) || data.comment.toLowerCase().includes(search.toLowerCase)));
         setIndexes({ start:-1, end: 10 })
     }

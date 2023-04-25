@@ -20,7 +20,6 @@ export function BirdDetail () {
         if (response.ok){
             const data = await response.json();
             setSightings(data)
-            console.log(data)
         }
     }
 
