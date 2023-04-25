@@ -8,7 +8,7 @@ Over 900 North American bird species retrieved from publically available wikiped
 
 
 ## Currently Working on:
-Basic front-end functionality. Backend and authentication done.
+Basic functionality finished. Working on CSS
 
 
 Disclaimer:

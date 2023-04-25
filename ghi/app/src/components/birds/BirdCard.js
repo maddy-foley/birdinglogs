@@ -58,7 +58,7 @@ export function BirdCard({bird}) {
                 }
             {
                 ask ?
-                    <div classNam="modal">
+                    <div className="modal">
                         Please Login to add wishes:
                         <NavLink to="/account/login">Login / Sign Up</NavLink>
                     </div> :
