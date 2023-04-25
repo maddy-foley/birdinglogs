@@ -89,7 +89,7 @@ export function SightingsCard ({sighting}) {
                     <input name="spotted_on" id="spotted_on" onChange={handleChange}  defaultValue={formData.spotted_on} type="date"/>
                 </div>
                 <div className="text-lg px-10"> Notes: <textarea name="comment" id="comment" onChange={handleChange} className="" defaultValue={formData.comment}/></div>
-                <button type="submit">Submit Edit</button>
+                <button className="nav-link" type="submit">Submit Edit</button>
             </form>
             </>
             }

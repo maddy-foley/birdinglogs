@@ -18,6 +18,14 @@ button:hover {
 .mybutton:hover{
     background-color: rgb(236, 211, 185);
 }
+input[type=text],input[type=date], input[type=url], textarea, select {
+    border: 2px solid #F28963;
+    border-radius: 10px;
+    transition: .5s;
+}
+input[type=text]:focus, input[type=url]:focus, textarea:focus {
+    background-color: rgb(254, 233, 191);
+}
 
 /* detail page */
 .detail-body{

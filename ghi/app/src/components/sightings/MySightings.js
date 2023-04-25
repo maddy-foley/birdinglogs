@@ -82,7 +82,14 @@ export function MySightings() {
             </div>
                 </div>
                 :
-                <div>Go to <NavLink to="/birds">All Birds</NavLink> and Add Sightings!</div>
+                <>
+                <div className="flex font-semibold justify-center mb-10 sm:text-xl lg:text-3xl">
+                    <p>You have no Sightings!</p>
+                </div>
+                <div className="flex font-semibold justify-center sm:text-3xl lg:text-5xl">
+                    <NavLink className="nav-link" to="/birds">Browse Birds</NavLink>
+                </div>
+                </>
             }
 
         </div>

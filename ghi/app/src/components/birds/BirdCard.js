@@ -60,7 +60,7 @@ export function BirdCard({bird}) {
                 ask ?
                     <div className="modal">
                         <div className="modal-textbox">
-                            Please Login to add wishes: <div className="nav-link mt-3"><NavLink className="text-grey-700"to="/account/login">Login / Sign Up</NavLink></div>
+                            Please Login to add wishes: <div className="nav-link mt-3"><NavLink className="text-black"to="/account/login">Login / Sign Up</NavLink></div>
                         </div>
 
                     </div> :

@@ -9,7 +9,7 @@ export function CreateSighting(){
     const [formData, setFormData] = useState({
         bird_id: id,
         comment: '',
-        spotted_on: new Date()
+        spotted_on: new Date().toISOString().slice(0, 10)
     });
 
 
@@ -50,20 +50,20 @@ export function CreateSighting(){
 
     return(
         <div className="body-page">
-        <h1>Create a Sighting for {bird.name}</h1>
+        <h1 className="font-semibold text-3xl">Create a Sighting for {bird.name}</h1>
         <img src={bird.picture_url}/>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mt-5">
             <div>
             </div>
             <div>
-                <label htmlFor="comment">comment: </label>
+                <label htmlFor="comment">Note: </label>
                 <textarea onChange={handleChange} name="comment" id="comment"></textarea>
             </div>
             <div>
-                <label htmlFor="spotted_on">spotted_on: </label>
-                <input type="datetime-local" onChange={handleChange} name="spotted_on" id="spotted_on" defaultValue={new Date().toISOString().slice(0,16)}/>
+                <label htmlFor="spotted_on">Spotted On: </label>
+                <input name="spotted_on" id="spotted_on" onChange={handleChange}  defaultValue={formData.spotted_on} type="date"/>
             </div>
-            <button className="border">Submit</button>
+            <button className="nav-link">Submit</button>
         </form>
         <br></br>
     </div>
