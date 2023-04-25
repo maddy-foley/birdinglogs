@@ -75,11 +75,13 @@ export function SightingsCard ({sighting}) {
             <div className="text-lg px-10"><details className="italic"><summary>Notes</summary>{sighting.comment}</details></div>
             </>:
             <>
-            <button onClick={e=> setEditMode(!editMode)}><i className="fa-solid fa-xmark fa-2x"></i></button>
+            <div className="flex justify-end">
+                <button onClick={e=> setEditMode(!editMode)} ><i className="fa-solid fa-xmark fa-2x"></i></button>
+            </div>
             <form onSubmit={handleEdit}>
-                <div>
-                    <h1 className="text-2xl text-extrabold">{sighting.bird}</h1>
-                    <div className="text-sm italic">Family: {sighting.family}</div>
+                <div className="">
+                    <h1 className="text-2xl text-extrabold flex justify-end">{sighting.bird}</h1>
+                    <div className="text-sm italic flex justify-end">Family: {sighting.family}</div>
                 </div>
                 <div className="flex flex-col justify-center items-center m-5">
                     <img className="bird-img" src={sighting.picture_url} alt={sighting.bird}/>
@@ -87,7 +89,7 @@ export function SightingsCard ({sighting}) {
                     <input name="spotted_on" id="spotted_on" onChange={handleChange}  defaultValue={formData.spotted_on} type="date"/>
                 </div>
                 <div className="text-lg px-10"> Notes: <textarea name="comment" id="comment" onChange={handleChange} className="" defaultValue={formData.comment}/></div>
-                <button type="submit">Submit</button>
+                <button type="submit">Submit Edit</button>
             </form>
             </>
             }
