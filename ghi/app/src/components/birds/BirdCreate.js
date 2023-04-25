@@ -15,7 +15,7 @@ export function CreateBird() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const response = fetch(
+        const response = await fetch(
             'http://localhost:8000/api/birds',
             {
                 method: "POST",
@@ -25,17 +25,12 @@ export function CreateBird() {
                     'Content-Type': 'application/json'
                 }
             });
-            if(response.ok) {
-                const data = await response.json()
-                setFamilies({
-                    name:'',
-                    family: 'Ducks, Geese, and Swans',
-                    description: '',
-                    picture_url: currImage
-                })
-                navigate("/account/profile")
-                window.location.reload()
-            }
+        if(response.ok) {
+            console.log('hi')
+            navigate('/birds/me')
+            window.location.reload();
+
+        }
     }
     const handleChange = (e) => {
         e.preventDefault();

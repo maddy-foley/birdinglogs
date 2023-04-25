@@ -69,8 +69,8 @@ export function MyBirds() {
             {
                 filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(bird => {
                     return (
-                        <div>
-                            <BirdCard key={bird.id} bird={bird}/>
+                        <div key={bird.id}>
+                            <BirdCard bird={bird}/>
                         </div>
                     )
                 })
