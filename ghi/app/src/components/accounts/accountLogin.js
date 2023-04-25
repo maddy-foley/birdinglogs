@@ -52,10 +52,10 @@ export function Login() {
                     <input onChange={onChange} type="password" name="password"/>
                 </div>
                 <div>
-                    <button onClick={onSubmit} className="border" name="submit">Login</button>
+                    <button onClick={onSubmit} className="mybutton" name="submit">Login</button>
                 </div>
                 <div>
-                    <NavLink to="/account/create">Create an Account</NavLink>
+                    <NavLink to="/account/create" className="mybutton">Create an Account</NavLink>
                 </div>
             </form>
         </div>

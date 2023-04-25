@@ -10,6 +10,14 @@ img {
 button:hover {
     background-color: rgb(236, 211, 185);
 }
+.mybutton {
+    border-radius: 10px;
+    padding: 7px;
+    background-color: rgb(255, 226, 108);
+}
+.mybutton:hover{
+    background-color: rgb(236, 211, 185);
+}
 /* MISC */
 .bg-container{
     top: 0;

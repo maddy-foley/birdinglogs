@@ -68,7 +68,7 @@ export function CreateAccount () {
                     <label htmlFor="picture_url">picture url: </label>
                     <input onFocus={ (event) => event.target.select()} onChange={handleChange} name="picture_url" placeholder="(optional)" defaultValue={currImage} type="text"></input>
                 </div>
-                <button className="border" type="submit">Sign Up</button>
+                <button className="mybutton" type="submit">Sign Up</button>
             </form>
             <br></br>
             <div>

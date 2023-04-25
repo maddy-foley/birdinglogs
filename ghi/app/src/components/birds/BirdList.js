@@ -59,10 +59,10 @@ export function BirdList() {
             <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
                 <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
-                <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
+                <button onClick={rightPage} className="nav-link p-1 ml-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
             <div>
-                <NavLink to="/birds/create">Add a Bird</NavLink>
+                <NavLink className="mybutton" to="/birds/create">Add a Bird</NavLink>
             </div>
             <div className="grid sm:grid-cols-1 lg:grid-cols-2">
                 {
@@ -79,7 +79,7 @@ export function BirdList() {
             <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
                 <i className="fas fa-crow"></i>
-                <button onClick={rightPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-right"></i></button>
+                <button onClick={rightPage} className="nav-link p-1 ml-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
     )
