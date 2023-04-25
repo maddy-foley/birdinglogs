@@ -16,10 +16,10 @@ export function SightingsCard ({sighting}) {
 
     return (
         <>
-        <div onClick={toDetails} className="sighting-container m-3 p-3">
+        <div className="sighting-container m-3 p-3">
         <p className="border-bottom ml-2 mt-2 mb-4"></p>
             <div className="flex flex-col items-end">
-            <button onClick={e=> setIsOpen(!isOpen)}>Delete</button>
+            <button onClick={e=> setIsOpen(!isOpen)}><i class="fa-solid fa-trash-can fa-2x"></i></button>
                 {
                     isOpen ?
                     <div>
@@ -31,7 +31,7 @@ export function SightingsCard ({sighting}) {
                 <div className="text-sm italic">Family: {sighting.family}</div>
             </div>
 
-            <div className="flex flex-col justify-center items-center m-5">
+            <div  onClick={toDetails} className="flex flex-col justify-center items-center m-5">
                 <img className="bird-img" src={sighting.picture_url} alt={sighting.bird}/>
                 <div>Spotted on: {sighting.spotted_on}</div>
             </div>

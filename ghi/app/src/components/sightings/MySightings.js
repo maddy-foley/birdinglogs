@@ -36,7 +36,6 @@ export function MySightings() {
             const data = await response.json();
             setSightings(data)
             setFilteredBirds(data)
-            console.log(data)
         }
     }
 
