@@ -42,9 +42,13 @@ def create_bird(
 @router.get('/api/birds/{bird_id}')
 def get_bird_by_id(
     bird_id: int,
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
     repo: BirdQueries = Depends()
 ):
-    return repo.get_bird_by_id(bird_id)
+    if account_data:
+        return repo.get_bird_by_id(bird_id, account_data["id"])
+    else:
+        return repo.get_bird_by_id(bird_id, account_id=None)
 
 
 @ router.put('/api/birds/{bird_id}')

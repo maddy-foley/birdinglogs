@@ -14,7 +14,6 @@ export function MyWishes() {
         } else {
             setIndexes({start: indexes.start - 10, end: indexes.end - 10})
         }
-        console.log(indexes, filteredBirds.length)
     }
 
     const rightPage = () =>{

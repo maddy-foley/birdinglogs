@@ -52,11 +52,7 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
-                            , CASE
-                                WHEN COUNT(w.account_id) > 0
-                                    THEN 1
-                                    ELSE 0
-                            END as wish
+                            , COUNT(w.account_id) as wish
                             , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
@@ -67,11 +63,11 @@ class BirdQueries:
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
                         LEFT JOIN wishes w
-                            ON(w.bird_id=b.id)
+                            ON(w.account_id=%s) AND (w.bird_id=b.id)
                         WHERE b.account_id=%s
                         GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
-                        [account_id]
+                        [account_id, account_id]
                     )
 
                     return [
@@ -84,7 +80,7 @@ class BirdQueries:
             return Error(message=str(e))
 
 
-    def get_bird_by_id(self, bird_id: int) -> BirdOut:
+    def get_bird_by_id(self, bird_id: int, account_id: int | None) -> BirdOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -95,11 +91,7 @@ class BirdQueries:
                             , b.description AS description
                             , f.family AS family
                             , a.username AS username
-                            , CASE
-                                WHEN COUNT(w.account_id) > 0
-                                    THEN 1
-                                    ELSE 0
-                            END as wish
+                            , COUNT(w.account_id) as wish
                             , COUNT(s.bird_id) AS sightings
                             , b.id AS id
                         FROM birds b
@@ -110,11 +102,11 @@ class BirdQueries:
                         LEFT JOIN accounts a
                             ON(a.id=b.account_id)
                         LEFT JOIN wishes w
-                            ON(w.bird_id=b.id)
+                            ON(w.account_id=%s) AND (w.bird_id=b.id)
                         WHERE b.id=%s
                         GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
-                        [bird_id]
+                        [account_id, bird_id]
                     )
                     record = result.fetchone()
                     return self.record_to_joined_bird_out(record)
