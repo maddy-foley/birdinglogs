@@ -59,8 +59,10 @@ export function BirdCard({bird}) {
             {
                 ask ?
                     <div className="modal">
-                        Please Login to add wishes:
-                        <NavLink to="/account/login">Login / Sign Up</NavLink>
+                        <div className="modal-textbox">
+                            Please Login to add wishes: <div className="nav-link mt-3"><NavLink className="text-grey-700"to="/account/login">Login / Sign Up</NavLink></div>
+                        </div>
+
                     </div> :
                     null
             }
@@ -73,9 +75,12 @@ export function BirdCard({bird}) {
                         <div className="m-5">
                             <img src={bird.picture_url} alt={bird.name}/>
                         </div>
-                        <div className="">Sightings: {bird.sightings}</div>
+                        <div className=""> Site Sightings: {bird.sightings}</div>
                     </div>
             </div>
+                <div className=" flex justify-center my-3">
+                    <NavLink className="mybutton" to={"/birds/"+bird.id+"/create-sighting"}>Create Sighting</NavLink>
+                </div>
         </div>
         </div>
     )

@@ -44,20 +44,27 @@ export function Login() {
 
     return(
         <div className="body-page">
-            <form>
-                <div>
-                    <input onChange={onChange} name="username"/>
-                </div>
-                <div>
-                    <input onChange={onChange} type="password" name="password"/>
-                </div>
-                <div>
-                    <button onClick={onSubmit} className="mybutton" name="submit">Login</button>
-                </div>
-                <div>
-                    <NavLink to="/account/create" className="mybutton">Create an Account</NavLink>
-                </div>
-            </form>
+        <h2 className="flex font-semibold justify-center sm:text-3xl lg:text-7xl mb-10">Login</h2>
+            <div className="flex items-center justify-center">
+                <form>
+                    <div className="flex flex-col gap-1 items-end">
+                         <div>
+                        <input onChange={onChange} name="username"/>
+                    </div>
+                    <div>
+                        <input onChange={onChange} type="password" name="password"/>
+                    </div>
+                    <div>
+                        <button onClick={onSubmit} className="mybutton" name="submit">Login</button>
+                    </div>
+                    <p className="mt-10 font-semibold">Don't Have an Account?</p>
+                    <div>
+                        <NavLink to="/account/create" className="mybutton">Create an Account</NavLink>
+                    </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
     )
 }

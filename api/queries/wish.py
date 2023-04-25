@@ -22,6 +22,7 @@ class WishQueries:
                                     THEN 1
                                     ELSE 0
                             END as wish
+                            , COUNT(s.bird_id) AS sightings
                         FROM wishes AS w
                         INNER JOIN birds b
                             ON(b.id = w.bird_id)
@@ -29,6 +30,8 @@ class WishQueries:
                             ON(a.id = w.account_id)
                         INNER JOIN families f
                             ON(b.family_id = f.id)
+                        LEFT JOIN sightings s
+                            ON(s.bird_id=b.id)
                         WHERE w.account_id=%s
                         GROUP BY b.picture_url, b.id, b.name, a.username, f.family, w.id;
 
@@ -97,12 +100,12 @@ class WishQueries:
             id=record[2]
         )
     def record_to_joined_wish(self, record):
-        print(record)
         return JoinedWishOut(
             picture_url=record[0],
             family=record[1],
             name=record[2],
             id=record[3],
             username=record[4],
-            wish=record[5]
+            wish=record[5],
+            sightings=record[6]
         )

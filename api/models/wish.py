@@ -12,3 +12,4 @@ class JoinedWishOut(BaseModel):
     family: str
     picture_url: str
     wish: bool
+    sightings: int

@@ -5,7 +5,7 @@ html{
     font-family: Arial, Helvetica, sans-serif;
 }
 img {
-    max-height: 300px;
+    max-height: 250px;
 }
 button:hover {
     background-color: rgb(236, 211, 185);
@@ -18,6 +18,12 @@ button:hover {
 .mybutton:hover{
     background-color: rgb(236, 211, 185);
 }
+
+/* detail page */
+.detail-body{
+    max-width: 600px;
+}
+
 /* MISC */
 .bg-container{
     top: 0;
@@ -30,6 +36,7 @@ button:hover {
 .body-page{
     margin:0;
 	min-height:100vh;
+    margin-left: 10px;
 }
 
 .home-img {
@@ -120,6 +127,15 @@ button:hover {
     align-items: center;
     justify-content: center;
     z-index: 10;
+}
+.modal-textbox {
+    color:rgb(236, 211, 185);
+    background-color: rgb(48, 30, 5);
+    opacity: 90%;
+    padding: 30px;
+    height:150px;
+    width: 200px;
+    border-radius: 10%;
 }
 
 /* HEARTS */
