@@ -212,7 +212,7 @@ class BirdQueries:
 
     def delete_bird_by_id(self, bird_id: int, account_id: int):
         try:
-            deleted = self.get_bird_by_id(bird_id)
+            deleted = self.get_bird_by_id(bird_id, account_id=account_id)
             with pool.connection() as conn:
                 with conn.cursor() as cur:
                     result = cur.execute(

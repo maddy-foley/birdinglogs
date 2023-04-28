@@ -25,7 +25,7 @@ export function HomePage(){
         <div className="body-page">
             <h1 className="flex font-semibold justify-center sm:text-3xl lg:text-7xl">Welcome to Birding Logs!</h1>
             <div className="flex justify-center mt-10">
-                <img className="home-img" src="img/background.png"></img>
+                <img className="home-img" src="img/background.png" alt="home-bird"></img>
             </div>
             <p className="border-bottom m-6"></p>
             <h2  className="flex justify-center text-3xl my-5">Discover a New Bird!</h2>

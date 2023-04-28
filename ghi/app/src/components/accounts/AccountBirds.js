@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { BirdCard } from "../birds/BirdCard";
 
 

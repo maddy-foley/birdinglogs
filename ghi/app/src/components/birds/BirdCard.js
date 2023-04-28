@@ -1,11 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState} from "react";
 import getToken from "../Token";
-import { BirdEdit } from "./BirdEdit";
+import { BirdDelete } from "./BirdDelete";
+
 
 export function BirdCard({bird, mine}) {
     const [wish, setWish] = useState(bird.wish);
     const [ask, setAsk] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ export function BirdCard({bird, mine}) {
         if(data){
             setWish(!wish);
             if (wish){
-                const response = await fetch(
+                await fetch(
                     `http://localhost:8000/api/birds/${bird.id}/wishes`,
                     {
                         method: "DELETE",
@@ -33,7 +35,7 @@ export function BirdCard({bird, mine}) {
                         }
                     });
             } else {
-                const response = await fetch(`http://localhost:8000/api/birds/${bird.id}/wishes`,
+                await fetch(`http://localhost:8000/api/birds/${bird.id}/wishes`,
                     {
                         method: "POST",
                         credentials: 'include',
@@ -47,6 +49,9 @@ export function BirdCard({bird, mine}) {
             setAsk(true)
         }
     }
+    const callbackOpen = () =>{
+        setIsOpen(false);
+    }
 
     return (
         <div className="bird-card m-3">
@@ -56,7 +61,14 @@ export function BirdCard({bird, mine}) {
                     mine ?
                     <div className="flex gap-2 pr-1">
                         <NavLink to={"/birds/" + bird.id + "/edit"} state={bird}><i className="fa-solid fa-pen-to-square fa-2x"></i></NavLink>
-                        <button><i className="fa-solid fa-trash-can fa-2x"></i></button>
+                        <button onClick={e=> setIsOpen(!isOpen)}><i className="fa-solid fa-trash-can fa-2x"></i></button>
+                {
+                    isOpen ?
+                    <div>
+                        <BirdDelete id={bird.id} name={bird.name} callback={callbackOpen}/>
+                    </div> :
+                    null
+                }
                     </div> :
                    <></>
                 }
