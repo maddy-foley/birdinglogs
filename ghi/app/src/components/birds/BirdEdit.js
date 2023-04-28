@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
+
 
 export function BirdEdit () {
     const location = useLocation();
     const {state} = location;
     const [families, setFamilies] = useState([])
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: state.from.name,
         family: state.from.family,
@@ -26,10 +28,24 @@ export function BirdEdit () {
             setFamilies(data)
         }
     }
-    const handleSubmit = async () => {
-        console.log(formData)
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        const response = await fetch(
+            'http://localhost:8000/api/birds/' + state.from.id,
+            {
+                method: "PUT",
+                body: JSON.stringify(formData),
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        if(response.ok) {
+            console.log(await response.json())
+            navigate('/birds/' + state.from.id)
+            window.location.reload();
+        }
     }
-
     useEffect ( () =>{
         getFamily();
     }, [])
