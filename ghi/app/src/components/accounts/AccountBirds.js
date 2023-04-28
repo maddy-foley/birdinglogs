@@ -24,7 +24,6 @@ export function MyBirds() {
         } else {
             setIndexes({start: indexes.start + 10, end: indexes.end + 10})
         }
-        console.log(indexes)
     }
 
     const getData = async () => {

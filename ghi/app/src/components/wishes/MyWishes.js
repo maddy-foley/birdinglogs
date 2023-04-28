@@ -34,8 +34,6 @@ export function MyWishes() {
         })
         if(response.ok) {
             const data = await response.json();
-
-            console.log(data)
             setBirds(data)
             setFilteredBirds(data)
         }

@@ -7,11 +7,12 @@ export function BirdEdit () {
     const {state} = location;
     const [families, setFamilies] = useState([])
     const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
-        name: state.from.name,
-        family: state.from.family,
-        description: state.from.description,
-        picture_url: state.from.picture_url
+        name: state.name,
+        family: state.family,
+        description: state.description,
+        picture_url: state.picture_url
     })
 
     const handleChange = (e) => {
@@ -31,7 +32,7 @@ export function BirdEdit () {
     const handleSubmit = async(e) => {
         e.preventDefault();
         const response = await fetch(
-            'http://localhost:8000/api/birds/' + state.from.id,
+            'http://localhost:8000/api/birds/' + state.id,
             {
                 method: "PUT",
                 body: JSON.stringify(formData),
@@ -42,7 +43,7 @@ export function BirdEdit () {
             });
         if(response.ok) {
             console.log(await response.json())
-            navigate('/birds/' + state.from.id)
+            navigate('/birds/' + state.id)
             window.location.reload();
         }
     }
@@ -53,14 +54,14 @@ export function BirdEdit () {
     return(
         (
             <div className="grid grid-cols-2 body-page">
-            <h1>Create a Bird</h1>
+            <h1>Edit {formData.name}:</h1>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">name: </label>
-                    <input onChange={handleChange} name="name" required type="text"></input>
+                    <input onChange={handleChange} name="name" id="name" required defaultValue={formData.name} type="text"></input>
                 </div>
                 <div>
-                    <select name="family" defaultValue={formData.family} onChange={handleChange} >
+                    <select name="family" id="family" value={formData.family} onChange={handleChange} >
                         {
                             families.map( family => {
                                 return <option key={family.id}>{family.family}</option>
@@ -70,11 +71,11 @@ export function BirdEdit () {
                 </div>
                 <div>
                     <label htmlFor="description">description: </label>
-                    <textarea onChange={handleChange} name="description"></textarea>
+                    <textarea onChange={handleChange} name="description" id="description"></textarea>
                 </div>
                 <div>
                     <label htmlFor="picture_url">picture url: </label>
-                    <input onFocus={ (event) => event.target.select()} onChange={handleChange} name="picture_url" placeholder="(optional)" type="text"></input>
+                    <input onFocus={ (event) => event.target.select()} onChange={handleChange} id="picture_url" name="picture_url" placeholder="(optional)" type="text"></input>
                 </div>
                 <button className="border" type="submit">Submit</button>
             </form>
