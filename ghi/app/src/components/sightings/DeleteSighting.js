@@ -20,9 +20,15 @@ export function DeleteSighting({id, callback}) {
 
     return (
         <div className="modal">
-            <p>Are you sure you want to delete sighting?</p>
-            <button onClick={deleteSighting}>Yes</button>
-            <button onClick={e => callback()}>No</button>
+            <div className="modal-textbox">
+                <p>Are you sure you want to delete sighting?</p>
+                <div className="flex g-2">
+                    <button className="nav-link p-2 text-black" onClick={deleteSighting}>Yes</button>
+                    <button className="nav-link p-2 text-black" onClick={e => callback()}>No</button>
+                </div>
+
+            </div>
+
         </div>
     )
 }

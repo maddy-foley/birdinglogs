@@ -18,6 +18,7 @@ import { CreateSighting } from './components/sightings/CreateSighting';
 
 import { MyWishes } from './components/wishes/MyWishes';
 import { Footer } from './components/Footer';
+import { BirdEdit } from './components/birds/BirdEdit';
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path=":id" element={<BirdDetail />} />
           <Route path="create" element={<CreateBird />} />
           <Route path="me" element={<MyBirds/>}/>
+          <Route path=":id/edit" element={<BirdEdit/>}/>
           <Route path=":id/create-sighting" element={<CreateSighting />}/>
         </Route>
         <Route path="account">

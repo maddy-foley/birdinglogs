@@ -6,11 +6,11 @@ export function MyWishes() {
     const [birds, setBirds] = useState([]);
     const [filteredBirds, setFilteredBirds] = useState([]);
     const [search, setSearch] = useState("");
-    const [indexes, setIndexes] = useState({start: 0, end: 10 })
+    const [indexes, setIndexes] = useState({start: -1, end: 10 })
 
     const leftPage = () =>{
-        if(indexes.start<= 0){
-            setIndexes({start: 0, end: 10})
+        if(indexes.start< 0){
+            setIndexes({start: -1, end: 10})
         } else {
             setIndexes({start: indexes.start - 10, end: indexes.end - 10})
         }

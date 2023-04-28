@@ -15,7 +15,6 @@ export function HomePage(){
         if (response.ok){
             const data = await response.json()
             setBird(data)
-            console.log(data)
         }
     }
 

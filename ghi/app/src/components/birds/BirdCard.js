@@ -1,8 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import getToken from "../Token";
+import { BirdEdit } from "./BirdEdit";
 
-export function BirdCard({bird}) {
+export function BirdCard({bird, mine}) {
     const [wish, setWish] = useState(bird.wish);
     const [ask, setAsk] = useState(false);
 
@@ -51,6 +52,14 @@ export function BirdCard({bird}) {
         <div className="bird-card m-3">
             <div className="p-3">
                 <div className="flex justify-end">
+                {
+                    mine ?
+                    <div className="flex gap-2 pr-1">
+                        <NavLink to={"/birds/" + bird.id + "/edit"} state={bird}><i className="fa-solid fa-pen-to-square fa-2x"></i></NavLink>
+                        <button><i className="fa-solid fa-trash-can fa-2x"></i></button>
+                    </div> :
+                   <></>
+                }
                {
                 wish ?
                     <button className="z-9" onClick={handleLike}><div><i className="fa-solid fa-heart fa-2x heart"></i></div></button> :
@@ -62,7 +71,6 @@ export function BirdCard({bird}) {
                         <div className="modal-textbox">
                             Please Login to add wishes: <div className="nav-link mt-3"><NavLink className="text-black"to="/account/login">Login / Sign Up</NavLink></div>
                         </div>
-
                     </div> :
                     null
             }
