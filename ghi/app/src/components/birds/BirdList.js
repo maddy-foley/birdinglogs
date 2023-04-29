@@ -3,17 +3,19 @@ import { NavLink} from "react-router-dom";
 import { BirdCard } from "./BirdCard"
 
 
+
 export function BirdList() {
     const [birds, setBirds] = useState([]);
     const [filteredBirds, setFilteredBirds] = useState([]);
     const [search, setSearch] = useState("");
-    const [indexes, setIndexes] = useState({start: 0, end: 10 })
+    const [indexes, setIndexes] = useState({start: -1, end: 10 })
     const [families, setFamilies] = useState([]);
-    const [selectedFamily, setSelectedFamily] = useState("")
+    const [selectedFamily, setSelectedFamily] = useState("");
+
 
     const leftPage = () =>{
         if(indexes.start<= 0){
-            setIndexes({start: 0, end: 10})
+            setIndexes({start: -1, end: 10})
         } else {
             setIndexes({start: indexes.start - 10, end: indexes.end - 10})
         }
@@ -42,12 +44,14 @@ export function BirdList() {
         }
     }
     const filterBirds = (data) => {
+        let newBirds = [...data]
         if(selectedFamily === ""){
-            setFilteredBirds(data.filter( data => data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase())));
+            newBirds = [...data.filter( data => data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase()))];
         } else {
-            setFilteredBirds(data.filter( data => (data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase())) && (data.family === selectedFamily)));
+            newBirds = [...data.filter( data => (data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase())) && (data.family === selectedFamily))];
         }
-        setIndexes({ start:0, end: 10 })
+        setIndexes({ start:-1, end: 10 })
+        setFilteredBirds([...newBirds])
     }
 
     const getFamily = async() => {
@@ -57,26 +61,39 @@ export function BirdList() {
             setFamilies(data)
         }
     }
-
+    const handleSearch = (e) =>{
+        setSearch(e.target.value);
+    }
+    const handleChange = (e) =>{
+        if(e.target.value === "All Birds"){
+            setFilteredBirds([...birds])
+        } else {
+            setSelectedFamily(e.target.value);
+        }
+    }
 
     useEffect(() => {
         getData();
         getFamily();
-    }, [])
+    }, []);
+
+    useEffect(() =>{
+        filterBirds(birds);
+    }, [search, selectedFamily])
 
     return(
         <div className="body-page">
             <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
-                <input onChange={ e => {setSearch(e.target.value); filterBirds(birds);}} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
+                <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
                 <button onClick={rightPage} className="nav-link p-1 ml-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
             <div>
                 <NavLink className="mybutton" to="/birds/create">Add a Bird</NavLink>
             </div>
             <div>
-                <select name="family" id="family" className="mt-3" onChange={e => {setSelectedFamily(e.target.value); filterBirds(birds)}}>
-                    <option selected={null}>Filter by Family</option>
+                <select name="family" id="family" className="mt-3" onChange={handleChange}>
+                    <option selected={null}>All Birds</option>
                     {
                         families.map( family => {
                             return <option key={family.id}>{family.family}</option>
