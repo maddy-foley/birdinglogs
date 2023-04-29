@@ -28,6 +28,7 @@ export function Profile() {
     useEffect(() => {
         getData();
     }, [])
+
     return (
         <div className="body-page">
             <div className="flex flex-col items-center">

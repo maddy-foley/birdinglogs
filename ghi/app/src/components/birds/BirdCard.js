@@ -18,9 +18,7 @@ export function BirdCard({bird, mine}) {
     const handleLike = async() => {
         const data = await getToken();
 
-        setTimeout(() => {
-            console.log("Delayed for 1 second.");
-          }, "1000")
+        setTimeout(() => {}, "1000")
 
         if(data){
             setWish(!wish);
@@ -59,7 +57,7 @@ export function BirdCard({bird, mine}) {
                 <div className="flex justify-end">
                 {
                     mine ?
-                    <div className="flex gap-2 pr-1">
+                <div className="flex gap-2 pr-1">
                         <NavLink to={"/birds/" + bird.id + "/edit"} state={bird}><i className="fa-solid fa-pen-to-square fa-2x"></i></NavLink>
                         <button onClick={e=> setIsOpen(!isOpen)}><i className="fa-solid fa-trash-can fa-2x"></i></button>
                 {

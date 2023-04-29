@@ -4,7 +4,7 @@ export function Logout() {
     const navigate = useNavigate();
     const handleLogout = async (e) =>{
         e.preventDefault();
-        const response = await fetch(
+        await fetch(
             "http://localhost:8000/token", {
                 method: "DELETE",
                 credentials: 'include',

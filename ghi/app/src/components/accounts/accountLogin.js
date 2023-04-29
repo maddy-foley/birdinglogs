@@ -22,7 +22,7 @@ export function Login() {
                 }
             })
         if (response.ok) {
-            const data = await response.json()
+            await response.json()
             navigate("/account/profile")
             window.location.reload();
 

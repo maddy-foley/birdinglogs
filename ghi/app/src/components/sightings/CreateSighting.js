@@ -36,22 +36,22 @@ export function CreateSighting(){
         const value = e.target.value
         setFormData({...formData, [name]: value})
     }
-
-    useEffect(() =>{
-        const getBird = async() => {
-            const response = await fetch(`http://localhost:8000/api/birds/${id}`)
-            if (response.ok){
-                const data = await response.json();
-                setBird(data)
-            }
+    const getBird = async() => {
+        const response = await fetch(`http://localhost:8000/api/birds/${id}`)
+        if (response.ok){
+            const data = await response.json();
+            setBird(data)
         }
+    }
+    useEffect(() =>{
+
         getBird();
     }, [])
 
     return(
         <div className="body-page">
         <h1 className="font-semibold text-3xl">Create a Sighting for {bird.name}</h1>
-        <img src={bird.picture_url}/>
+        <img src={bird.picture_url} alt={bird.name}/>
         <form onSubmit={handleSubmit} className="mt-5">
             <div>
             </div>

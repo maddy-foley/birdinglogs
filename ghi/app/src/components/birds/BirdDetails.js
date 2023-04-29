@@ -26,7 +26,7 @@ export function BirdDetail () {
     useEffect(() => {
         getBird();
         getSighting();
-    }, [])
+    }, )
 
 
     return (
@@ -34,7 +34,7 @@ export function BirdDetail () {
             <div className="flex items-center flex-col">
                 <h1 className="text-3xl md:text-7xl">{bird.name}</h1>
                 <div className="italic md:text-3xl">{bird.family}</div>
-                <img src={bird.picture_url}/>
+                <img src={bird.picture_url} alt={bird.name}/>
                 <p className="detail-body">{bird.description}</p>
             </div>
 

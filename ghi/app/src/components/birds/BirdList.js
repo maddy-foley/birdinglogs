@@ -7,7 +7,9 @@ export function BirdList() {
     const [birds, setBirds] = useState([]);
     const [filteredBirds, setFilteredBirds] = useState([]);
     const [search, setSearch] = useState("");
-    const [indexes, setIndexes] = useState({start: -1, end: 10 })
+    const [indexes, setIndexes] = useState({start: 0, end: 10 })
+    const [families, setFamilies] = useState([]);
+    const [selectedFamily, setSelectedFamily] = useState("")
 
     const leftPage = () =>{
         if(indexes.start<= 0){
@@ -39,30 +41,48 @@ export function BirdList() {
             setFilteredBirds(data);
         }
     }
-    const filterBirds = async (data) => {
-        setFilteredBirds(data.filter( data => data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase())));
-        setIndexes({ start:-1, end: 10 })
+    const filterBirds = (data) => {
+        if(selectedFamily === ""){
+            setFilteredBirds(data.filter( data => data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase())));
+        } else {
+            setFilteredBirds(data.filter( data => (data.name.toLowerCase().includes(search.toLowerCase()) || data.family.toLowerCase().includes(search.toLowerCase())) && (data.family === selectedFamily)));
+        }
+        setIndexes({ start:0, end: 10 })
+    }
+
+    const getFamily = async() => {
+        const response = await fetch('http://localhost:8000/api/family')
+        if(response.ok){
+            const data = await response.json()
+            setFamilies(data)
+        }
     }
 
 
     useEffect(() => {
         getData();
+        getFamily();
     }, [])
-
-    const handleSearch = (event) =>{
-        setSearch(event.target.value)
-        filterBirds(birds);
-    }
 
     return(
         <div className="body-page">
             <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>
-                <input onChange={handleSearch} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
+                <input onChange={ e => {setSearch(e.target.value); filterBirds(birds);}} type="text" name="searchBar" className="p-1" placeholder="Search for birds..."/>
                 <button onClick={rightPage} className="nav-link p-1 ml-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
             <div>
                 <NavLink className="mybutton" to="/birds/create">Add a Bird</NavLink>
+            </div>
+            <div>
+                <select name="family" id="family" className="mt-3" onChange={e => {setSelectedFamily(e.target.value); filterBirds(birds)}}>
+                    <option selected={null}>Filter by Family</option>
+                    {
+                        families.map( family => {
+                            return <option key={family.id}>{family.family}</option>
+                        })
+                    }
+                </select>
             </div>
             <div className="grid sm:grid-cols-1 lg:grid-cols-2">
                 {

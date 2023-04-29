@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 
@@ -45,7 +45,6 @@ export function CreateAccount () {
         const name = e.target.name;
         const value = e.target.value;
         setFormData({...formData, [name]: value})
-        console.log(formData)
     }
 
     return (
