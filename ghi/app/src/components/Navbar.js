@@ -31,7 +31,7 @@ export function Navbar(){
             {
                 open ?
                 <div className="flex">
-                    <div className="sm:grid gap-1 lg:flex gap-1">
+                    <div className="sm:grid lg:flex gap-1">
                         <div className="nav-link">
                             <NavLink to="/">Home</NavLink>
                         </div>

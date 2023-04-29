@@ -29,7 +29,6 @@ export function CreateBird() {
             console.log('hi')
             navigate('/birds/me')
             window.location.reload();
-
         }
     }
     const handleChange = (e) => {

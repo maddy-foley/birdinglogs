@@ -9,8 +9,8 @@ export function MySightings() {
     const [search, setSearch] = useState("")
 
     const leftPage = () =>{
-        if(indexes.start<= 0){
-            setIndexes({start: 0, end: 10})
+        if(indexes.start < 0){
+            setIndexes({start: -1, end: 10})
         } else {
             setIndexes({start: indexes.start - 10, end: indexes.end - 10})
         }
@@ -46,12 +46,15 @@ export function MySightings() {
 
     const handleSearch = (event) =>{
         setSearch(event.target.value)
-        filterBirds(sightings);
     }
 
     useEffect(() => {
         getSightings();
     }, [])
+
+    useEffect(() => {
+        filterBirds(sightings);
+    }, [search])
 
     return(
         <div className="mt-10">

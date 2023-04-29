@@ -50,8 +50,11 @@ export function MyWishes() {
 
     const handleSearch = (event) =>{
         setSearch(event.target.value)
-        filterBirds(birds);
     }
+
+    useEffect(() => {
+        filterBirds(birds);
+    }, [search])
 
     return(
     <div className="body-page">
@@ -80,7 +83,6 @@ export function MyWishes() {
         </div>
         :
         <div>Go to <NavLink to="/birds">All Birds</NavLink>  and add birds to your List!</div>}
-
     </div>
 )
 }
