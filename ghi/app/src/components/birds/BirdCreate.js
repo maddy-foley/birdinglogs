@@ -60,7 +60,7 @@ export function CreateBird() {
         getFamily();
     }, [])
 
-    useEffect(() => {}, [formData.family])
+    useEffect(() => {}, [formData])
 
     return(
         <div className="body-page">

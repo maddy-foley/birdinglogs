@@ -63,7 +63,6 @@ export function CreateAccount () {
         const value = e.target.value;
         setFormData({...formData, [name]: value})
     }
-
     return (
         <div className="body-page">
             <h1 className="flex font-semibold justify-center sm:text-3xl lg:text-7xl">Create a User</h1>
