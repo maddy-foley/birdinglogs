@@ -11,8 +11,8 @@ services:
     volumes:
       - ./api:/app
     environment:
-      SIGNING_KEY: 9FRW08FDS0G2JG923G2R4332F4FDCR
-      DATABASE_URL: postgresql://birds_user:birdy@db/birds
+      SIGNING_KEY: ${SIGNING_KEY}
+      DATABASE_URL: ${DATABASE_URL}
       WAIT_HOST: db:5432
       PORT: 8000
   ghi:
@@ -36,6 +36,6 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: birds_user
-      POSTGRES_PASSWORD: birdy
-      POSTGRES_DB: birds
+      POSTGRES_USER:  ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
