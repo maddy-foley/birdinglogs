@@ -37,6 +37,7 @@ input[type=text],input[type=date], input[type=url], textarea, select {
     bottom: 0;
     background: rgb(255, 255, 255. 5.0);
 }
+
 /* HOMEPAGE */
 .body-page{
     margin:0;
@@ -66,6 +67,15 @@ input[type=text],input[type=date], input[type=url], textarea, select {
     margin-bottom: 5px;
 }
 
+.warning{
+    background-color: rgb(248, 121, 121);
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    font-weight: bolder;
+    padding: 4px;
+}
 
 
 /* NAVBAR/LINKS */

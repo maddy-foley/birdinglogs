@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 
 
 export function CreateBird() {
@@ -12,10 +12,12 @@ export function CreateBird() {
         description: '',
         picture_url: currImage
     })
+    const [login, setLogin] = useState(false);
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const response = await fetch(
+        try{
+            const response = await fetch(
             'http://localhost:8000/api/birds',
             {
                 method: "POST",
@@ -25,11 +27,19 @@ export function CreateBird() {
                     'Content-Type': 'application/json'
                 }
             });
-        if(response.ok) {
-            console.log('hi')
-            navigate('/birds/me')
-            window.location.reload();
+            if(response.ok) {
+                console.log('hi')
+                navigate('/birds/me')
+                window.location.reload();
+            } else {
+                if(response.status === 401){
+                    setLogin(true);
+                }
+            }
+        } catch (e){
+            console.log(e)
         }
+
     }
     const handleChange = (e) => {
         e.preventDefault();
@@ -50,36 +60,53 @@ export function CreateBird() {
         getFamily();
     }, [])
 
+    useEffect(() => {}, [formData.family])
+
     return(
-        <div className="grid grid-cols-2 body-page">
-        <h1>Create a Bird</h1>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="name">name: </label>
-                <input onChange={handleChange} name="name" required type="text"></input>
+        <div className="body-page">
+        <h1 className="flex font-semibold justify-center sm:text-3xl lg:text-7xl">Create a Bird</h1>
+        <div className="text-2xl warning">Any birds you add will NOT appear in other's all birds list but they can still accessed it via url.</div>
+        <div className="warning">Please only post tests or bird content.</div>
+        {
+                login ?
+                    <div className="modal">
+                        <div className="modal-textbox">
+                            Please Login to add birds: <div className="nav-link mt-3"><NavLink className="text-black"to="/account/login">Login / Sign Up</NavLink></div>
+                        </div>
+                    </div> :
+                    null
+            }
+        <form onSubmit={handleSubmit} className="grid grid-cols-11">
+            <div className="col-start-5 col-end-9">
+                <div className="account-form">
+                    <label htmlFor="name">name: </label>
+                    <input onChange={handleChange} name="name" required type="text"></input>
+                </div>
+                <div className="account-form">
+                    <label htmlFor="picture_url">picture url: </label>
+                    <input onFocus={ (event) => event.target.select()} onChange={handleChange} name="picture_url" placeholder="(optional)" defaultValue={currImage} type="text"></input>
+                </div>
+                <div className="account-form">
+                    <label htmlFor="description">description: </label>
+                    <textarea onChange={handleChange} name="description"></textarea>
+                </div>
+                <div className="account-form">
+                    <label htmlFor="family">family: </label>
+                    <select name="family" onChange={handleChange} >
+                        <option selected={null}>Please Select a Family</option>
+                        {
+                            families.map( family => {
+                                return <option key={family.id}>{family.family}</option>
+                            })
+                        }
+                    </select>
+                </div>
             </div>
-            <div>
-                <select name="family" onChange={handleChange} >
-                    {
-                        families.map( family => {
-                            return <option key={family.id}>{family.family}</option>
-                        })
-                    }
-                </select>
-            </div>
-            <div>
-                <label htmlFor="description">description: </label>
-                <textarea onChange={handleChange} name="description"></textarea>
-            </div>
-            <div>
-                <label htmlFor="picture_url">picture url: </label>
-                <input onFocus={ (event) => event.target.select()} onChange={handleChange} name="picture_url" placeholder="(optional)" defaultValue={currImage} type="text"></input>
-            </div>
-            <button className="border" type="submit">Submit</button>
+            <button className="nav-link col-start-8" type="submit">Submit</button>
         </form>
         <br></br>
-        <div>
-            <h1>Bird Picture Preview: </h1>
+        <div className="flex flex-col items-center">
+            <h1 className="mt-10 text-2xl">Bird Picture Preview: </h1>
             <div>
                 <img className="bird-img" src={formData.picture_url} alt="link broken or copyrighted"/>
             </div>

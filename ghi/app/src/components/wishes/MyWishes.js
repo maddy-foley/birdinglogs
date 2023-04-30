@@ -82,7 +82,12 @@ export function MyWishes() {
             </div>
         </div>
         :
-        <div>Go to <NavLink to="/birds">All Birds</NavLink>  and add birds to your List!</div>}
+        <div className="flex font-semibold justify-center sm:text-3xl lg:text-7xl">
+            <div className="">
+                Go to: <NavLink className="nav-link" to="/birds">All Birds</NavLink>  and add birds to your List!
+            </div>
+        </div>
+        }
     </div>
 )
 }

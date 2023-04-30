@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BirdCard } from "../birds/BirdCard";
-
+import { NavLink } from "react-router-dom";
 
 export function MyBirds() {
     const [birds, setBirds] = useState([]);
@@ -38,7 +38,6 @@ export function MyBirds() {
             const data = await response.json();
             setBirds(data);
             setFilteredBirds(data);
-            console.log(data)
         }
     }
     const filterBirds = async (data) => {
@@ -65,13 +64,22 @@ export function MyBirds() {
                 <button onClick={rightPage} className="nav-link p-1 ml-2"><i className="fa-solid fa-arrow-right"></i></button>
             </div>
             {
+                birds.length > 0?
                 filteredBirds.filter((_, idx) => idx>indexes.start && idx<indexes.end).map(bird => {
                     return (
                         <div key={bird.id}>
                             <BirdCard bird={bird} mine={true}/>
                         </div>
                     )
-                })
+                }) :
+                <div>
+                    <div className="flex font-semibold justify-center sm:text-3xl lg:text-7xl">You have no Birds!</div>
+                    <div className="text-2xl warning">Any birds you add will NOT appear in other's all birds list but they can still accessed it via url.</div>
+                    <div className="warning mb-10">Please only post tests or bird content.</div>
+                    <div className="flex font-semibold justify-center mb-5 sm:text-3xl lg:text-5xl">
+                        <NavLink className="mybutton" to="/birds/create">Add a Bird</NavLink>
+                    </div>
+                </div>
             }
             <div className="flex justify-center">
                 <button onClick={leftPage} className="nav-link p-1 mr-2"><i className="fa-solid fa-arrow-left"></i></button>

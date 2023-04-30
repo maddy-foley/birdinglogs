@@ -26,7 +26,7 @@ export function BirdDetail () {
     useEffect(() => {
         getBird();
         getSighting();
-    }, )
+    }, [])
 
 
     return (
@@ -38,7 +38,7 @@ export function BirdDetail () {
                 <p className="detail-body">{bird.description}</p>
             </div>
 
-            <h2 className="mt-5 text-2xl md:text-5xl">Recent Sightings:</h2>
+            <h2 className="mt-5 text-2xl md:text-5xl">All Sightings:</h2>
             <div className="my-5">
                 <NavLink className="mybutton" to={"/birds/"+id+"/create-sighting"}>Create Sighting</NavLink>
             </div>

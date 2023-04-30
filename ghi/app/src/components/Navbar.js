@@ -18,7 +18,6 @@ export function Navbar(){
     }
     const isOpen = () =>{
         setOpen(!open)
-        console.log(open)
     }
 
     useEffect(() => {
