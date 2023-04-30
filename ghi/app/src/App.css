@@ -6,6 +6,7 @@ html{
 }
 img {
     max-height: 250px;
+    border-radius: 10%;
 }
 button:hover {
     background-color: rgb(236, 211, 185);
@@ -19,13 +20,9 @@ button:hover {
     background-color: rgb(236, 211, 185);
 }
 input[type=text],input[type=date], input[type=url], textarea, select {
-    border: 2px solid #F28963;
-    border-radius: 10px;
-    transition: .5s;
+    padding: 3px;
 }
-input[type=text]:focus, input[type=url]:focus, textarea:focus {
-    background-color: rgb(254, 233, 191);
-}
+
 
 /* detail page */
 .detail-body{
@@ -63,6 +60,13 @@ input[type=text]:focus, input[type=url]:focus, textarea:focus {
     right: 11%
 }
 
+.account-form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+
 
 /* NAVBAR/LINKS */
 
@@ -97,6 +101,17 @@ input[type=text]:focus, input[type=url]:focus, textarea:focus {
 .sightings-header{
     margin-left: 100px;
     margin-bottom: 20px;
+}
+
+.sighting-img {
+    transition: all .5s ease-in-out;
+}
+
+
+.sighting-img:hover{
+    transform: scale(1.1);
+    margin-bottom: 10px;
+    box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* CARDS */

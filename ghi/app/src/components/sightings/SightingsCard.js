@@ -69,7 +69,7 @@ export function SightingsCard ({sighting}) {
                 <div className="text-sm italic">Family: {sighting.family}</div>
             </div>
             <div onClick={toDetails} className="flex flex-col justify-center items-center mx-5 mt-5">
-                <img className="bird-img" src={sighting.picture_url} alt={sighting.bird}/>
+                <img className="bird-img sighting-img mb-1" src={sighting.picture_url} alt={sighting.bird}/>
                 <div className="italic px-10">Spotted on: <span className="">{new Date(sighting.spotted_on).toDateString()}</span></div>
             </div>
             <div className="text-lg px-10"><details className="italic"><summary>Notes</summary>{sighting.comment}</details></div>

@@ -38,6 +38,7 @@ export function MyBirds() {
             const data = await response.json();
             setBirds(data);
             setFilteredBirds(data);
+            console.log(data)
         }
     }
     const filterBirds = async (data) => {

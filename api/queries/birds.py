@@ -26,10 +26,11 @@ class BirdQueries:
                             ON(a.id=b.account_id)
                         LEFT JOIN wishes w
                             ON(w.account_id=%s) AND (w.bird_id=b.id)
+                        WHERE b.account_id=%s OR b.account_id IS null
                         GROUP BY b.name, b.id, b.picture_url, b.description, w.id, f.family, a.username
                         ORDER BY id;
                         """,
-                        [account_id]
+                        [account_id, account_id]
                     )
 
                     return [
@@ -103,10 +104,10 @@ class BirdQueries:
                             ON(a.id=b.account_id)
                         LEFT JOIN wishes w
                             ON(w.account_id=%s) AND (w.bird_id=b.id)
-                        WHERE b.id=%s
+                        WHERE b.id=%s AND (b.account_id=%s or b.account_id IS null)
                         GROUP BY b.name, b.id, b.picture_url, b.description, f.family, a.username;
                         """,
-                        [account_id, bird_id]
+                        [account_id, bird_id, account_id]
                     )
                     record = result.fetchone()
                     return self.record_to_joined_bird_out(record)

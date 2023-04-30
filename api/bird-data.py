@@ -42,7 +42,6 @@ for bird in output:
 with open('data/dictbirdfamily.json') as data:
     data = json.load(data)
     birds = list(data.keys())
-    print(birds)
     bird_list = [
         BirdIn(
             name = bird,
