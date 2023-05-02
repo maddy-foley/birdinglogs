@@ -6,7 +6,7 @@ If you would like to run this website on your local machine, please:
  1. create a ```.env``` file in **/birdinglogs**. In this file you will need to declare **5 variables**:
     ```
     SIGNING_KEY=<letters or numbers (length 20-40)>
-    DATABASE_URL=<postgresql://<username>:<password>@db/<database>
+    DATABASE_URL=postgresql://<username>:<password>@db/<database>
     POSTGRES_USER=<postgres username>
     POSTGRES_PASSWORD=<postgres password>
     POSTGRES_DB=<postgres database>
