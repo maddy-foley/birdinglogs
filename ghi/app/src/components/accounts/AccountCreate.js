@@ -16,7 +16,7 @@ export function CreateAccount () {
 
     const handleSubmit= async (e) => {
         e.preventDefault();
-        if(formData.username.length < 8 || formData.password.length < 8){
+        if(formData.password.length < 8){
             setFormData({
                 name: '',
                 username: '',
@@ -81,7 +81,7 @@ export function CreateAccount () {
                     <input onChange={handleChange} name="password" required type="password"></input>
                 </div>
                 {
-                    ask ? <div>Please make your username and password atleast 8 characters long!</div> :
+                    ask ? <div>Please make your password atleast 8 characters long!</div> :
                     <div></div>
                 }
                 {

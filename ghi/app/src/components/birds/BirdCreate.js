@@ -65,8 +65,8 @@ export function CreateBird() {
     return(
         <div className="body-page">
         <h1 className="flex font-semibold justify-center sm:text-3xl lg:text-7xl">Create a Bird</h1>
-        <div className="text-2xl warning">Any birds you add will NOT appear in other's all birds list but they can still accessed it via url.</div>
-        <div className="warning">Please only post tests or bird content.</div>
+        {/* <div className="text-2xl warning">Any birds you add will NOT appear in other's all birds list but they can still accessed it via url.</div>
+        <div className="warning">Please only post tests or bird content.</div> */}
         {
                 login ?
                     <div className="modal">
