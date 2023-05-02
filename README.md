@@ -14,7 +14,7 @@ If you would like to run this website on your local machine, please:
  2. go to your commandline and cd to **/birdinglogs** repo directory:
     -   run ```docker volume create bird-data```
     -   run ```docker compose build```
-    -   run ``` docker compose up``` *if api image fails to run try going to docker dashboard and try again*
+    -   run ``` docker compose up``` *if api image fails to run try going to docker dashboard and hitting play button*
     -   Go to your http://localhost:3000/ to see the website! I would recommend viewing the application on Chrome.
 
  3. Bird Data is currently hidden, you can still test things by creating an account and adding your own bird.
