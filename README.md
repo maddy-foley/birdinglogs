@@ -2,7 +2,7 @@
 
 UPDATE: May 4th, 20203
 
-- Data is viewable and can be easily spinned up on computer!
+- Data is now viewable!
 
 The application uses FastAPI, React.JS, PostrgreSQL and Docker
 
