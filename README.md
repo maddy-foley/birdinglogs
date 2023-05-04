@@ -15,10 +15,10 @@ The application uses FastAPI, React.JS, PostrgreSQL and Docker
     POSTGRES_PASSWORD=<postgres password>
     POSTGRES_DB=<postgres database>
     ```
- 2. go to your commandline and cd to **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps:
+ 2. go to your commandline and cd to **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps :):
     -   run ```docker volume create bird-data```
     -   run ```docker compose build```
-    -   run ``` docker compose up``` *please individually start api container on docker dashboard if it crashes! Currently debugging this*
+    -   run ``` docker compose up``` *please individually start api container on docker dashboard if it crashes!*
     - in docker dashboard open the built-in api terminal  (OR copy the api's container name and on your computer terminal run ```docker exec -it <copied-container-name> bash```) and then run ```python bird-data.py```. You should see print statements confirming the data has loaded into the volume.
     -   Go to your http://localhost:3000/ to see the website! I would recommend viewing the application on Chrome.
     -   When you are done, run ```docker compose down``` to remove all the containers. Add ```--volumes``` at the end if you'd like to delete the volume.
