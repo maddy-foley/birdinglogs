@@ -15,7 +15,7 @@ The application uses FastAPI, React.JS, PostrgreSQL and Docker
     POSTGRES_PASSWORD=<postgres password>
     POSTGRES_DB=<postgres database>
     ```
- 2. go to your commandline and cd to **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps :):
+ 2. go to your commandline and cd to **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps :)  :
     -   run ```docker volume create bird-data```
     -   run ```docker compose build```
     -   run ``` docker compose up``` *please individually start api container on docker dashboard if it crashes!*
