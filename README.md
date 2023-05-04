@@ -10,7 +10,7 @@ The application uses FastAPI, React.JS, PostrgreSQL and Docker
 
  1. Please clone this repository onto your local machine
 
- 2. create a ```.env``` file in **/birdinglogs**. In this file you will need to declare **5 variables** by replacing anything in the <>:
+ 2. create a ```.env``` file in **/birdinglogs**. In this file you will need to declare **5 variables**:
     ```
     SIGNING_KEY=<letters or numbers (length 20-40)>
     DATABASE_URL=postgresql://<username>:<password>@db/<database>
