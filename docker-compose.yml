@@ -15,6 +15,8 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       WAIT_HOST: db:5432
       PORT: 8000
+    depends_on:
+      - db
   ghi:
     image: node:latest
     command: /bin/bash run.sh
