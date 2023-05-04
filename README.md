@@ -7,7 +7,10 @@ UPDATE: May 4th, 20203
 The application uses FastAPI, React.JS, PostrgreSQL and Docker
 
 ## If you would like to run this website on your local machine, please:
- 1. create a ```.env``` file in **/birdinglogs**. In this file you will need to declare **5 variables**:
+
+ 1. Please clone this repository onto your local machine
+ 
+ 2. create a ```.env``` file in **/birdinglogs**. In this file you will need to declare **5 variables**:
     ```
     SIGNING_KEY=<letters or numbers (length 20-40)>
     DATABASE_URL=postgresql://<username>:<password>@db/<database>
@@ -15,7 +18,7 @@ The application uses FastAPI, React.JS, PostrgreSQL and Docker
     POSTGRES_PASSWORD=<postgres password>
     POSTGRES_DB=<postgres database>
     ```
- 2. go to your commandline and cd to **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps :)  :
+ 3. Go to your commandline and cd to **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps :)  :
     -   run ```docker volume create bird-data```
     -   run ```docker compose build```
     -   run ``` docker compose up``` *please individually start api container on docker dashboard if it crashes!*
