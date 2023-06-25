@@ -12,7 +12,7 @@ services:
       - ./api:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
       WAIT_HOST: db:5432
       PORT: 8000
     depends_on:
