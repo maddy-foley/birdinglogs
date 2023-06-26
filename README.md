@@ -1,7 +1,7 @@
 ## Welcome to Birding Logs!
 
 
-The application uses FastAPI, React.JS, PostrgreSQL and Docker
+The application uses FastAPI, React.JS, PostgreSQL and Docker
 
 ## If you would like to run this website on your local machine, please:
 
@@ -14,9 +14,9 @@ The application uses FastAPI, React.JS, PostrgreSQL and Docker
     POSTGRES_PASSWORD=<postgres password>
     POSTGRES_DB=<postgres database>
     ```
- 3. Go to your commandline and the **/birdinglogs/ghi/app** directory and install node_modules by running the command:
+ 3. Go to your command line and the **/birdinglogs/ghi/app** directory and install node_modules by running the command:
     - ```npm install```
- 4. On your commandline go back to the **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps :)  :
+ 4. On your command line go back to the **/birdinglogs** repo directory. I am working on the docker compose to be one command but it currently needs a few extra steps :)  :
     -   run ```docker volume create bird-data```
     -   run ```docker compose build```
     -   run ```docker compose up``` *please individually start api container on docker dashboard if it crashes!*
@@ -27,5 +27,5 @@ The application uses FastAPI, React.JS, PostrgreSQL and Docker
  5. Enjoy!
 
 
-This was developed independent and I appreciate any feedback. You can find me on linkedin:
+This was developed independently and I appreciate any feedback. You can find me on linkedin:
 https://www.linkedin.com/in/mad-foley/
