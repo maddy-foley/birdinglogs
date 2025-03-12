@@ -3,6 +3,7 @@ volumes:
     external: true
 services:
   api:
+    container_name: api
     build:
       context: ./api
       dockerfile: Dockerfile.dev
@@ -17,6 +18,7 @@ services:
       PORT: 8000
     depends_on:
       - db
+
   ghi:
     image: node:latest
     command: /bin/bash run.sh

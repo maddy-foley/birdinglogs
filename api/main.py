@@ -3,10 +3,20 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import birds, accounts, sightings, wish, family
 from authenticator import authenticator
+from birddata import load_birds
+import time
 
 
 app = FastAPI()
+
+
+
 router = APIRouter()
+@app.on_event("startup")
+async def startup():
+    load_birds()
+    time.wait(2)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,6 +27,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 app.include_router(birds.router, tags=['Birds'])
 app.include_router(accounts.router, tags=['Accounts'])
