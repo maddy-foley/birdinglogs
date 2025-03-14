@@ -122,3 +122,9 @@ https://www.linkedin.com/in/maddy-foley/
 - More resources to come with changes!
 
 <p align="right"><a href="#readme-top">:hatched_chick: back to top</a></p>
+
+
+<!-- variables -->
+
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
