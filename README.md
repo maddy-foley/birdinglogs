@@ -115,6 +115,7 @@ This application also shows my software development skills.
 - [x] Interactive Bird Catalogue
 - [x] User Authentication
 - [x] Note Taking Feature
+- [ ] Deployment
 - [ ] Bird Feeder Tracking
 - [ ] Update Authentication
 - [ ] TBD
