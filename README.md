@@ -44,6 +44,13 @@
 ### Built with
 [![React][React.js]][React-url]
 
+[![Tailwind-CSS][Tailwind-CSS]][Tailwind-url]
+
+[![Docker][DOCKER]][Docker-url]
+
+[![FastAPI][FastAPI]][FastAPI-url]
+
+[![PostgreSQL][PostgreSQL]][Postgres-url]
 
 ## Getting Started
 
@@ -118,9 +125,12 @@ https://www.linkedin.com/in/maddy-foley/
 <p align="right"><a href="#readme-top">:baby_chick: back to top</a></p>
 
 ## Acknowledgements
-- All current data is pulled from wikipedia and wikipediaapi
+- [Wikipedia](https://www.wikipedia.org/) to scrape bird data
+- [README Template](https://github.com/othneildrew/Best-README-Template)
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Img Shields](https://shields.io)
+- [Font Awesome](https://fontawesome.com/)
 - More resources to come with changes!
-
 <p align="right"><a href="#readme-top">:hatched_chick: back to top</a></p>
 
 
@@ -128,3 +138,11 @@ https://www.linkedin.com/in/maddy-foley/
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[FastAPI]: https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi
+[FastAPI-url]: https://fastapi.tiangolo.com/
+[PostgreSQL]: https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white
+[Postgres-url]: https://www.postgresql.org/
+[DOCKER]: https://img.shields.io/badge/docker-257bd6?style=for-the-badge&logo=docker&logoColor=white
+[Docker-url]: https://www.docker.com/
+[Tailwind-CSS]: https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC
+[Tailwind-url]: https://tailwindcss.com/
