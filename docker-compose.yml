@@ -1,6 +1,6 @@
 volumes:
   bird-data:
-    external: true
+    # external: true
 services:
   api:
     container_name: api
@@ -14,8 +14,8 @@ services:
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
-      WAIT_HOST: db:5432
-      PORT: 8000
+      WAIT_HOST: 5432:5432
+      PORT: 8000:8000
     depends_on:
       - db
 

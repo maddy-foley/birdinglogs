@@ -12,10 +12,6 @@ app = FastAPI()
 
 
 router = APIRouter()
-@app.on_event("startup")
-async def startup():
-    load_birds()
-    time.wait(2)
 
 
 app.add_middleware(
@@ -27,7 +23,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+load_birds()
 
 app.include_router(birds.router, tags=['Birds'])
 app.include_router(accounts.router, tags=['Accounts'])
