@@ -8,6 +8,7 @@
 
   <p align="center">
     A full stack web application created for bird enthusiasts!
+    <p align="right"><i>Last Updated March 14th, 2025</i></p>
 </div>
 
 <details>
@@ -37,8 +38,10 @@
 
 
 ## About Birding Logs
-
 <img src="./assets/images/homescreen.png">
+
+<p>To be added later</p>
+
 <p align="right"><a href="#readme-top">:dove: back to top</a></p>
 
 ### Built with
@@ -56,8 +59,8 @@
 
 ### Prerequisites
 You will need:
-- latest version of node.js
-- docker on your local machine
+- node.js (latest version)
+- docker
 - a clone of this repository
 - some command line knowledge
 <p align="right"><a href="#readme-top">:whale: back to top</a></p>
@@ -97,7 +100,7 @@ You will need:
 - Ensure the latest version of node.js is on your local computer
 
 <i>Bird data is missing or api crashed</i>
-- try restarting the containers using:  ```docker compose stop``` followed by ```docker compose up```
+- try restarting the containers by running:  ```docker compose stop``` followed by ```docker compose up```
 <p align="right"><a href="#readme-top">:whale: back to top</a></p>
 
 ## Usage
@@ -109,7 +112,6 @@ This application also shows my software development skills.
 
 <!-- ROADMAP -->
 ## Roadmap
-
 - [x] Interactive Bird Catalogue
 - [x] User Authentication
 - [x] Note Taking Feature
@@ -120,7 +122,7 @@ This application also shows my software development skills.
 
 ## Contact
 
-This application was developed independently and I appreciate any feedback. You can find me on linkedin:
+This application was developed independently, and I would appreciate any feedback. You can find me on Linkedin:
 https://www.linkedin.com/in/maddy-foley/
 <p align="right"><a href="#readme-top">:baby_chick: back to top</a></p>
 
