@@ -97,7 +97,7 @@ export function BirdCard({bird, mine}) {
                     </div>
             </div>
                 <div className=" flex justify-center my-3">
-                    <NavLink className="mybutton" to={"/birds/"+bird.id+"/create-sighting"}>Create Sighting</NavLink>
+                    <NavLink className="mybutton" to={"/birds/" + bird.id + "/create-sighting"}>Create Sighting</NavLink>
                 </div>
         </div>
         </div>

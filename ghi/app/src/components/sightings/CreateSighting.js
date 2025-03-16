@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 export function CreateSighting(){
@@ -11,7 +12,24 @@ export function CreateSighting(){
         comment: '',
         spotted_on: new Date().toISOString().slice(0, 10)
     });
+    const [login, setLogin] = useState(false);
 
+    const getLoginState = async() => {
+        const response = await fetch('http://localhost:8000/api/account/me')
+        if(response.ok){
+
+            const data = await response.json()
+            console.log(data)
+            setLogin(false)
+        } else {
+            if (response.status == 401){
+                {
+                    setLogin(true)
+                }
+            }
+        }
+
+    }
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -27,7 +45,12 @@ export function CreateSighting(){
             });
         if(response.ok) {
             navigate(`/birds/${id}`)
+        } else {
+            if(response.status === 401){
+                setLogin(true);
+            }
         }
+
 }
 
     const handleChange = (e) => {
@@ -44,13 +67,22 @@ export function CreateSighting(){
         }
     }
     useEffect(() =>{
-
         getBird();
+        getLoginState();
     }, [])
 
     return(
         <div className="body-page">
         <h1 className="font-semibold text-3xl">Create a Sighting for {bird.name}</h1>
+        {
+            login ?
+                <div className="modal">
+                    <div className="modal-textbox">
+                        Please Login to add sighting: <div className="nav-link mt-3"><NavLink className="text-black"to="/account/login">Login / Sign Up</NavLink></div>
+                    </div>
+                </div> :
+                null
+        }
         <img src={bird.picture_url} alt={bird.name}/>
         <form onSubmit={handleSubmit} className="mt-5">
             <div>

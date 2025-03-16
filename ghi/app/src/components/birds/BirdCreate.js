@@ -56,8 +56,26 @@ export function CreateBird() {
         }
     }
 
+    const getLoginState = async() => {
+        const response = await fetch('http://localhost:8000/api/account/me')
+        if(response.ok){
+
+            const data = await response.json()
+            console.log(data)
+            setLogin(false)
+        } else {
+            if (response.status == 401){
+                {
+                    setLogin(true)
+                }
+            }
+        }
+
+    }
+
     useEffect ( () =>{
         getFamily();
+        getLoginState();
     }, [])
 
     useEffect(() => {}, [formData])
@@ -65,17 +83,15 @@ export function CreateBird() {
     return(
         <div className="body-page">
         <h1 className="flex font-semibold justify-center sm:text-3xl lg:text-7xl">Create a Bird</h1>
-        {/* <div className="text-2xl warning">Any birds you add will NOT appear in other's all birds list but they can still accessed it via url.</div>
-        <div className="warning">Please only post tests or bird content.</div> */}
         {
-                login ?
-                    <div className="modal">
-                        <div className="modal-textbox">
-                            Please Login to add birds: <div className="nav-link mt-3"><NavLink className="text-black"to="/account/login">Login / Sign Up</NavLink></div>
-                        </div>
-                    </div> :
-                    null
-            }
+            login ?
+                <div className="modal">
+                    <div className="modal-textbox">
+                        Please Login to add birds: <div className="nav-link mt-3"><NavLink className="text-black"to="/account/login">Login / Sign Up</NavLink></div>
+                    </div>
+                </div> :
+                null
+        }
         <form onSubmit={handleSubmit} className="grid grid-cols-11">
             <div className="col-start-5 col-end-9">
                 <div className="account-form">
