@@ -55,6 +55,8 @@
 
 [![PostgreSQL][PostgreSQL]][Postgres-url]
 
+[![nginx][nginx]][nginx-url]
+
 
 ## Getting Started
 

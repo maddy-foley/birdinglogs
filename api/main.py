@@ -4,10 +4,6 @@ import os
 from routers import birds, accounts, sightings, wish, family
 from authenticator import authenticator
 from birddata import load_birds
-import time
-from contextlib import asynccontextmanager
-import uvicorn
-
 
 
 
