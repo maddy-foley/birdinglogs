@@ -8,7 +8,7 @@
 
   <p align="center">
     A full stack web application created for bird enthusiasts!
-    <p align="right"><i>Last Updated March 14th, 2025</i></p>
+    <p align="right"><i>Last Updated March 18th, 2025</i></p>
 </div>
 
 <details>
@@ -54,6 +54,7 @@
 [![FastAPI][FastAPI]][FastAPI-url]
 
 [![PostgreSQL][PostgreSQL]][Postgres-url]
+[![nginx][Nginx]][Nginx-url]
 
 ## Getting Started
 
@@ -149,3 +150,5 @@ https://www.linkedin.com/in/maddy-foley/
 [Docker-url]: https://www.docker.com/
 [Tailwind-CSS]: https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC
 [Tailwind-url]: https://tailwindcss.com/
+[Nginx]: https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white&style=for-the-badgestyle=for-the-badge&logo=fastapi
+[Nginx-url]: https://nginx.org/
