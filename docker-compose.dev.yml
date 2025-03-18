@@ -3,7 +3,10 @@ volumes:
     # external: true
 services:
   api:
-    build: ./api
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     ports:
       - 8000:8000
     volumes:
@@ -11,21 +14,25 @@ services:
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
-      WAIT_HOST: db:5432
+      WAIT_HOST: 5432:5432
       PORT: 8000:8000
     depends_on:
       - db
+
   ghi:
-    build:
-      context: ./ghi/app
-      dockerfile: Dockerfile
-    # working_dir: /app
+    image: node:latest
+    command: /bin/bash run.sh
+    working_dir: /app
     volumes:
       - ./ghi/app:/app
     ports:
-      - 80:80
-    depends_on:
-      - api
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3000
+      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
   db:
     image: postgres:13.3-alpine
     container_name: db
