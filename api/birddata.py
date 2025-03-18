@@ -94,4 +94,3 @@ def load_birds():
                     )
                     print(f"Bird #{count} added.")
 
-load_birds()

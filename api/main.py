@@ -5,11 +5,13 @@ from routers import birds, accounts, sightings, wish, family
 from authenticator import authenticator
 from birddata import load_birds
 import time
+from contextlib import asynccontextmanager
+import uvicorn
+
+
 
 
 app = FastAPI()
-
-
 
 router = APIRouter()
 
@@ -35,4 +37,5 @@ app.include_router(authenticator.router, tags=['Login / Logout'])
 app.include_router(sightings.router, tags=['Sightings'])
 app.include_router(wish.router, tags=['Wish List'])
 app.include_router(family.router, tags=['Family'])
+
 load_birds()

@@ -55,13 +55,11 @@
 
 [![PostgreSQL][PostgreSQL]][Postgres-url]
 
-[![nginx][nginx]][nginx-url]
 
 ## Getting Started
 
 ### Prerequisites
 You will need:
-- node.js (latest version)
 - docker
 - a clone of this repository
 - some command line knowledge
@@ -86,14 +84,10 @@ You will need:
     POSTGRES_DB=test_database
     ```
 
- 3. On your command line go back to the **/birdinglogs** repo directory and use these commands:
-    -   ```docker volume create bird-data```
-    -   ```docker compose build```
-    -   ```docker compose up```
-    -   Go to your http://localhost:3000/ to see the website! I would recommend viewing the application on Google Chrome.
-    - If there is no bird content
-    -   When you are done, run ```docker compose down``` to remove all the containers.
-    -   ```docker volume remove bird-data``` will remove the volume.
+ 3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
+    -   ```docker compose up --build```
+    -   Go to your http://localhost:80/ to see the website! I highly recommend viewing this application on Google Chrome.
+    -   When you are done, run ```docker compose down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
  4. Enjoy!
 <p align="right"><a href="#readme-top">:whale2: back to top</a></p>
 
