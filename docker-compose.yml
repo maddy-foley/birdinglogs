@@ -3,10 +3,7 @@ volumes:
     # external: true
 services:
   api:
-    container_name: api
-    build:
-      context: ./api
-      dockerfile: Dockerfile.dev
+    build: ./api
     ports:
       - 8000:8000
     volumes:
@@ -19,21 +16,23 @@ services:
     depends_on:
       - db
   ghi:
-    image: node:latest
-    command: /bin/bash run.sh
-    working_dir: /app
+    build:
+      context: ./ghi/app
+      dockerfile: Dockerfile
+    # working_dir: /app
     volumes:
       - ./ghi/app:/app
     ports:
-      - "3000:3000"
+      - 80:80
     environment:
-      HOST_OS: ${OS}
-      NODE_ENV: development
-      HOST: "0.0.0.0"
-      PUBLIC_URL: http://localhost:3000
-      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      NODE_ENV: production
+    # environment:
+    #   HOST_OS: ${OS}
+      # NODE_ENV: development
+      # HOST: "0.0.0.0"
+      # PUBLIC_URL: http://localhost:3000
   db:
-    image: postgres:13.3-alpine
+    image: postgres:13-alpine
     container_name: db
     volumes:
       - bird-data:/var/lib/postgresql/data

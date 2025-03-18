@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import birds, accounts, sightings, wish, family
 from authenticator import authenticator
-from birddata import load_birds
 import time
 
 
@@ -23,7 +22,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-load_birds()
 
 app.include_router(birds.router, tags=['Birds'])
 app.include_router(accounts.router, tags=['Accounts'])

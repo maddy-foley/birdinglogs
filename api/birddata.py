@@ -21,7 +21,6 @@ def load_birds():
             total = result.fetchone()[0]
 
     if total == 0:
-    # Get json data from wine bid
         with open('data/families.json') as data:
             data = json.load(data)
             output = [
@@ -50,7 +49,6 @@ def load_birds():
                     print("added family")
 
 
-        # Get json data from wine bid
         with open('data/dictbirdfamily.json') as data:
             data = json.load(data)
             birds = list(data.keys())
@@ -96,3 +94,4 @@ def load_birds():
                     )
                     print(f"Bird #{count} added.")
 
+load_birds()
