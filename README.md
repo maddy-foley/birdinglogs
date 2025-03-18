@@ -151,5 +151,5 @@ https://www.linkedin.com/in/maddy-foley/
 [Docker-url]: https://www.docker.com/
 [Tailwind-CSS]: https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC
 [Tailwind-url]: https://tailwindcss.com/
-[nginx]: https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white&style=for-the-badgestyle=for-the-badge&logo=fastapi
+[nginx]: https://img.shields.io/badge/Nginx-009639?logo=nginx&logoColor=white&style=for-the-badge
 [nginx-url]: https://nginx.org/
