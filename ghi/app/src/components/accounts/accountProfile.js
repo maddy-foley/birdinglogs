@@ -23,6 +23,7 @@ export function Profile() {
             setProfile(data)
         }
     }
+    
 
 
     useEffect(() => {

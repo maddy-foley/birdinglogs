@@ -85,12 +85,13 @@ You will need:
     POSTGRES_PASSWORD=password
     POSTGRES_DB=test_database
     ```
-
- 3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
+  3. On your command line go back into the **/birdinglogs/ghi/app** directory and use these commands to install required node modules:
+    -   ```npm install```
+ 4. On your command line go back into the **/birdinglogs** repo directory and use these commands:
     -   ```docker compose up --build```
     -   Go to your http://localhost:80/ to see the website! I highly recommend viewing this application on Google Chrome.
     -   When you are done, run ```docker compose down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
- 4. Enjoy!
+ 5. Enjoy!
 <p align="right"><a href="#readme-top">:whale2: back to top</a></p>
 
 ### Trouble Shooting
