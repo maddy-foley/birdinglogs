@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Query
 from typing import Union, Optional
-from authenticator import authenticator
+from accounts import authenticator
 from models.sightings import SightingIn, SightingOut
 from queries.sightings import SightingsQueries
 
@@ -14,6 +14,7 @@ def get_all_sightings(
 ):
     return repo.get_all_sightings()
 
+# CHANGE AUTH
 @router.get('/api/sighting/me')
 def get_all_sightings_by_account(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
@@ -23,7 +24,7 @@ def get_all_sightings_by_account(
         return repo.get_all_sightings_by_account(account_data['id'])
     else:
         return {"message": "could not get account data"}
-
+# CHANGE AUTH
 @router.post('/api/sighting')
 def create_sighting(
     bird: SightingIn,
@@ -36,7 +37,7 @@ def create_sighting(
         return {"message": "could not get account data"}
 
 
-
+# CHANGE AUTH
 @router.put('/api/sighting/{sighting_id}')
 def update_sighting(
     sighting:SightingIn,
@@ -48,7 +49,7 @@ def update_sighting(
         return repo.update_sighting(sighting, sighting_id, account_id=account_data['id'])
     else:
         return {"message": "could not get account data"}
-
+# CHANGE AUTH
 @router.delete('/api/sighting/{sighting_id}')
 def delete_sighting(
     sighting_id,

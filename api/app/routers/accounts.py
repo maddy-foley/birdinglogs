@@ -11,8 +11,7 @@ from models.accounts import *
 from secret import *
 from queries.accounts import *
 
-# to get a string like this run:
-# openssl rand -hex 32
+# INPROGRESS
 
 
 router = APIRouter()

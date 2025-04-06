@@ -4,7 +4,7 @@ from queries.birds import BirdOut, BirdQueries, Error, BirdIn
 from authenticator import authenticator
 
 router = APIRouter()
-
+# CHANGE AUTH
 @router.get('/api/birds')
 def get_all_birds(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
@@ -15,7 +15,7 @@ def get_all_birds(
     else:
         return repo.get_all_birds(account_id=None)
 
-
+# CHANGE AUTH
 @router.get('/api/birds/me')
 def get_birds_by_account(
     account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
@@ -25,7 +25,7 @@ def get_birds_by_account(
         return repo.get_birds_by_account(account_id=account_data['id'])
     else:
         return Error(message="You need to login to view your added birds")
-
+# CHANGE AUTH
 @router.post('/api/birds')
 def create_bird(
     bird: BirdIn,
@@ -38,7 +38,7 @@ def create_bird(
     else:
         return Error(message="You need an account to add birds")
 
-
+# CHANGE AUTH
 @router.get('/api/birds/{bird_id}')
 def get_bird_by_id(
     bird_id: int,
@@ -50,7 +50,7 @@ def get_bird_by_id(
     else:
         return repo.get_bird_by_id(bird_id, account_id=None)
 
-
+# CHANGE AUTH
 @ router.put('/api/birds/{bird_id}')
 def update_bird_by_id(
     bird_id: int,
@@ -63,7 +63,7 @@ def update_bird_by_id(
     else:
         return Error(message="You need an account to add birds")
 
-
+# CHANGE AUTH
 @router.delete('/api/birds/{bird_id}')
 def delete_bird_by_id(
     bird_id,
