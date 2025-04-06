@@ -2,11 +2,11 @@ import json
 import datetime
 from pydantic import BaseModel
 from typing import Optional
-from queries.db import pool
+from api.app.common.db import pool
 from datetime import date
 from models.family import FamilyIn
 from models.birds import BirdIn
-from queries.db import pool
+from api.app.common.db import pool
 import time
 
 def load_birds():
@@ -93,4 +93,3 @@ def load_birds():
                         ]
                     )
                     print(f"Bird #{count} added.")
-

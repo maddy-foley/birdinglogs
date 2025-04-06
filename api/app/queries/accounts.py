@@ -1,4 +1,4 @@
-from queries.db import pool
+from api.app.common.db import pool
 from models.accounts import (
     AccountIn,
     AccountOut,
@@ -41,7 +41,7 @@ class AccountQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, picture_url, created_on, id
+                        SELECT name, username, picture_url, created_on, disabled, id
                         FROM accounts
                         WHERE id = %s;
                         """,
@@ -112,7 +112,8 @@ class AccountQueries:
                 username=record[1],
                 picture_url=record[2],
                 created_on=record[3],
-                id=record[4]
+                disabled=record[4],
+                id=record[5]
             )
         except Exception as e:
             return Error(message=str(e))

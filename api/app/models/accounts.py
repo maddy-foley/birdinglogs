@@ -19,6 +19,7 @@ class AccountIn(BaseModel):
     username: str = defaults['username']
     password: str = defaults['password']
     picture_url: str = defaults['picture_url']
+    disabled: bool | None = None
 
 
 class AccountOut(BaseModel):
@@ -26,6 +27,7 @@ class AccountOut(BaseModel):
     name: str = defaults['name']
     username: str = defaults['username']
     picture_url: str = defaults['picture_url']
+    disabled: bool | None = None
     created_on: Optional[datetime]
 
 class AccountOutWithPassword(BaseModel):

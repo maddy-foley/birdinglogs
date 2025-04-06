@@ -1,4 +1,4 @@
-from queries.db import pool
+from api.app.common.db import pool
 from models.family import FamilyIn, FamilyOut
 
 

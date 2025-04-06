@@ -5,3 +5,4 @@ models/__pycache__
 migrations/__pycache__
 
 Dockerfile.dev
+/routers/secret.py
