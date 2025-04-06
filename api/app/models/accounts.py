@@ -1,4 +1,4 @@
-from jwtdown_fastapi.authentication import Token
+# from jwtdown_fastapi.authentication import Token
 from pydantic import BaseModel
 from datetime import date, datetime
 from typing import Optional
@@ -42,18 +42,18 @@ class AccountForm(BaseModel):
     password: str
 
 
-class AccountToken(Token):
-    account: AccountOutWithPassword
+# class AccountToken(Token):
+#     account: AccountOutWithPassword
 
 
 class HttpError(BaseModel):
     detail: str
 
 
-class TokenResponse(BaseModel):
-    access_token: str
-    token_type: str
-    account: AccountOutWithPassword
+# class TokenResponse(BaseModel):
+#     access_token: str
+#     token_type: str
+#     account: AccountOutWithPassword
 
 
 class DuplicateAccountError(ValueError):
