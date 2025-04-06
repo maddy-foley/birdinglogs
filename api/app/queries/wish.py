@@ -1,4 +1,4 @@
-from api.app.common.db import pool
+from common.db import pool
 from typing import List
 from pydantic import BaseModel
 from models.wish import WishOut, JoinedWishOut

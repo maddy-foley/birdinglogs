@@ -2,11 +2,10 @@ import json
 import datetime
 from pydantic import BaseModel
 from typing import Optional
-from api.app.common.db import pool
+from common.db import pool
 from datetime import date
 from models.family import FamilyIn
 from models.birds import BirdIn
-from api.app.common.db import pool
 import time
 
 def load_birds():

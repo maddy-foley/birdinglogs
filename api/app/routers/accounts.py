@@ -2,28 +2,20 @@ from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
 import jwt
-from fastapi import Depends, FastAPI, HTTPException, status, APIRouter
+from fastapi import Depends, FastAPI, HTTPException, status, APIRouter, Response, Request
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from models.accounts import *
-from secret import *
+from routers.secret import *
+from common.db import pool
 from queries.accounts import *
 
 # INPROGRESS
 
 
 router = APIRouter()
-fake_accounts_db = {
-    "johndoe": {
-        "username": "johndoe",
-        "full_name": "John Doe",
-        "email": "johndoe@example.com",
-        "hashed_password": "$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",
-        "disabled": False,
-    }
-}
 
 
 class Token(BaseModel):
@@ -50,9 +42,9 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def get_account(db, username: str):
-    if username in db:
-        account_dict = db[username]
+def get_account(pool, username: str):
+    if username in pool:
+        account_dict = pool[username]
         return AccountInDB(**account_dict)
 
 
@@ -76,7 +68,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 
-async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+async def get_current_account(token: Annotated[str, Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -97,7 +89,7 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
 
 
 async def get_current_active_account(
-    current_account: Annotated[AccountOut, Depends(get_current_user)],
+    current_account: Annotated[AccountOut, Depends(get_current_account)],
 ):
     if current_account.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
@@ -108,7 +100,7 @@ async def get_current_active_account(
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
-    account = authenticate_account(fake_accounts_db, form_data.username, form_data.password)
+    account = authenticate_account(pool, form_data.username, form_data.password)
     if not account:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -122,14 +114,14 @@ async def login_for_access_token(
     return Token(access_token=access_token, token_type="bearer")
 
 
-@router.get("/users/me/", response_model=AccountOut)
+@router.get("/account/me/", response_model=AccountOut)
 async def read_users_me(
     current_account: Annotated[AccountOut, Depends(get_current_active_account)],
 ):
     return current_account
 
 
-@router.get("/users/me/items/")
+@router.get("/account/me/items/")
 async def read_own_items(
     current_account: Annotated[AccountOut, Depends(get_current_active_account)],
 ):
@@ -196,22 +188,20 @@ async def read_own_items(
 #         }
 
 
-# @router.post('/api/account/create')
-# async def create_account(
-#     account: AccountIn,
-#     request: Request,
-#     response: Response,
-#     repo: AccountQueries = Depends()
-# ):
-#     hashed_password = authenticator.hash_password(account.password)
-
-#     try:
-#         result = repo.create_account(account, hashed_password)
-#     except DuplicateAccountError:
-#          raise HTTPException(
-#             status_code=status.HTTP_400_BAD_REQUEST,
-#             detail="Cannot create an account with those credentials"
-#         )
-#     form = AccountForm(username=account.username, password=account.password)
-#     token = await authenticator.login(response, request, form, repo)
-#     return AccountToken(account=result, **token.dict())
+@router.post('/api/account/create')
+async def create_account(
+    account: AccountIn,
+    request: Request,
+    response: Response,
+    repo: AccountQueries = Depends()
+):
+    hashed_password = pwd_context.hash(account.password)
+    try:
+        result = repo.create_account(account, hashed_password)
+    except DuplicateAccountError:
+         raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot create an account with those credentials"
+        )
+    login_status = await login_for_access_token(pool,account.username,account.password)
+    return login_status

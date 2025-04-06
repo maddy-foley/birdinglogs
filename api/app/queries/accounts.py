@@ -1,4 +1,3 @@
-from api.app.common.db import pool
 from models.accounts import (
     AccountIn,
     AccountOut,
@@ -6,6 +5,7 @@ from models.accounts import (
     Error,
 )
 from typing import List
+from common.db import pool
 from common.common import timestamp
 
 

@@ -2,7 +2,6 @@ from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import birds, accounts, sightings, wish, family
-from authenticator import authenticator
 from birddata import load_birds
 
 
