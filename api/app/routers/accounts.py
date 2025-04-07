@@ -41,12 +41,14 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def authenticate_account(username: str, password: str):
-    account = get_account_by_username(username=username)
-    print("**** AUTH_ACCOUNT", account ,"*********")
+async def authenticate_account(username: str, password: str):
+    try:
+        account = await get_account_by_username(username)
+    except TypeError:
+        return False
     if not account:
         return False
-    if not verify_password(password, account.hashed_password):
+    if not verify_password(password, account.password):
         return False
     return account
 
@@ -62,7 +64,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 
-async def get_current_account(token: Annotated[str, Depends(oauth2_scheme)]):
+async def get_current_account(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -73,38 +75,24 @@ async def get_current_account(token: Annotated[str, Depends(oauth2_scheme)]):
         username = payload.get("sub")
         if username is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
-    except InvalidTokenError:
-        raise credentials_exception
-    account = get_account_by_username(token_data.username)
-    if account is None:
-        raise credentials_exception
-    return account
-
-
-async def get_current_active_account(
-    current_account: Annotated[AccountOut, Depends(get_current_account)],
-):
-    if current_account.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
-    return current_account
-
+        return username
+    except Error:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
 
 @router.post("/token")
 async def login_for_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    form_data: OAuth2PasswordRequestForm = Depends(),
 ) -> Token:
-    account = await authenticate_account(form_data.username, form_data.password)
+    account = await authenticate_account(form_data.username,form_data.password)
+
     if not account:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": account.username}, expires_delta=access_token_expires
-    )
+    # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(data={"sub": account.username})
     return Token(access_token=access_token, token_type="bearer")
 
 
@@ -117,6 +105,10 @@ def get_account_by_username(
     except Exception as e:
         return Error(message=str(e))
 
+async def get_current_active_account(current_account: AccountOut = Depends(get_current_account)):
+    if current_account.disabled:
+        raise HTTPException(status_code=400, detail="Inactive account")
+    return current_account
 
 # FIX ERROR HANDLING
 @router.post('/api/account/create')
@@ -126,7 +118,7 @@ async def create_account(
     response: Response,
     repo: AccountQueries = Depends()
 ):
-    hashed_password = pwd_context.hash(account.password)
+    hashed_password = get_password_hash(account.password)
     try:
         result = repo.create_account(account, hashed_password)
     except DuplicateAccountError:
@@ -136,3 +128,12 @@ async def create_account(
         )
 
     return result
+
+@router.get("/account/me/", response_model=AccountOut)
+async def read_users_me(current_account: AccountOut = Depends(get_current_active_account)):
+    return current_account
+
+
+@router.get("/account/me/items/")
+async def read_own_items(current_account: AccountOut = Depends(get_current_active_account)):
+    return [{"item_id": "Foo", "owner": current_account.username}]
