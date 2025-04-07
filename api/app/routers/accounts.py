@@ -3,6 +3,7 @@ from typing import Annotated
 
 import jwt
 from fastapi import Depends, HTTPException, status, APIRouter, Response, Request
+from typing import Union
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
@@ -73,6 +74,7 @@ async def get_current_account(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
+        print(username)
         if username is None:
             raise credentials_exception
         return username
@@ -120,8 +122,8 @@ def get_account_by_username(
         raise HTTPException(status_code=400, detail="Error fetching account")
 
 async def get_current_active_account(current_account: AccountOut = Depends(get_current_account)):
-    if current_account.disabled:
-        raise HTTPException(status_code=400, detail="Inactive account")
+    # if current_account.disabled:
+    #     raise HTTPException(status_code=400, detail="Inactive account")
     return current_account
 
 # FIX ERROR HANDLING
@@ -143,11 +145,8 @@ async def create_account(
 
     return result
 
-@router.get("/account/me/", response_model=AccountOut)
-async def read_users_me(current_account: AccountOut = Depends(get_current_active_account)):
+@router.get("/api/users/me/")
+async def read_accounts_me(
+    current_account: TokenData = Depends(get_current_active_account),
+):
     return current_account
-
-
-@router.get("/account/me/items/")
-async def read_own_items(current_account: AccountOut = Depends(get_current_active_account)):
-    return [{"item_id": "Foo", "owner": current_account.username}]
