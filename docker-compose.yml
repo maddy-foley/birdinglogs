@@ -3,7 +3,6 @@ volumes:
     # external: true
 services:
   api:
-    platform: linux/amd64
     build: ./api
     ports:
       - 8000:8000
@@ -18,7 +17,6 @@ services:
       db:
         condition: service_healthy
   ghi:
-    platform: linux/amd64
     build:
       context: ./ghi/app
       dockerfile: Dockerfile
@@ -33,7 +31,6 @@ services:
   db:
     image: postgres:13.3-alpine
     container_name: db
-    platform: linux/amd64
     volumes:
       - bird-data:/var/lib/postgresql/data
     ports:
