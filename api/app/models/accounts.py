@@ -19,7 +19,7 @@ class AccountIn(BaseModel):
     username: str = defaults['username']
     password: str = defaults['password']
     picture_url: str = defaults['picture_url']
-    disabled: bool | None = None
+    disabled: bool
 
 
 class AccountOut(BaseModel):

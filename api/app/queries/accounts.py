@@ -76,12 +76,14 @@ class AccountQueries:
                         ]
                     )
                     id = result.fetchone()[0]
+
                     return AccountOutWithPassword(
                         id = id,
                         name = account.name,
                         username=account.username,
                         hashed_password=hashed_password,
                         picture_url=account.picture_url,
+                        disabled=False,
                         created_on=timestamp(),
                     )
         except Exception as e:

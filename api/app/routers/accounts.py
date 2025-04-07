@@ -9,8 +9,7 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 from models.accounts import *
 from routers.secret import *
-from common.db import pool
-from queries.accounts import *
+from queries.accounts import AccountQueries
 
 # INPROGRESS
 
@@ -42,14 +41,9 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def get_account(pool, username: str):
-    if username in pool:
-        account_dict = pool[username]
-        return AccountInDB(**account_dict)
-
-
-def authenticate_account(fake_db, username: str, password: str):
-    account = get_account(fake_db, username)
+def authenticate_account(username: str, password: str):
+    account = get_account_by_username(username=username)
+    print("**** AUTH_ACCOUNT", account ,"*********")
     if not account:
         return False
     if not verify_password(password, account.hashed_password):
@@ -82,7 +76,7 @@ async def get_current_account(token: Annotated[str, Depends(oauth2_scheme)]):
         token_data = TokenData(username=username)
     except InvalidTokenError:
         raise credentials_exception
-    account = get_account(fake_accounts_db, username=token_data.username)
+    account = get_account_by_username(token_data.username)
     if account is None:
         raise credentials_exception
     return account
@@ -100,7 +94,7 @@ async def get_current_active_account(
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
 ) -> Token:
-    account = authenticate_account(pool, form_data.username, form_data.password)
+    account = await authenticate_account(form_data.username, form_data.password)
     if not account:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -114,80 +108,17 @@ async def login_for_access_token(
     return Token(access_token=access_token, token_type="bearer")
 
 
-@router.get("/account/me/", response_model=AccountOut)
-async def read_users_me(
-    current_account: Annotated[AccountOut, Depends(get_current_active_account)],
+def get_account_by_username(
+    username:str,
+    repo: AccountQueries = Depends()
 ):
-    return current_account
+    try:
+        return repo.get_account_by_username(username)
+    except Exception as e:
+        return Error(message=str(e))
 
 
-@router.get("/account/me/items/")
-async def read_own_items(
-    current_account: Annotated[AccountOut, Depends(get_current_active_account)],
-):
-    return [{"item_id": "Foo", "owner": current_account.username}]
-
-# from fastapi import (
-#     APIRouter,
-#     Depends,
-#     Request,
-#     Response,
-#     HTTPException,
-#     status
-# )
-
-# from queries.accounts import AccountQueries
-# from models.accounts import (
-#     AccountIn,
-#     AccountForm,
-#     AccountOut,
-#     AccountOutWithPassword,
-#     AccountToken,
-#     DuplicateAccountError,
-#     Error,
-#     TokenResponse,
-#     HttpError
-# )
-# from typing import List, Union, Optional
-# from authenticator import authenticator
-
-
-# router = APIRouter()
-
-
-# @router.get('/api/account/me', response_model=Union[AccountOut,Error])
-# def get_account_by_id(
-#     repo: AccountQueries = Depends(),
-#     account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
-# ):
-#     if account_data:
-#         return repo.get_account_by_id(account_data['id'])
-#     return {"message": "You are not logged in"}
-
-# @router.get('/api/account/username', response_model=Union[TokenResponse, Error])
-# def get_account_by_username(
-#     username:str,
-#     repo: AccountQueries = Depends()
-# ):
-#     try:
-#         return repo.get_account_by_username(username)
-#     except Exception as e:
-#         return Error(message=str(e))
-
-
-# @router.get('/token', response_model=AccountToken | None)
-# async def get_token(
-#     request: Request,
-#     account: AccountIn = Depends(authenticator.try_get_current_account_data)
-# ) -> AccountToken | None:
-#     if account and authenticator.cookie_name in request.cookies:
-#         return {
-#             "access_token": request.cookies[authenticator.cookie_name],
-#             "type": "Bearer",
-#             "account": account,
-#         }
-
-
+# FIX ERROR HANDLING
 @router.post('/api/account/create')
 async def create_account(
     account: AccountIn,
@@ -203,5 +134,5 @@ async def create_account(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials"
         )
-    login_status = await login_for_access_token(pool,account.username,account.password)
-    return login_status
+
+    return result
