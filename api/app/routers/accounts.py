@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
 import jwt
-from fastapi import Depends, FastAPI, HTTPException, status, APIRouter, Response, Request
+from fastapi import Depends, HTTPException, status, APIRouter, Response, Request
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
@@ -10,6 +10,7 @@ from pydantic import BaseModel
 from models.accounts import *
 from routers.secret import *
 from queries.accounts import AccountQueries
+from common.db import pool
 
 # INPROGRESS
 
@@ -41,15 +42,15 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-async def authenticate_account(username: str, password: str):
+def authenticate_account(username: str, password: str):
     try:
-        account = await get_account_by_username(username)
+        account = get_account_by_username(username)
     except TypeError:
-        return False
+        return None
     if not account:
-        return False
+        return None
     if not verify_password(password, account.password):
-        return False
+        return None
     return account
 
 
@@ -62,7 +63,6 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
-
 
 async def get_current_account(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -83,27 +83,41 @@ async def get_current_account(token: str = Depends(oauth2_scheme)):
 async def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
 ) -> Token:
-    account = await authenticate_account(form_data.username,form_data.password)
-
+    account = authenticate_account(form_data.username,form_data.password)
     if not account:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"sub": account.username})
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(data={"sub": account.username},  expires_delta=access_token_expires)
     return Token(access_token=access_token, token_type="bearer")
 
 
 def get_account_by_username(
-    username:str,
-    repo: AccountQueries = Depends()
+    username:str
 ):
     try:
-        return repo.get_account_by_username(username)
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                result = cur.execute(
+                    """
+                    SELECT username, password
+                    FROM accounts
+                    WHERE username=%s;
+                    """,
+                    [username]
+                )
+                record = result.fetchone()
+                if record is None:
+                    return {"message": "Could not get account"}
+                return AccountForm(
+                    username = record[0],
+                    password=record[1],
+                )
     except Exception as e:
-        return Error(message=str(e))
+        raise HTTPException(status_code=400, detail="Error fetching account")
 
 async def get_current_active_account(current_account: AccountOut = Depends(get_current_account)):
     if current_account.disabled:

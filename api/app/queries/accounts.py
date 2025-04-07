@@ -11,6 +11,7 @@ from common.common import timestamp
 
 class AccountQueries:
     def get_account_by_username(self, username: str) -> AccountOutWithPassword:
+
         try:
             with pool.connection() as conn:
                 with conn.cursor() as cur:
@@ -31,6 +32,7 @@ class AccountQueries:
                         hashed_password=record[2],
                         id=record[3]
                     )
+
         except Exception as e:
             return Error(message=str(e))
 

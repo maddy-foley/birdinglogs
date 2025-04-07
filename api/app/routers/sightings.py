@@ -6,6 +6,7 @@ from queries.sightings import SightingsQueries
 
 
 
+
 router = APIRouter()
 
 @router.get('/api/sighting')
@@ -24,6 +25,7 @@ def get_all_sightings_by_account(
         return repo.get_all_sightings_by_account(account_data['id'])
     else:
         return {"message": "could not get account data"}
+
 # CHANGE AUTH
 @router.post('/api/sighting')
 def create_sighting(

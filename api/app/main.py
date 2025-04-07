@@ -19,7 +19,8 @@ app.add_middleware(
 
 
         # for productiont:
-        os.environ.get("CORS_HOST", "http://localhost")
+        os.environ.get("CORS_HOST", "http://localhost"),
+        "http://localhost:8080"
     ],
     allow_credentials=True,
     allow_methods=["*"],
