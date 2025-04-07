@@ -63,23 +63,25 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
     return encoded_jwt
 
 async def get_current_account(token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+    # credentials_exception = HTTPException(
+    #     status_code=status.HTTP_401_UNAUTHORIZED,
+    #     detail="Could not validate credentials",
+    #     headers={"WWW-Authenticate": "Bearer"},
+    # )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
-        print(username)
+
         if username is None:
-            raise credentials_exception
+            return None
         return username
+
     except Error:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+        return None
 
 @router.post("/token")
 async def login_for_access_token(
@@ -105,7 +107,7 @@ def get_account_by_username(
             with conn.cursor() as cur:
                 result = cur.execute(
                     """
-                    SELECT username, password
+                    SELECT username, password, id
                     FROM accounts
                     WHERE username=%s;
                     """,
@@ -117,14 +119,21 @@ def get_account_by_username(
                 return AccountForm(
                     username = record[0],
                     password=record[1],
+                    id=record[2]
                 )
     except Exception as e:
         raise HTTPException(status_code=400, detail="Error fetching account")
 
-async def get_current_active_account(current_account: AccountOut = Depends(get_current_account)):
-    # if current_account.disabled:
-    #     raise HTTPException(status_code=400, detail="Inactive account")
-    return current_account
+async def get_current_active_account_strict(current_account: AccountOut = Depends(get_current_account)):
+
+    if current_account is None:
+        raise HTTPException(status_code=400, detail="Inactive account")
+    account_data = get_account_by_username(current_account)
+    return account_data
+
+async def get_current_active_account(current_account: Optional[AccountOut] = Depends(get_current_account)):
+    account_data = get_account_by_username(current_account)
+    return account_data
 
 # FIX ERROR HANDLING
 @router.post('/api/account/create')
@@ -149,4 +158,5 @@ async def create_account(
 async def read_accounts_me(
     current_account: TokenData = Depends(get_current_active_account),
 ):
-    return current_account
+    account_data = get_account_by_username(current_account)
+    return account_data

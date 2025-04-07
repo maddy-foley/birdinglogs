@@ -1,13 +1,15 @@
 from fastapi import APIRouter, Depends, Query
 from typing import Union, Optional
 from queries.birds import BirdOut, BirdQueries, Error, BirdIn
+from routers.accounts import *
 
 
 router = APIRouter()
+
 # CHANGE AUTH
 @router.get('/api/birds')
 def get_all_birds(
-    account_data: Optional[dict] = Depends(),
+    account_data: Optional[dict] = Depends(get_current_active_account),
     repo: BirdQueries = Depends()
 ):
     if account_data:
@@ -18,7 +20,7 @@ def get_all_birds(
 # CHANGE AUTH
 @router.get('/api/birds/me')
 def get_birds_by_account(
-    account_data: Optional[dict] = Depends(),
+    account_data: Optional[dict] = Depends(get_current_active_account),
     repo: BirdQueries = Depends()
 ):
     if account_data:
@@ -29,7 +31,7 @@ def get_birds_by_account(
 @router.post('/api/birds')
 def create_bird(
     bird: BirdIn,
-    account_data: Optional[dict] = Depends(),
+    account_data: Optional[dict] = Depends(get_current_active_account),
     repo: BirdQueries = Depends()
 ):
     if account_data:
@@ -42,7 +44,7 @@ def create_bird(
 @router.get('/api/birds/{bird_id}')
 def get_bird_by_id(
     bird_id: int,
-    account_data: Optional[dict] = Depends(),
+    account_data: Optional[dict] = Depends(get_current_active_account),
     repo: BirdQueries = Depends()
 ):
     if account_data:
@@ -55,7 +57,7 @@ def get_bird_by_id(
 def update_bird_by_id(
     bird_id: int,
     bird: BirdIn,
-    account_data: Optional[dict] = Depends(),
+    account_data: Optional[dict] = Depends(get_current_active_account),
     repo: BirdQueries = Depends()
 ):
     if account_data:
@@ -67,7 +69,7 @@ def update_bird_by_id(
 @router.delete('/api/birds/{bird_id}')
 def delete_bird_by_id(
     bird_id,
-    account_data: Optional[dict] = Depends(),
+    account_data: Optional[dict] = Depends(get_current_active_account),
     repo: BirdQueries = Depends()
 ):
     if account_data:
