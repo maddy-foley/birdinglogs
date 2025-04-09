@@ -1,8 +1,7 @@
 
-queries/__pycache__
-routers/__pycache__
-models/__pycache__
-migrations/__pycache__
+*/__pycache__
 
 Dockerfile.dev
 /routers/secret.py
+__pycache__
+.venv
