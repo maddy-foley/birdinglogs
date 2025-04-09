@@ -17,7 +17,7 @@ class AccountQueries:
                 with conn.cursor() as cur:
                     result = cur.execute(
                         """
-                        SELECT name, username, password, id
+                        SELECT id, name, username, password, picture_url, disabled, created_on
                         FROM accounts
                         WHERE username=%s;
                         """,
@@ -26,12 +26,7 @@ class AccountQueries:
                     record = result.fetchone()
                     if record is None:
                         return {"message": "Could not get account"}
-                    return AccountOutWithPassword(
-                        name = record[0],
-                        username=record[1],
-                        hashed_password=record[2],
-                        id=record[3]
-                    )
+                    return self.record_to_account_out_with_password(record)
 
         except Exception as e:
             return Error(message=str(e))
@@ -83,7 +78,7 @@ class AccountQueries:
                         id = id,
                         name = account.name,
                         username=account.username,
-                        hashed_password=hashed_password,
+                        password=hashed_password,
                         picture_url=account.picture_url,
                         disabled=False,
                         created_on=timestamp(),
@@ -119,5 +114,19 @@ class AccountQueries:
                 disabled=record[4],
                 id=record[5]
             )
+        except Exception as e:
+            return Error(message=str(e))
+
+    def record_to_account_out_with_password(self, record):
+        try:
+            return AccountOutWithPassword(
+                        id = record[0],
+                        name = record[1],
+                        username=record[2],
+                        password=record[3],
+                        picture_url=record[4],
+                        disabled=record[5],
+                        created_on=record[6],
+                    )
         except Exception as e:
             return Error(message=str(e))
