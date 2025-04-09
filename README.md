@@ -8,7 +8,9 @@
 
   <p align="center">
     A full stack web application created for bird enthusiasts!
-    <p align="right"><i>Last Updated March 18th, 2025</i></p>
+    Currently revising backend in seperate branch.
+    <p align="right"><i>Last Updated April 7th, 2025</i></p>
+
 </div>
 
 <details>
@@ -85,13 +87,11 @@ You will need:
     POSTGRES_PASSWORD=password
     POSTGRES_DB=test_database
     ```
-  3. On your command line go back into the **/birdinglogs/ghi/app** directory and use these commands to install required node modules:
-    -   ```npm install```
- 4. On your command line go back into the **/birdinglogs** repo directory and use these commands:
+ 3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
     -   ```docker compose up --build```
     -   Go to your http://localhost:80/ to see the website! I highly recommend viewing this application on Google Chrome.
     -   When you are done, run ```docker compose down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
- 5. Enjoy!
+ 4. Enjoy!
 <p align="right"><a href="#readme-top">:whale2: back to top</a></p>
 
 ### Trouble Shooting
@@ -114,9 +114,9 @@ This application also shows my software development skills.
 - [x] Interactive Bird Catalogue
 - [x] User Authentication
 - [x] Note Taking Feature
+- [ ] Update Authentication
 - [ ] Deployment
 - [ ] Bird Feeder Tracking
-- [ ] Update Authentication
 - [ ] TBD
 <p align="right"><a href="#readme-top">:car: back to top</a></p>
 
