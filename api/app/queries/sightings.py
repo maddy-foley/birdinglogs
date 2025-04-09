@@ -1,4 +1,4 @@
-from queries.db import pool
+from common.db import pool
 from models.sightings import SightingOut, SightingIn, JoinedSightingOut
 from models.birds import Error
 from typing import List

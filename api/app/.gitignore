@@ -1,5 +1,7 @@
 
 */__pycache__
-__pycache__
 
 Dockerfile.dev
+/routers/secret.py
+__pycache__
+.venv

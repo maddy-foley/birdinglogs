@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, Query
 from typing import Union, Optional
-from authenticator import authenticator
 from models.family import FamilyIn, FamilyOut
 from queries.family import FamilyQueries
 

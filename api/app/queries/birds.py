@@ -1,5 +1,5 @@
 from models.birds import BirdIn, BirdOut, Error, JoinedBirdOut
-from queries.db import pool
+from common.db import pool
 
 
 class BirdQueries:

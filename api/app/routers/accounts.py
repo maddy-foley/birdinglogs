@@ -1,62 +1,21 @@
-from fastapi import (
-    APIRouter,
-    Depends,
-    Request,
-    Response,
-    HTTPException,
-    status
-)
+from datetime import datetime, timedelta, timezone
+from typing import Annotated
 
+import jwt
+from fastapi import Depends, HTTPException, status, APIRouter, Response, Request
+from typing import Union
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jwt.exceptions import InvalidTokenError
+from passlib.context import CryptContext
+from pydantic import BaseModel
+from models.accounts import *
+from routers.secret import *
 from queries.accounts import AccountQueries
-from models.accounts import (
-    AccountIn,
-    AccountForm,
-    AccountOut,
-    AccountOutWithPassword,
-    AccountToken,
-    DuplicateAccountError,
-    Error,
-    TokenResponse,
-    HttpError
-)
-from typing import List, Union, Optional
-from authenticator import authenticator
-
+from common.db import pool
+from routers.authentication import *
 
 router = APIRouter()
 
-
-@router.get('/api/account/me', response_model=Union[AccountOut,Error])
-def get_account_by_id(
-    repo: AccountQueries = Depends(),
-    account_data: Optional[dict] = Depends(authenticator.get_current_account_data),
-):
-    if account_data:
-        return repo.get_account_by_id(account_data['id'])
-    return {"message": "You are not logged in"}
-
-@router.get('/api/account/username', response_model=Union[TokenResponse, Error])
-def get_account_by_username(
-    username:str,
-    repo: AccountQueries = Depends()
-):
-    try:
-        return repo.get_account_by_username(username)
-    except Exception as e:
-        return Error(message=str(e))
-
-
-@router.get('/token', response_model=AccountToken | None)
-async def get_token(
-    request: Request,
-    account: AccountIn = Depends(authenticator.try_get_current_account_data)
-) -> AccountToken | None:
-    if account and authenticator.cookie_name in request.cookies:
-        return {
-            "access_token": request.cookies[authenticator.cookie_name],
-            "type": "Bearer",
-            "account": account,
-        }
 
 
 @router.post('/api/account/create')
@@ -66,8 +25,7 @@ async def create_account(
     response: Response,
     repo: AccountQueries = Depends()
 ):
-    hashed_password = authenticator.hash_password(account.password)
-
+    hashed_password = get_password_hash(account.password)
     try:
         result = repo.create_account(account, hashed_password)
     except DuplicateAccountError:
@@ -75,6 +33,11 @@ async def create_account(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Cannot create an account with those credentials"
         )
-    form = AccountForm(username=account.username, password=account.password)
-    token = await authenticator.login(response, request, form, repo)
-    return AccountToken(account=result, **token.dict())
+
+    return result
+
+@router.get("/api/account/me/")
+async def read_accounts_me(
+    current_account: TokenData = Depends(get_current_account)
+):
+    return current_account
