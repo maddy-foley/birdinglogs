@@ -17,7 +17,7 @@ from routers.authentication import *
 router = APIRouter()
 
 
-# FIX ERROR HANDLING
+
 @router.post('/api/account/create')
 async def create_account(
     account: AccountIn,
