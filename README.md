@@ -72,12 +72,14 @@ You will need:
 ### Setup
  1. Please clone this repository onto your local machine
 
- 2. create a ```.env``` file in **/birdinglogs** directory. In this file you will need to declare **4 variables**:
+ 2. Create a ```.env``` file in **/birdinglogs** directory. In this file you will need to declare **4 variables**:
     ```
     SIGNING_KEY=<letters or numbers (length 20-40)>
     POSTGRES_USER=<postgres username>
     POSTGRES_PASSWORD=<postgres password>
     POSTGRES_DB=<postgres database>
+    SECRET_KEY=<generate a sha-256 key>
+    ALGORITHM=HS256
     ```
 
     Example:
@@ -86,7 +88,12 @@ You will need:
     POSTGRES_USER=test_user
     POSTGRES_PASSWORD=password
     POSTGRES_DB=test_database
+    SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
+    ALGORITHM=HS256
+
     ```
+    Note: To generate a sha-256 on you computer, run ```openssl rand -hex 32``` in your console.
+
  3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
     -   ```docker compose up --build```
     -   Go to your http://localhost:80/ to see the website! I highly recommend viewing this application on Google Chrome.

@@ -10,16 +10,16 @@ from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from models.accounts import *
-from routers.secret import *
 from queries.accounts import AccountQueries
 from common.db import pool
+import os
 
 router = APIRouter()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -45,7 +45,7 @@ def authenticate_account(
 
 async def get_current_account_from_token(token: str = Depends(oauth2_scheme)):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, os.env["SECRET_KEY"], algorithms=os.env["ALGORITHM"])
         username = payload.get("sub")
 
         if username is None:
@@ -71,7 +71,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     else:
         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(to_encode, os.env["SECRET_KEY"], algorithm=os.env["ALGORITHM"])
 
     return encoded_jwt
 

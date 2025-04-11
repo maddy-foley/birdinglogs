@@ -9,7 +9,6 @@ from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from models.accounts import *
-from routers.secret import *
 from queries.accounts import AccountQueries
 from common.db import pool
 from routers.authentication import *
