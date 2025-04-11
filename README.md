@@ -9,7 +9,7 @@
   <p align="center">
     A full stack web application created for bird enthusiasts!
     Currently revising backend in seperate branch.
-    <p align="right"><i>Last Updated April 7th, 2025</i></p>
+    <p align="right"><i>Last Updated April 11th, 2025</i></p>
 
 </div>
 
