@@ -78,7 +78,7 @@ You will need:
     POSTGRES_USER=<postgres username>
     POSTGRES_PASSWORD=<postgres password>
     POSTGRES_DB=<postgres database>
-    SECRET_KEY=<generate a sha-256 key>
+    SECRET_KEY=<generate a sha-256 hash value>
     ALGORITHM=HS256
     ```
 
@@ -92,7 +92,7 @@ You will need:
     ALGORITHM=HS256
 
     ```
-    Note: To generate a sha-256 on you computer, run ```openssl rand -hex 32``` in your console.
+    Note: To get a sha-256 value on you computer, run ```openssl rand -hex 32``` in your console.
 
  3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
     -   ```docker compose up --build```
