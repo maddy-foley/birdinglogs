@@ -72,7 +72,7 @@ You will need:
 ### Setup
  1. Please clone this repository onto your local machine
 
- 2. Create a ```.env``` file in **/birdinglogs** directory. In this file you will need to declare **4 variables**:
+ 2. Create a ```.env``` file in **/birdinglogs** directory. In this file you will need to declare **6 variables**:
     ```
     SIGNING_KEY=<letters or numbers (length 20-40)>
     POSTGRES_USER=<postgres username>

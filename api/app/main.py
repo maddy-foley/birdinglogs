@@ -14,10 +14,7 @@ router = APIRouter()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        # for development:
         os.environ.get("CORS_HOST", "http://localhost:3000") if os.environ.get('VERSION') == 'dev' else os.environ.get("CORS_HOST", "http://localhost"), "http://localhost:8080"
-
-        # for productiont:
 
     ],
     allow_credentials=True,

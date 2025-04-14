@@ -8,7 +8,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./api:/app
+      - ./api/app:/app
     environment:
       VERSION: prod
       SIGNING_KEY: ${SIGNING_KEY}

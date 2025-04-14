@@ -8,3 +8,4 @@ RUN python -m pip install -r requirements.txt
 WORKDIR /
 COPY . .
 CMD /wait && python -m migrations up && /wait && uvicorn main:app --reload --proxy-headers --host 0.0.0.0
+
