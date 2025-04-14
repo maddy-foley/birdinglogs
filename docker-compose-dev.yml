@@ -5,19 +5,21 @@ services:
   api:
     container_name: api
     build:
-      context: ./api
-      dockerfile: Dockerfile
+      context: ./api/app
+      dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
-      - ./api:/app
+      - ./api/app:/app
     environment:
+      VERSION: dev
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
       WAIT_HOST: 5432:5432
       PORT: 8000:8000
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   ghi:
     image: node:latest
@@ -33,6 +35,8 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+    depends_on:
+      - api
   db:
     image: postgres:13.3-alpine
     container_name: db
@@ -44,3 +48,8 @@ services:
       POSTGRES_USER:  ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

@@ -10,6 +10,7 @@ services:
     volumes:
       - ./api:/app
     environment:
+      VERSION: prod
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
       WAIT_HOST: db:5432
