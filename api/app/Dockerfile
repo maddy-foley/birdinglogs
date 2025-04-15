@@ -1,11 +1,7 @@
-FROM python:3.10-bullseye
+FROM python:3.10
 RUN python -m pip install --upgrade pip
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
-RUN chmod +x /wait
-WORKDIR /deps
+WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN python -m pip install -r requirements.txt
-WORKDIR /
-COPY . .
-CMD /wait && python -m migrations up && /wait && uvicorn main:app --reload --proxy-headers --host 0.0.0.0
-
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
