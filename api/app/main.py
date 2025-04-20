@@ -9,15 +9,19 @@ from birddata import load_birds
 app = FastAPI()
 
 router = APIRouter()
+dev = [
+    os.environ.get("CORS_HOST", "http://localhost:3000")
+]
+prod = [
+    os.environ.get("CORS_HOST", "http://localhost"),
+    "http://localhost:3000"
+]
 
+my_origins = dev if os.environ.get("VERSION") == 'dev' else prod
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        # os.environ.get("CORS_HOST", "http://localhost:3000"),
-        os.environ.get("CORS_HOST", "http://localhost"),
-        "http://localhost:3000"
-    ],
+    allow_origins=my_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

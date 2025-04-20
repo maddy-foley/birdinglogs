@@ -1,10 +1,13 @@
+#development only
 volumes:
   bird-data:
     # external: true
 services:
   api:
     container_name: api
-    build: ./api/app
+    build:
+      context: ./api/app
+      dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
@@ -13,8 +16,8 @@ services:
       VERSION: dev
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
-      WAIT_HOST: db:5432
-      PORT: 8000:8000
+      WAIT_HOST: 5432:5432
+      PORT: 8000
     depends_on:
       db:
         condition: service_healthy

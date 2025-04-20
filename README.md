@@ -9,7 +9,7 @@
   <p align="center">
     A full stack web application created for bird enthusiasts!
     Currently revising backend in seperate branch.
-    <p align="right"><i>Last Updated April 11th, 2025</i></p>
+    <p align="right"><i>Last Updated April 20th, 2025</i></p>
 
 </div>
 
@@ -95,9 +95,9 @@ You will need:
     Note: To get a sha-256 value on you computer, run ```openssl rand -hex 32``` in your console.
 
  3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
-    -   ```docker compose up --build```
-    -   Go to your http://localhost:80/ to see the website! I highly recommend viewing this application on Google Chrome.
-    -   When you are done, run ```docker compose down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
+    -   ```docker compose -f 'docker-compose-prod.yml' up --build -d```
+    -   Go to your http://localhost:80/ to see the website (may take a few minutes to appear while docker builds the database)! I highly recommend viewing this application on Google Chrome.
+    -   When you are done, run ```docker compose -f 'docker-compose-prod.yml' down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
  4. Enjoy!
 <p align="right"><a href="#readme-top">:whale2: back to top</a></p>
 

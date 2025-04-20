@@ -14,7 +14,6 @@ services:
       - 8000:8000
     volumes:
       - ./api/app:/app
-    # hostname: ${IPV4}
     environment:
       VERSION: prod
       SIGNING_KEY: ${SIGNING_KEY}
@@ -25,7 +24,6 @@ services:
         condition: service_healthy
   ghi:
     container_name: ghi
-    # image: madfoley/birdinglogs-ghi
     build:
       context: ./ghi/app
       dockerfile: Dockerfile
