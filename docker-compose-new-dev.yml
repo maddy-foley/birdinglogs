@@ -1,14 +1,18 @@
-# run images in production container
+# to test different docker builds
 volumes:
   bird-data:
     # external: true
 services:
   api:
     container_name: api
-    image: madfoley/birdinglogs-api:latest
+    build:
+      context: ./api/app
+      dockerfile: Dockerfile
     platform: linux/amd64
     ports:
       - 8000:8000
+    volumes:
+      - ./api/app:/app
     environment:
       VERSION: prod
       SIGNING_KEY: ${SIGNING_KEY}
@@ -18,8 +22,14 @@ services:
         condition: service_healthy
   ghi:
     container_name: ghi
-    image: madfoley/birdinglogs-ghi:latest
+    build:
+      context: ./ghi/app
+      dockerfile: Dockerfile
     platform: linux/amd64
+    working_dir: /app
+    volumes:
+      - ./ghi/app:/app
+      - ./ghi/app/node_modules:/node_modules
     ports:
       - 80:80
     depends_on:

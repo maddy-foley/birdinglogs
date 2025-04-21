@@ -15,7 +15,7 @@ services:
     volumes:
       - ./api/app:/app
     environment:
-      VERSION: prod
+      VERSION: dev
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
       PORT: 8000
@@ -33,7 +33,7 @@ services:
       - ./ghi/app:/app
       - ./ghi/app/node_modules:/node_modules
     ports:
-      - 3000:80
+      - 80:80
     depends_on:
       - api
   db:

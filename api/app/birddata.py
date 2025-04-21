@@ -6,7 +6,7 @@ from common.db import pool
 from datetime import date
 from models.family import FamilyIn
 from models.birds import BirdIn
-import time
+
 
 def load_birds():
     with pool.connection() as conn:
