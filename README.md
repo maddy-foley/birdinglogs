@@ -64,7 +64,7 @@
 
 ### Prerequisites
 You will need:
-- docker
+- docker desktop
 - a clone of this repository
 - some command line knowledge
 <p align="right"><a href="#readme-top">:whale: back to top</a></p>

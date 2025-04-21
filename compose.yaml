@@ -1,4 +1,4 @@
-# run images in production container
+# use to run images in production container
 volumes:
   bird-data:
     # external: true

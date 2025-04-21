@@ -1,24 +1,22 @@
-# build production images
+# use to make production images for demo
 volumes:
   bird-data:
     # external: true
 services:
   api:
     container_name: api
-    working_dir: /app
     build:
       context: ./api/app
-      dockerfile: Dockerfile.dev
-    platform: linux/amd64
+      dockerfile: Dockerfile
+    # platform: linux/amd64
     ports:
       - 8000:8000
     volumes:
       - ./api/app:/app
     environment:
-      VERSION: dev
+      VERSION: prod
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
-      PORT: 8000
     depends_on:
       db:
         condition: service_healthy
@@ -27,7 +25,7 @@ services:
     build:
       context: ./ghi/app
       dockerfile: Dockerfile
-    platform: linux/amd64
+    # platform: linux/amd64
     working_dir: /app
     volumes:
       - ./ghi/app:/app
@@ -39,7 +37,7 @@ services:
   db:
     image: postgres:13.3-alpine
     container_name: db
-    platform: linux/amd64
+    # platform: linux/amd64
     volumes:
       - bird-data:/var/lib/postgresql/data
     ports:

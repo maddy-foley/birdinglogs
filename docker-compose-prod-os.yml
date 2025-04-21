@@ -1,4 +1,5 @@
-# USE TO TEST BUILDS, not for any other purpose
+
+# use to make production images for cloud os
 volumes:
   bird-data:
     # external: true
