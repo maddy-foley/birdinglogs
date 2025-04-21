@@ -102,11 +102,8 @@ You will need:
 <p align="right"><a href="#readme-top">:whale2: back to top</a></p>
 
 ### Trouble Shooting
-<i>Node modules not found</i>
-- Ensure the latest version of node.js is on your local computer
+Comming Soon
 
-<i>Bird data is missing or api crashed</i>
-- try restarting the containers by running:  ```docker compose stop``` followed by ```docker compose up```
 <p align="right"><a href="#readme-top">:whale: back to top</a></p>
 
 ## Usage

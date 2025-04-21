@@ -1,4 +1,4 @@
-# to test different docker builds
+# USE TO TEST BUILDS, not for any other purpose
 volumes:
   bird-data:
     # external: true
