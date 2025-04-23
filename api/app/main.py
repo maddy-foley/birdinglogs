@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import birds, accounts, sightings, wish, family, authentication
 from birddata import load_birds
-from secret import pub_ipv_four,pub_ipv_four_rec
 
 
 app = FastAPI()
@@ -15,7 +14,7 @@ version_configurations = {
 }
 
 if version_configurations.get('version') == 'prod':
-    version_configurations['origins'] = ["http://localhost:3000","http://localhost",pub_ipv_four_rec, pub_ipv_four]
+    version_configurations['origins'] = ["http://localhost:3000","http://localhost","https://birdinglogs.com"]
 else:
     version_configurations['origins'] = [os.environ.get("CORS_HOST", "http://localhost:3000"),"http://localhost"]
 

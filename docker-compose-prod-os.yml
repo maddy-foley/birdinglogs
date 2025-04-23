@@ -2,7 +2,7 @@
 # use to make production images for cloud os
 volumes:
   bird-data:
-    # external: true
+    external: true
 services:
   api:
     container_name: api

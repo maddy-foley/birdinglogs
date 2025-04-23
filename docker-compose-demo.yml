@@ -14,7 +14,7 @@ services:
     volumes:
       - ./api/app:/app
     environment:
-      VERSION: prod
+      VERSION: dev
       SIGNING_KEY: ${SIGNING_KEY}
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
     depends_on:

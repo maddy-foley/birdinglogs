@@ -95,9 +95,9 @@ You will need:
     Note: To get a sha-256 value on you computer, run ```openssl rand -hex 32``` in your console.
 
  3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
-    -   ```docker compose -f 'docker-compose-prod.yml' up --build -d```
+    -   ```docker compose -f 'docker-compose-demo.yml' up --build -d```
     -   Go to your http://localhost:80/ to see the website (may take a few minutes to appear while docker builds the database)! I highly recommend viewing this application on Google Chrome.
-    -   When you are done, run ```docker compose -f 'docker-compose-prod.yml' down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
+    -   When you are done, run ```docker compose -f 'docker-compose-demo.yml' down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
  4. Enjoy!
 <p align="right"><a href="#readme-top">:whale2: back to top</a></p>
 
