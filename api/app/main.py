@@ -34,5 +34,5 @@ app.include_router(sightings.router, tags=['Sightings'])
 app.include_router(wish.router, tags=['Wish List'])
 app.include_router(family.router, tags=['Family'])
 
-
-load_birds()
+if version_configurations.get('version') == 'dev':
+    load_birds()

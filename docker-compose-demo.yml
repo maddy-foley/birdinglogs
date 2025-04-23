@@ -7,7 +7,7 @@ services:
     container_name: api
     build:
       context: ./api/app
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     # platform: linux/amd64
     ports:
       - 8000:8000
