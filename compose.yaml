@@ -22,8 +22,6 @@ services:
     platform: linux/amd64
     ports:
       - 80:80
-    depends_on:
-      - api
   db:
     image: postgres:13.3-alpine
     container_name: db
