@@ -8,7 +8,7 @@ services:
     image: madfoley/birdinglogs-api:latest
     platform: linux/amd64
     ports:
-      - 8000:8000
+      - "8000"
     environment:
       VERSION: prod
       SIGNING_KEY: ${SIGNING_KEY}
@@ -29,7 +29,7 @@ services:
     volumes:
       - bird-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      -  "5432"
     environment:
       POSTGRES_USER:  ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

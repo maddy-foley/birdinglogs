@@ -2,7 +2,7 @@ export function BirdDelete({id, name, callback}) {
     const deleteBird = async(e) =>{
         e.preventDefault();
         const response = await fetch(
-            `http://localhost:8000/api/birds/${id}`,
+            `/api/birds/${id}`,
             {
                 method: "DELETE",
                 credentials: 'include',

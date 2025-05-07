@@ -25,7 +25,7 @@ export function SightingsCard ({sighting}) {
         e.preventDefault();
         formData.spotted_on = new Date(formData.spotted_on)
         const response = await fetch(
-            'http://localhost:8000/api/sighting/' + sighting.id,
+            '/api/sighting/' + sighting.id,
             {
                 method: "PUT",
                 body: JSON.stringify(formData),

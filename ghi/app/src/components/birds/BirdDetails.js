@@ -9,14 +9,14 @@ export function BirdDetail () {
 
 
     const getBird = async() => {
-        const response = await fetch(`http://localhost:8000/api/birds/${id}`)
+        const response = await fetch(`/api/birds/${id}`)
         if (response.ok){
             const data = await response.json();
             setBird(data)
         }
     }
     const getSighting = async () => {
-        const response = await fetch(`http://localhost:8000/api/birds/${id}/sightings`)
+        const response = await fetch(`/api/birds/${id}/sightings`)
         if (response.ok){
             const data = await response.json();
             setSightings(data)

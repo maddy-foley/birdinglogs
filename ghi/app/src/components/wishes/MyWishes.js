@@ -25,7 +25,7 @@ export function MyWishes() {
     }
 
     const getWishes = async () =>{
-        const response = await fetch('http://localhost:8000/api/account/me/wishes', {
+        const response = await fetch('/api/account/me/wishes', {
             method: 'GET',
             credentials: 'include',
             headers: {

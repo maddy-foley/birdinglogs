@@ -13,7 +13,7 @@ export function Login() {
         e.preventDefault();
         const content= `username=${formData.username}&password=${formData.password}`
         const response = await fetch(
-            "http://localhost:8000/token", {
+            "/api/token", {
                 method: "POST",
                 body: content,
                 credentials: 'include',
@@ -68,4 +68,3 @@ export function Login() {
         </div>
     )
 }
-

@@ -28,7 +28,7 @@ export function CreateAccount () {
             try{
                 const data = JSON.stringify(formData)
                 const response = await fetch(
-                    "http://localhost:8000/api/account/create", {
+                    "/api/account/create", {
                         method: "POST",
                         body: data,
                         credentials: 'include',

@@ -5,7 +5,7 @@ export function DeleteSighting({id, callback}) {
     const deleteSighting = async (e) => {
         e.preventDefault();
         const response = await fetch(
-            `http://localhost:8000/api/sighting/${id}`,
+            `/api/sighting/${id}`,
             {
                 method: "DELETE",
                 credentials: 'include',

@@ -92,3 +92,6 @@ def load_birds():
                         ]
                     )
                     print(f"Bird #{count} added.")
+
+# file for easy deployment
+load_birds()

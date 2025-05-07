@@ -1,0 +1,7 @@
+.env
+.git
+# .gitignore
+# Dockerfile
+.dockerignore
+# npm-debug.log
+node_modules

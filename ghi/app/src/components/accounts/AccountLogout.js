@@ -5,7 +5,7 @@ export function Logout() {
     const handleLogout = async (e) =>{
         e.preventDefault();
         await fetch(
-            "http://localhost:8000/token", {
+            "/api/token", {
                 method: "DELETE",
                 credentials: 'include',
             })
@@ -18,4 +18,3 @@ export function Logout() {
         <button onClick={handleLogout}>Logout</button>
     )
 }
-

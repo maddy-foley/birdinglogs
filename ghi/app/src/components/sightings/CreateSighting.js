@@ -15,7 +15,7 @@ export function CreateSighting(){
     const [login, setLogin] = useState(false);
 
     const getLoginState = async() => {
-        const response = await fetch('http://localhost:8000/api/account/me')
+        const response = await fetch('/api/account/me')
         if(response.ok){
 
             const data = await response.json()
@@ -34,7 +34,7 @@ export function CreateSighting(){
     const handleSubmit = async(e) => {
         e.preventDefault();
         const response = await fetch(
-            'http://localhost:8000/api/sighting',
+            '/api/sighting',
             {
                 method: "POST",
                 body: JSON.stringify(formData),
@@ -60,7 +60,7 @@ export function CreateSighting(){
         setFormData({...formData, [name]: value})
     }
     const getBird = async() => {
-        const response = await fetch(`http://localhost:8000/api/birds/${id}`)
+        const response = await fetch(`/api/birds/${id}`)
         if (response.ok){
             const data = await response.json();
             setBird(data)

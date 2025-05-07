@@ -18,7 +18,7 @@ export function CreateBird() {
         e.preventDefault();
         try{
             const response = await fetch(
-            'http://localhost:8000/api/birds',
+            '/api/birds',
             {
                 method: "POST",
                 body: JSON.stringify(formData),
@@ -49,7 +49,7 @@ export function CreateBird() {
     }
 
     const getFamily = async() => {
-        const response = await fetch('http://localhost:8000/api/family')
+        const response = await fetch('/api/family')
         if(response.ok){
             const data = await response.json()
             setFamilies(data)
@@ -57,7 +57,7 @@ export function CreateBird() {
     }
 
     const getLoginState = async() => {
-        const response = await fetch('http://localhost:8000/api/account/me')
+        const response = await fetch('/api/account/me')
         if(response.ok){
 
             const data = await response.json()

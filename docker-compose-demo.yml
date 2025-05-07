@@ -21,17 +21,20 @@ services:
       db:
         condition: service_healthy
   ghi:
-    container_name: ghi
-    build:
-      context: ./ghi/app
-      dockerfile: Dockerfile
-    # platform: linux/amd64
+    image: node:latest
+    command: /bin/bash run.sh
     working_dir: /app
     volumes:
       - ./ghi/app:/app
       - ./ghi/app/node_modules:/node_modules
     ports:
-      - 80:80
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+      PUBLIC_URL: http://localhost:3000
+      REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
     depends_on:
       - api
   db:

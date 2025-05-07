@@ -2,8 +2,7 @@ from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import birds, accounts, sightings, wish, family, authentication
-from birddata import load_birds
-
+from migrations import up
 
 app = FastAPI()
 
@@ -14,10 +13,13 @@ version_configurations = {
 }
 
 if version_configurations.get('version') == 'prod':
-    version_configurations['origins'] = ["http://localhost:3000","http://localhost","https://birdinglogs.com"]
+    version_configurations['origins'] = ["http://localhost","http://localhost:3000","https://birdinglogs.com","https://www.birdinglogs.com"]
 else:
     version_configurations['origins'] = [os.environ.get("CORS_HOST", "http://localhost:3000"),"http://localhost"]
 
+@app.on_event("startup")
+async def startup_event():
+    await up(os.environ.get('DATABASE_URL'))
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,6 +35,3 @@ app.include_router(authentication.router, tags=['Login / Logout'])
 app.include_router(sightings.router, tags=['Sightings'])
 app.include_router(wish.router, tags=['Wish List'])
 app.include_router(family.router, tags=['Family'])
-
-if version_configurations.get('version') == 'dev':
-    load_birds()

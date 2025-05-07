@@ -30,7 +30,7 @@ export function BirdList() {
     }
 
     const getData = async () => {
-        const url = 'http://localhost:8000/api/birds'
+        const url = '/api/birds'
         const fetchConfig = {
             method: 'GET',
             credentials: 'include',
@@ -55,7 +55,7 @@ export function BirdList() {
     }
 
     const getFamily = async() => {
-        const response = await fetch('http://localhost:8000/api/family')
+        const response = await fetch('/api/family')
         if(response.ok){
             const data = await response.json()
             setFamilies(data)

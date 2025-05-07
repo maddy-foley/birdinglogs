@@ -9,7 +9,7 @@ export function Profile() {
     const getData = async() =>{
         const auth = await getToken();
         setToken(auth)
-        const url = 'http://localhost:8000/api/account/me'
+        const url = '/api/account/me'
         const fetchConfig = {
             method: 'GET',
             headers: {
@@ -23,7 +23,7 @@ export function Profile() {
             setProfile(data)
         }
     }
-    
+
 
 
     useEffect(() => {

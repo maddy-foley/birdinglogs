@@ -11,7 +11,8 @@ services:
       dockerfile: Dockerfile
     platform: linux/amd64
     ports:
-      - 8000:8000
+      - "8000"
+    restart: always
     volumes:
       - ./api/app:/app
     environment:
@@ -23,16 +24,17 @@ services:
         condition: service_healthy
   ghi:
     container_name: ghi
+    restart: always
     build:
       context: ./ghi/app
       dockerfile: Dockerfile
     platform: linux/amd64
-    working_dir: /app
     volumes:
       - ./ghi/app:/app
-      - ./ghi/app/node_modules:/node_modules
     ports:
       - 80:80
+    depends_on:
+      - api
   db:
     image: postgres:13.3-alpine
     container_name: db

@@ -25,7 +25,7 @@ export function MySightings() {
     }
 
     const getSightings = async () =>{
-        const response = await fetch('http://localhost:8000/api/sighting/me', {
+        const response = await fetch('/api/sighting/me', {
             method: 'GET',
             credentials: 'include',
             headers: {

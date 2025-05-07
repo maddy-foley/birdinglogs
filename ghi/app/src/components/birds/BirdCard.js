@@ -24,7 +24,7 @@ export function BirdCard({bird, mine}) {
             setWish(!wish);
             if (wish){
                 await fetch(
-                    `http://localhost:8000/api/birds/${bird.id}/wishes`,
+                    `/api/birds/${bird.id}/wishes`,
                     {
                         method: "DELETE",
                         credentials: 'include',
@@ -33,7 +33,7 @@ export function BirdCard({bird, mine}) {
                         }
                     });
             } else {
-                await fetch(`http://localhost:8000/api/birds/${bird.id}/wishes`,
+                await fetch(`/api/birds/${bird.id}/wishes`,
                     {
                         method: "POST",
                         credentials: 'include',

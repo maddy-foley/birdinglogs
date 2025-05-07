@@ -8,8 +8,8 @@
 
   <p align="center">
     A full stack web application created for bird enthusiasts!
-    <p align="right"><i>Last Updated April 20th, 2025</i></p>
-    <p align="right">Deployment Coming Soon!</p>
+    <p align="right"><i>Last Updated May 7th, 2025</i></p>
+    <p align="right">First Deployment Working! https://www.birdinglogs.com</p>
 
 </div>
 
@@ -95,8 +95,8 @@ You will need:
     Note: To get a sha-256 value on you computer, run ```openssl rand -hex 32``` in your console.
 
  3. On your command line go back into the **/birdinglogs** repo directory and use these commands:
-    -   ```docker compose -f 'docker-compose-demo.yml' up --build -d```
-    -   Go to your http://localhost:80/ to see the website (may take a few minutes to appear while docker builds the database)! I highly recommend viewing this application on Google Chrome.
+    -   ```docker compose -f 'docker-compose-demo.yml' up --build -d && docker exec -it api python birddata.py```
+    -   Go to your http://localhost:3000/ to see the website (may take a few minutes to appear while docker builds the database)! I highly recommend viewing this application on Google Chrome.
     -   When you are done, run ```docker compose -f 'docker-compose-demo.yml' down && docker volume remove birdinglogs_bird-data``` to remove all the containers and volumes.
  4. Enjoy!
 <p align="right"><a href="#readme-top">:whale2: back to top</a></p>
@@ -119,7 +119,7 @@ This application also shows my software development skills.
 - [x] User Authentication
 - [x] Note Taking Feature
 - [x] Update Authentication
-- [ ] Deployment
+- [x] Deployment
 - [ ] Bird Feeder Tracking
 - [ ] TBD
 <p align="right"><a href="#readme-top">:car: back to top</a></p>

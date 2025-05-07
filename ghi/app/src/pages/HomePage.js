@@ -6,7 +6,7 @@ export function HomePage(){
     const [bird, setBird] = useState({})
     const getBird = async() => {
         const random_number = Math.floor(Math.random() * 980) + 1
-        const url = 'http://localhost:8000/api/birds/' + random_number
+        const url = '/api/birds/' + random_number
         const fetchConfig = {
             method: 'GET',
             credentials: 'include',

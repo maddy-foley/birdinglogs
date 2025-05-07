@@ -26,7 +26,7 @@ export function MyBirds() {
     }
 
     const getData = async () => {
-        const response = await fetch('http://localhost:8000/api/birds/me', {
+        const response = await fetch('/api/birds/me', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {

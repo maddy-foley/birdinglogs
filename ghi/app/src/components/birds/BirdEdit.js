@@ -23,7 +23,7 @@ export function BirdEdit () {
     }
 
     const getFamily = async() => {
-        const response = await fetch('http://localhost:8000/api/family')
+        const response = await fetch('/api/family')
         if(response.ok){
             const data = await response.json()
             setFamilies(data)
@@ -32,7 +32,7 @@ export function BirdEdit () {
     const handleSubmit = async(e) => {
         e.preventDefault();
         const response = await fetch(
-            'http://localhost:8000/api/birds/' + state.id,
+            '/api/birds/' + state.id,
             {
                 method: "PUT",
                 body: JSON.stringify(formData),
